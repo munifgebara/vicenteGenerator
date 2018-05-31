@@ -127,6 +127,7 @@ import org.hibernate.envers.Audited;
 import br.com.munif.framework.vicente.domain.BaseEntity;
 import br.com.munif.framework.vicente.domain.BaseEntityHelper;
 
+import java.time.ZonedDateTime;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -170,7 +171,7 @@ ${Object.keys(data.fields).reduce((a, field) =>
 function geraApplication(project, path) {
 
     let src = `package ${mainPackage(project)
-        }.projects.${project.description.title.toLowerCase()} backend;
+        }.projects.${project.description.title.toLowerCase()}backend;
 
 import br.com.munif.framework.vicente.domain.BaseEntity;
 import org.springframework.boot.SpringApplication;
