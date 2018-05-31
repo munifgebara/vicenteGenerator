@@ -7,7 +7,7 @@ const fs = require("fs");
 
 function generateProject(project) {
     console.log(project.description);
-    let mainDir = project.description.title.toLowerCase()
+    let mainDir = `../${project.description.title.toLowerCase()}`;
 
     mkDir(mainDir);
     mkDir(`${mainDir}/front`);
@@ -41,7 +41,18 @@ function generateProject(project) {
 
     geraApplication(project, java);
 
-    geraDomain(project, `${java}`);
+    geraDomain(project, java);
+    geraDatabaseConfiguration(project, java);
+    geraSecurityConfiguration(project, java);
+    geraWebConfiguration(project, java);
+
+    geraRepositories(project, java);
+    geraServices(project, java);
+    geraApis(project, java);
+
+    geraHelloController(project, java);
+
+    geraSeed(project, java);
 }
 
 function mkDir(path) {
@@ -69,6 +80,345 @@ function geraExemplo(project, path) {
     `
     fs.writeFileSync(`${path}/exemplo.exx`, src, `utf8`);
 }
+
+function geraSeed(project, path) {
+    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.bootstrap;
+
+    import java.math.BigDecimal;
+    import java.time.ZoneId;
+    import java.time.ZoneOffset;
+    import java.time.ZonedDateTime;
+    import java.time.temporal.ChronoUnit;
+    import java.time.temporal.TemporalAdjusters;
+    import java.time.temporal.TemporalAmount;
+    import java.time.temporal.TemporalUnit;
+    import java.util.List;
+    import org.apache.log4j.Logger;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.context.ApplicationListener;
+    import org.springframework.context.event.ContextRefreshedEvent;
+    import org.springframework.stereotype.Component;
+
+    import br.com.munif.framework.vicente.core.RightsHelper;
+    import br.com.munif.framework.vicente.core.VicThreadScope;
+    import br.com.munif.framework.vicente.domain.BaseEntityHelper;
+    import br.com.munif.framework.vicente.security.seed.SeedSecurity;
+    
+    @Component
+    public class Seed implements ApplicationListener<ContextRefreshedEvent> {
+
+        private Logger log = Logger.getLogger(Seed.class);
+
+        @Autowired
+        private SeedSecurity seedSecurity;
+
+        @Override
+        public void onApplicationEvent(ContextRefreshedEvent event) {
+            VicThreadScope.gi.set("SEED");
+            VicThreadScope.ui.set("SEED");
+            VicThreadScope.oi.set("SEED.");
+            VicThreadScope.ip.set("127.0.0.1");
+            VicThreadScope.defaultRights.set(RightsHelper.OWNER_ALL + RightsHelper.GROUP_READ_UPDATE + RightsHelper.OTHER_READ);
+            log.info("Start");
+            seedSecurity.seedSecurity();
+        }
+    
+
+
+    }
+
+
+
+    `
+    fs.writeFileSync(`${path}/bootstrap/Seed.java`, src, `utf8`);
+}
+
+
+function geraHelloController(project, path) {
+    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.controllers;
+
+    import br.com.munif.framework.vicente.core.RightsHelper;
+    import br.com.munif.framework.vicente.core.UIDHelper;
+    import br.com.munif.framework.vicente.core.VicThreadScope;
+    import br.com.munif.framework.vicente.domain.util.EntitiesToSVG;
+    import java.util.HashMap;
+    import java.util.Map;
+    import org.springframework.http.MediaType;
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.ResponseBody;
+    import org.springframework.web.bind.annotation.RestController;
+    
+    @RestController
+    public class HelloController {
+    
+        @RequestMapping("/hello")
+        public Map hello() {
+            Map<String, Object> info = new HashMap<>();
+            info.put("id", UIDHelper.getUID());
+            info.put("gi", RightsHelper.getMainGi());
+            info.put("ui", VicThreadScope.ui.get());
+            info.put("oi", VicThreadScope.oi.get());
+    
+            return info;
+        }
+    
+        @ResponseBody
+        @RequestMapping(value = "/svg", produces = "image/svg+xml")
+        public String svg() {
+            return EntitiesToSVG.gera();
+    
+        }
+    
+    }
+
+
+    `
+    fs.writeFileSync(`${path}/controllers/HelloController.java`, src, `utf8`);
+}
+
+function geraRepositories(project, path) {
+    Object.keys(project.entities).forEach(p => {
+        Object.keys(project.entities[p]).forEach(e => {
+            geraRepositorie(project, p, e, project.entities[p][e], path);
+        });
+    });
+
+}
+
+
+function geraRepositorie(project, p, e, data, path) {
+    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.repository;
+    /* Arquivo gerado utilizando VICGERADOR por munif as ${Date()} */
+/* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
+
+
+import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${firstUp(e)}` : `${p}.${firstUp(e)}`};
+import br.com.munif.framework.vicente.application.VicRepository;
+
+import org.springframework.stereotype.Repository;
+
+@SuppressWarnings("unused")
+@Repository
+public interface ${firstUp(e)}Repository extends VicRepository<${firstUp(e)}>{
+    
+}
+    `
+
+    fs.writeFileSync(`${path}/repository/${firstUp(e)}Repository.java`, src, `utf8`);
+}
+
+
+function geraServices(project, path) {
+    Object.keys(project.entities).forEach(p => {
+        Object.keys(project.entities[p]).forEach(e => {
+            geraService(project, p, e, project.entities[p][e], path);
+        });
+    });
+
+}
+
+
+function geraService(project, p, e, data, path) {
+    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.service;
+    /* Arquivo gerado utilizando VICGERADOR por munif as ${Date()} */
+    /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
+    
+    import br.com.munif.framework.vicente.application.BaseService;
+    import br.com.munif.framework.vicente.application.VicRepository;
+    import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${firstUp(e)}` : `${p}.${firstUp(e)}`};
+    import org.springframework.stereotype.Service;
+    
+    
+    @Service
+    public class ${firstUp(e)}Service extends BaseService<${firstUp(e)}>{
+        
+        public ${firstUp(e)}Service(VicRepository<${firstUp(e)}> repository) {
+            super(repository);
+        }
+        
+    }
+    `
+
+    fs.writeFileSync(`${path}/service/${firstUp(e)}Service.java`, src, `utf8`);
+}
+
+function geraApis(project, path) {
+    Object.keys(project.entities).forEach(p => {
+        Object.keys(project.entities[p]).forEach(e => {
+            geraApi(project, p, e, project.entities[p][e], path);
+        });
+    });
+
+}
+
+
+function geraApi(project, p, e, data, path) {
+    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.api;
+    /* Arquivo gerado utilizando VICGERADOR por munif as ${Date()} */
+    /* Arquivo gerado utilizando VICGERADOR por munif as 13/03/2018 08:23:28 */
+    /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
+    
+    import br.com.munif.framework.vicente.api.BaseAPI;
+    import br.com.munif.framework.vicente.application.BaseService;
+    import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${firstUp(e)}` : `${p}.${firstUp(e)}`};
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RestController;
+    import org.apache.log4j.Logger;
+    
+    @RestController
+    @RequestMapping("/api/${e.toLowerCase()}")
+    public class ${firstUp(e)}Api extends BaseAPI<${firstUp(e)}> {
+    
+        private final Logger log = Logger.getLogger(${firstUp(e)}Api.class);
+    
+        private static final String ENTITY_NAME = "${e}";
+    
+        public ${firstUp(e)}Api(BaseService<${firstUp(e)}> service) {
+            super(service);
+        }
+        
+    
+    }
+    `
+
+    fs.writeFileSync(`${path}/api/${firstUp(e)}Api.java`, src, `utf8`);
+}
+
+
+
+function geraDatabaseConfiguration(project, path) {
+    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
+
+    import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.*;
+    import br.com.munif.framework.vicente.application.VicRepositoryImpl;
+    import org.springframework.boot.SpringApplication;
+    import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+    import org.springframework.boot.autoconfigure.domain.EntityScan;
+    import org.springframework.context.annotation.ComponentScan;
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+    import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+    import org.springframework.transaction.annotation.EnableTransactionManagement;
+    
+    @Configuration
+    @ComponentScan(basePackages = {
+        "${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend", 
+        "br.com.munif.framework.vicente.application.victenancyfields", 
+        "br.com.munif.framework.vicente.api.errors",
+        "br.com.munif.framework.vicente.security"
+    })
+    @EnableAutoConfiguration()
+    @EntityScan(basePackages = {
+        "br.com.munif.framework.vicente.domain", 
+        "${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain",
+        "br.com.munif.framework.vicente.security"
+    })
+    @EnableJpaRepositories(basePackages = {
+        "${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.repository", 
+        "br.com.munif.framework.vicente.application.victenancyfields",
+        "br.com.munif.framework.vicente.security.repository"
+    }, repositoryBaseClass = VicRepositoryImpl.class)
+    @EnableTransactionManagement
+    public class DatabaseConfiguration {
+    
+    }
+    `
+    fs.writeFileSync(`${path}/configuration/DatabaseConfiguration.java`, src, `utf8`);
+}
+
+
+function geraSecurityConfiguration(project, path) {
+    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
+    
+    //@Configuration
+    public class SecurityConfiguration {//extends WebSecurityConfigurerAdapter {
+    
+    //    @Override
+    //    protected void configure(HttpSecurity httpSecurity) throws Exception {
+    //        httpSecurity.authorizeRequests().antMatchers("/**").permitAll();
+    //        httpSecurity.csrf().disable();
+    //        httpSecurity.headers().frameOptions().disable();
+    //    }
+    
+    }
+
+    `
+    fs.writeFileSync(`${path}/configuration/SecurityConfiguration.java`, src, `utf8`);
+}
+function geraWebConfiguration(project, path) {
+    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
+
+import br.com.munif.framework.vicente.security.api.VicRequestFilter;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import java.util.List;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+/**
+ *
+ * @author munif
+ */
+@Configuration
+public class WebConfiguration extends WebMvcConfigurerAdapter implements WebApplicationInitializer {
+
+    @Bean
+    public VicRequestFilter vicRequestFilter() {
+        return new VicRequestFilter("br.com.munif.projects.empleadosapi");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(vicRequestFilter());
+    }
+
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(jacksonConverter());
+        super.configureMessageConverters(converters);
+    }
+
+    private MappingJackson2HttpMessageConverter jacksonConverter() {
+        ObjectMapper mapper = new ObjectMapper();
+        Hibernate5Module hm = new Hibernate5Module();
+        hm.disable(Hibernate5Module.Feature.USE_TRANSIENT_ANNOTATION);
+        mapper.registerModule(hm);
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.setDateFormat(new ISO8601DateFormat());
+//        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
+        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        MappingJackson2HttpMessageConverter jacksonConverter = new MappingJackson2HttpMessageConverter();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        jacksonConverter.setObjectMapper(mapper);
+        return jacksonConverter;
+    }
+
+}
+    `
+    fs.writeFileSync(`${path}/configuration/WebConfiguration.java`, src, `utf8`);
+}
+
+
 
 
 function geraDomain(project, path) {
