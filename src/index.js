@@ -106,28 +106,83 @@ function geraEnum(project, name, data, path) {
 
 
 function geraEntities(project, path) {
-    Object.keys(project.entities).forEach(entitie => {
-        console.log(entitie);
+    Object.keys(project.entities).forEach(p => {
+        Object.keys(project.entities[p]).forEach(e => {
+            geraEntitie(project, p, e, project.entities[p][e], path);
+        });
     });
+}
+
+function geraEntitie(project, p, e, data, path) {
+    if (p === 'mainPackage') {
+        p = '';
+    }
+    else {
+        mkDir(`${path}/domain/${p}`)
+        p = '.' + p;
+
+    }
+    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain${p};
+import org.hibernate.envers.Audited;
+import br.com.munif.framework.vicente.domain.BaseEntity;
+import br.com.munif.framework.vicente.domain.BaseEntityHelper;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
+@Table(name = "${e.toLowerCase()}")
+@Audited
+public class ${firstUp(e)} extends BaseEntity {
+
+${Object.keys(data.fields).reduce((a, field) =>
+            `${a}    @Column(name = "${field.toLowerCase()}")
+    private ${data.fields[field].type} ${field};
+`, "")}
+
+    public ${firstUp(e)}(){
+
+    }
+
+    ${Object.keys(data.fields).reduce((a, field) => `${a}public ${data.fields[field].type} get${firstUp(field)}(){
+        return ${field};
+    }
+           
+    public void set${firstUp(field)}(${data.fields[field].type} ${field}){
+        this.${field}=${field};
+    }
+
+    public ${firstUp(e)} ${field}(${data.fields[field].type} ${field}) {
+        this.${field} = ${field};
+        return this;
+    }
+
+    `, ""
+        )}
+}`;
+    fs.writeFileSync(`${path}/domain/${p.substr(1)}/${firstUp(e)}.java`, src, `utf8`);
+
 }
 
 
 
 function geraApplication(project, path) {
 
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend;
+    let src = `package ${mainPackage(project)
+        }.projects.${project.description.title.toLowerCase()} backend;
 
-    import br.com.munif.framework.vicente.domain.BaseEntity;
-    import org.springframework.boot.SpringApplication;
-    import org.springframework.boot.autoconfigure.SpringBootApplication;
-    
-    @SpringBootApplication
-    public class BackEndApplication {
-    
-        public static void main(String[] args) {
-            SpringApplication.run(BackEndApplication.class, args);
-        }
-    }`;
+import br.com.munif.framework.vicente.domain.BaseEntity;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class BackEndApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(BackEndApplication.class, args);
+    }
+} `;
     fs.writeFileSync(`${path}/BackEndApplication.java`, src, `utf8`);
 }
 
