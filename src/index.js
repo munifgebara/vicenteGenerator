@@ -463,6 +463,36 @@ function geraEntities(project, path) {
     });
 }
 
+function geraAssociation(e, field, data) {
+    if (data.associations[field].multiplicity === 'OneToMany') {
+        return `
+    @${data.associations[field].multiplicity}(mappedBy = "${e}", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"${e}"})
+    private Set<${firstUp(data.associations[field].targetEntity)}> ${field} ;
+`
+    }
+    if (data.associations[field].multiplicity === 'ManyToMany') {
+        return `
+    @${data.associations[field].multiplicity}
+    private Set<${firstUp(data.associations[field].targetEntity)}> ${field} ;
+`
+    }
+
+    if (data.associations[field].multiplicity === 'ManyToOne') {
+        return `
+    @${data.associations[field].multiplicity}
+    private ${firstUp(data.associations[field].targetEntity)} ${field} ;
+`
+    }
+    if (data.associations[field].multiplicity === 'OneToOne') {
+        return `
+    @${data.associations[field].multiplicity}
+    private ${firstUp(data.associations[field].targetEntity)} ${field} ;
+`
+    }
+
+}
+
 function geraEntitie(project, p, e, data, path) {
     if (p === 'mainPackage') {
         p = '';
@@ -492,7 +522,12 @@ ${Object.keys(data.fields).reduce((a, field) =>
     private ${data.fields[field].type} ${field};
 `, "")}
 
-    public ${firstUp(e)}(){
+    
+${Object.keys(data.associations).reduce((a, field) =>
+            `${a}${geraAssociation(e, field, data)}
+`, "")}
+
+public ${firstUp(e)}(){
 
     }
 
