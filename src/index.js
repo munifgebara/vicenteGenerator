@@ -506,11 +506,15 @@ function geraEntitie(project, p, e, data, path) {
 import org.hibernate.envers.Audited;
 import br.com.munif.framework.vicente.domain.BaseEntity;
 import br.com.munif.framework.vicente.domain.BaseEntityHelper;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.ZonedDateTime;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
+${    Object.keys(project.entities).reduce((a, p) => `${a}import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `*` : `${p}.*`};
+`  , "")}
+
 
 @Entity
 @Table(name = "${e.toLowerCase()}")
