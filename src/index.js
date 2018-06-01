@@ -7,7 +7,7 @@ const fs = require("fs");
 
 function generateProject(project) {
     console.log(project.description);
-    let mainDir = `../${project.description.title.toLowerCase()}`;
+    let mainDir = `../${project.description.title.toLowerCase()}2`;
 
     mkDir(mainDir);
     mkDir(`${mainDir}/front`);
@@ -111,6 +111,7 @@ function geraSeed(project, path) {
 
         @Autowired
         private SeedSecurity seedSecurity;
+
 
         @Override
         public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -463,6 +464,71 @@ function geraEntities(project, path) {
     });
 }
 
+
+function geraAssociationGetSet(e, field, data) {
+    if (data.associations[field].multiplicity === 'OneToMany') {
+        return `
+        public Set<${firstUp(data.associations[field].targetEntity)}> get${firstUp(field)}(){
+            return ${field};
+        }
+               
+        public void set${firstUp(field)}(Set<${firstUp(data.associations[field].targetEntity)}> ${field}){
+            this.${field}=${field};
+        }
+    
+        public ${firstUp(e)} ${field}(Set<${firstUp(data.associations[field].targetEntity)}> ${field}) {
+            this.${field} = ${field};
+            return this;
+        }`
+    }
+    if (data.associations[field].multiplicity === 'ManyToMany') {
+        return `
+        public Set<${firstUp(data.associations[field].targetEntity)}> get${firstUp(field)}(){
+            return ${field};
+        }
+               
+        public void set${firstUp(field)}(Set<${firstUp(data.associations[field].targetEntity)}> ${field}){
+            this.${field}=${field};
+        }
+    
+        public ${firstUp(e)} ${field}(Set<${firstUp(data.associations[field].targetEntity)}> ${field}) {
+            this.${field} = ${field};
+            return this;
+        }`    }
+
+    if (data.associations[field].multiplicity === 'ManyToOne') {
+        return `
+        public ${firstUp(data.associations[field].targetEntity)} get${firstUp(field)}(){
+            return ${field};
+        }
+               
+        public void set${firstUp(field)}(${firstUp(data.associations[field].targetEntity)} ${field}){
+            this.${field}=${field};
+        }
+    
+        public ${firstUp(e)} ${field}(${firstUp(data.associations[field].targetEntity)} ${field}) {
+            this.${field} = ${field};
+            return this;
+        }`
+    }
+    if (data.associations[field].multiplicity === 'OneToOne') {
+        return `
+        public ${firstUp(data.associations[field].targetEntity)} get${firstUp(field)}(){
+            return ${field};
+        }
+               
+        public void set${firstUp(field)}(${firstUp(data.associations[field].targetEntity)} ${field}){
+            this.${field}=${field};
+        }
+    
+        public ${firstUp(e)} ${field}(${firstUp(data.associations[field].targetEntity)} ${field}) {
+            this.${field} = ${field};
+            return this;
+        }`
+    }
+
+}
+
 function geraAssociation(e, field, data) {
     if (data.associations[field].multiplicity === 'OneToMany') {
         return `
@@ -526,7 +592,13 @@ ${Object.keys(data.fields).reduce((a, field) =>
     private ${data.fields[field].type} ${field};
 `, "")}
 
-    
+
+${Object.keys(data.enums).reduce((a, field) =>
+            `${a}    @Enumerated(EnumType.STRING)
+private ${firstUp(data.enums[field].enum)} ${field};
+`, "")}
+
+
 ${Object.keys(data.associations).reduce((a, field) =>
             `${a}${geraAssociation(e, field, data)}
 `, "")}
@@ -550,6 +622,27 @@ public ${firstUp(e)}(){
 
     `, ""
         )}
+
+        ${Object.keys(data.enums).reduce((a, field) => `${a}public ${firstUp(data.enums[field].enum)} get${firstUp(field)}(){
+            return ${field};
+        }
+               
+        public void set${firstUp(field)}(${firstUp(data.enums[field].enum)} ${field}){
+            this.${field}=${field};
+        }
+    
+        public ${firstUp(e)} ${field}(${firstUp(data.enums[field].enum)} ${field}) {
+            this.${field} = ${field};
+            return this;
+        }
+    
+        `, ""
+        )}
+        ${Object.keys(data.associations).reduce((a, field) =>
+            `${a}${geraAssociationGetSet(e, field, data)}
+`, "")}
+
+
 }`;
     fs.writeFileSync(`${path}/domain/${p.substr(1)}/${firstUp(e)}.java`, src, `utf8`);
 
@@ -719,7 +812,7 @@ function geraApplicationProperties(project, path) {
     let src = `spring.profiles.active=dev
     #logging.level.org.h2.server: DEBUG
     # Database
-    spring.datasource.url= jdbc:mysql://localhost:3306/empleadosapitest?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
+    spring.datasource.url= jdbc:mysql://localhost:3306/${project.description.title.toLowerCase()}?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
     spring.datasource.username=root
     spring.datasource.password=senha
     spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
@@ -732,7 +825,7 @@ function geraApplicationDevProperties(project, path) {
     let src = `
     #logging.level.org.h2.server: DEBUG
     # Database
-    spring.datasource.url= jdbc:mysql://localhost:3306/empleadosapidev?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
+    spring.datasource.url= jdbc:mysql://localhost:3306/${project.description.title.toLowerCase()}dev?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
     spring.datasource.username=root
     spring.datasource.password=senha
     spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
@@ -748,7 +841,7 @@ function geraApplicationDevProperties(project, path) {
 function geraApplicationProdProperties(project, path) {
     let src = `#logging.level.org.h2.server: DEBUG
     # Database
-    spring.datasource.url= jdbc:mysql://localhost:3306/empleadosapi?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
+    spring.datasource.url= jdbc:mysql://localhost:3306/${project.description.title.toLowerCase()}api?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
     spring.datasource.username=root
     spring.datasource.password=senha
     spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
@@ -765,11 +858,12 @@ function geraIndexHtml(project, path) {
     -->
     <html>
         <head>
-            <title>TODO supply a title</title>
+            <title>${project.description.title.toLowerCase()}</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body>
+        <h1>${project.description.title.toLowerCase()}</h1>
             <div>TODO write content</div>
         </body>
     </html>
