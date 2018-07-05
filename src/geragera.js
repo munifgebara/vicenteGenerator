@@ -38,7 +38,7 @@ ${s}
     }
   });
 }
-copia('/home/munif/projetos/empleadosapi/front/empleados/', 'src/app/pais/');
+copia('/home/munif/tcc/', 'mvnabc/');
 
 
 c.forEach(cc => console.log(cc));

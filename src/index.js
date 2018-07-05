@@ -885,6 +885,6 @@ function geraIndexHtml(project, path) {
 
 
 
-let jsonData = fs.readFileSync("/home/munif/projetos/empleados.project.json", "utf8");
+let jsonData = fs.readFileSync("/home/munif/projetos/estoque.json", "utf8");
 let json = JSON.parse(jsonData);
 generateProject(json);

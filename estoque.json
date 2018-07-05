@@ -1,0 +1,74 @@
+{
+    "description": {
+        "title": "Estoque",
+        "softwareHouseDomain": "impactit.com.br"
+    },
+    "enumeratedTypes": {
+        "sexo": {
+            "description": "Sexo",
+            "values": [
+                {
+                    "value": "M",
+                    "description": "Masculino"
+                },
+                {
+                    "value": "F",
+                    "description": "Feminino"
+                }
+            ]
+        },
+        "tipoMovimento": {
+            "description": "Tipo Movimento",
+            "values": [
+                {
+                    "value": "E",
+                    "description": "Entrada"
+                },
+                {
+                    "value": "F",
+                    "description": "Saída"
+                }
+            ]
+        },
+        "estadoCivil": {
+            "description": "Estado Cívil",
+            "values": [
+                {
+                    "value": "CASADO",
+                    "description": "Casado"
+                },
+                {
+                    "value": "SOLTEIRO",
+                    "description": "Solteiro"
+                },
+                {
+                    "value": "VIUVO",
+                    "description": "Viuvo"
+                }
+            ]
+        }
+    },
+    "entities": {
+        "mainPackage": {},
+        "pessoas": {
+            "pessoa": {
+                "fields": {
+                    "nome": {
+                        "description": "Nome",
+                        "type": "String",
+                        "required": "true",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {
+                    "sexo": {
+                        "enum": "sexo",
+                        "initialValue": "MASCULINO"
+                    }
+                },
+                "associations": {}
+            }
+        }
+    }
+}

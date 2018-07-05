@@ -1,0 +1,466 @@
+{
+    "description": {
+        "title": "Empleados",
+        "softwareHouseDomain": "munif.com.br"
+    },
+    "enumeratedTypes": {
+        "sexo": {
+            "description": "Sexo",
+            "values": [
+                {
+                    "value": "M",
+                    "description": "Masculino"
+                },
+                {
+                    "value": "F",
+                    "description": "Feminino"
+                }
+            ]
+        },
+        "tipoContato": {
+            "description": "Tipo de Contato",
+            "values": [
+                {
+                    "value": "TELEFONE",
+                    "description": "Telefone Residencial"
+                },
+                {
+                    "value": "CELULAR",
+                    "description": "Telefone Celular"
+                },
+                {
+                    "value": "EMAIL",
+                    "description": "Email"
+                },
+                {
+                    "value": "EMERGENCIA",
+                    "description": "Emergência"
+                }
+            ]
+        },
+        "tipoDocumento": {
+            "description": "Tipo de Documento",
+            "values": [
+                {
+                    "value": "CPF",
+                    "description": "CPF"
+                },
+                {
+                    "value": "RG",
+                    "description": "RG"
+                },
+                {
+                    "value": "CNH",
+                    "description": "CNH"
+                }
+            ]
+        },
+        "tipoObservacao": {
+            "description": "Tipo de Observação",
+            "values": [
+                {
+                    "value": "FALTADOCUMENTOS",
+                    "description": "Falta Documentos"
+                },
+                {
+                    "value": "DOENCA",
+                    "description": "Doença"
+                },
+                {
+                    "value": "OUTROS",
+                    "description": "Outros"
+                }
+            ]
+        },
+        "tipoParentesco": {
+            "description": "Tipo Parentesco",
+            "values": [
+                {
+                    "value": "IRMAO",
+                    "description": "Irmão"
+                },
+                {
+                    "value": "FILHO",
+                    "description": "Filho"
+                },
+                {
+                    "value": "FILHA",
+                    "description": "Filha"
+                },
+                {
+                    "value": "PAI",
+                    "description": "Pai"
+                },
+                {
+                    "value": "MAE",
+                    "description": "Mãe"
+                },
+                {
+                    "value": "ESPOSA",
+                    "description": "Esposa"
+                },
+                {
+                    "value": "MARIDO",
+                    "description": "Marido"
+                }
+            ]
+        },
+        "motivoTermino": {
+            "description": "Motivo Término",
+            "values": [
+                {
+                    "value": "RENUNCIA",
+                    "description": "Renuncia"
+                },
+                {
+                    "value": "DESPIDO",
+                    "description": "Despido"
+                },
+                {
+                    "value": "JUBILACIÓN",
+                    "description": "Jubilación"
+                },
+                {
+                    "value": "ACTUALIZACIÓN",
+                    "description": "Actualización"
+                },
+                {
+                    "value": "PLAZO",
+                    "description": "Plazo"
+                }
+            ]
+        },
+        "estadoCivil": {
+            "description": "Estado Cívil",
+            "values": [
+                {
+                    "value": "CASADO",
+                    "description": "Casado"
+                },
+                {
+                    "value": "SOLTEIRO",
+                    "description": "Solteiro"
+                },
+                {
+                    "value": "VIUVO",
+                    "description": "Viuvo"
+                }
+            ]
+        }
+    },
+    "entities": {
+        "mainPackage": {},
+        "pessoas": {
+            "observacao": {
+                "fields": {
+                    "texto": {
+                        "description": "Texto",
+                        "type": "String",
+                        "required": "true",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "momento": {
+                        "description": "Momento",
+                        "type": "ZonedDateTime",
+                        "required": "true",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {
+                    "tipoObservacao": {
+                        "enum": "tipoObservacao",
+                        "initialValue": "OUTROS"
+                    }
+                },
+                "associations": {
+                    "pessoa": {
+                        "targetEntity": "pessoa",
+                        "multiplicity": "ManyToOne"
+                    }
+                }
+            },
+            "endereco": {
+                "fields": {
+                    "descricao": {
+                        "description": "descricao",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "domicilio": {
+                        "description": "domicilio",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "direccion": {
+                        "description": "direccion",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {},
+                "associations": {
+                    "pessoa": {
+                        "targetEntity": "pessoa",
+                        "multiplicity": "ManyToOne"
+                    },
+                    "cidade": {
+                        "targetEntity": "cidade",
+                        "multiplicity": "ManyToOne"
+                    }
+                }
+            },
+            "documento": {
+                "fields": {
+                    "valor": {
+                        "description": "valor",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {
+                    "tipoDocumento": {
+                        "enum": "tipoDocumento",
+                        "initialValue": "CPF"
+                    }
+                },
+                "associations": {
+                    "pessoa": {
+                        "targetEntity": "pessoa",
+                        "multiplicity": "ManyToOne"
+                    }
+                }
+            },
+            "contato": {
+                "fields": {
+                    "descricao": {
+                        "description": "descricao",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "valor": {
+                        "description": "valor",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {
+                    "tipoContato": {
+                        "enum": "tipoContato",
+                        "initialValue": "TELEFONE"
+                    }
+                },
+                "associations": {
+                    "pessoa": {
+                        "targetEntity": "pessoa",
+                        "multiplicity": "ManyToOne"
+                    }
+                }
+            },
+            "pessoa": {
+                "fields": {
+                    "nome": {
+                        "description": "nome",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "sobreNome": {
+                        "description": "sobreNome",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "apelido": {
+                        "description": "apelido",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "dataNascimento": {
+                        "description": "dataNascimento",
+                        "type": "ZonedDateTime",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "lugarNascimento": {
+                        "description": "lugarNascimento",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "foto": {
+                        "description": "foto",
+                        "type": "byte[]",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "fotoContentType": {
+                        "description": "fotoContentType",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {
+                    "estadoCivil": {
+                        "enum": "estadoCivil",
+                        "initialValue": "SOLTEIRO"
+                    },
+                    "sexo": {
+                        "enum": "sexo",
+                        "initialValue": "M"
+                    }
+                },
+                "associations": {
+                    "nacionalidade": {
+                        "targetEntity": "nacionalidade",
+                        "multiplicity": "ManyToOne"
+                    },
+                    "cidade": {
+                        "targetEntity": "cidade",
+                        "multiplicity": "ManyToOne"
+                    },
+                    "parentescos": {
+                        "targetEntity": "parentesco",
+                        "multiplicity": "OneToMany"
+                    },
+                    "enderecos": {
+                        "targetEntity": "endereco",
+                        "multiplicity": "OneToMany"
+                    },
+                    "documentos": {
+                        "targetEntity": "documento",
+                        "multiplicity": "OneToMany"
+                    },
+                    "observacoes": {
+                        "targetEntity": "observacao",
+                        "multiplicity": "OneToMany"
+                    },
+                    "contatos": {
+                        "targetEntity": "contato",
+                        "multiplicity": "OneToMany"
+                    }
+                }
+            },
+            "parentesco": {
+                "fields": {
+                    "descricao": {
+                        "description": "descricao",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {
+                    "tipoParentesco": {
+                        "enum": "tipoParentesco",
+                        "initialValue": "PAI"
+                    }
+                },
+                "associations": {
+                    "familiar": {
+                        "targetEntity": "pessoa",
+                        "multiplicity": "ManyToOne"
+                    },
+                    "pessoa": {
+                        "targetEntity": "pessoa",
+                        "multiplicity": "ManyToOne"
+                    }
+                }
+            }
+        },
+        "localizacao": {
+            "nacionalidade": {
+                "fields": {
+                    "descricao": {
+                        "description": "descricao",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {},
+                "associations": {}
+            },
+            "estado": {
+                "fields": {
+                    "nome": {
+                        "description": "nome",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {},
+                "associations": {
+                    "pais": {
+                        "targetEntity": "pais",
+                        "multiplicity": "ManyToOne"
+                    }
+                }
+            },
+            "cidade": {
+                "fields": {
+                    "nome": {
+                        "description": "nome",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    },
+                    "populacao": {
+                        "description": "populacao",
+                        "type": "Integer",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {},
+                "associations": {
+                    "estado": {
+                        "targetEntity": "estado",
+                        "multiplicity": "ManyToOne"
+                    }
+                }
+            },
+            "pais": {
+                "fields": {
+                    "nome": {
+                        "description": "nome",
+                        "type": "String",
+                        "required": "false",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {},
+                "associations": {}
+            }
+        }
+    }
+}
