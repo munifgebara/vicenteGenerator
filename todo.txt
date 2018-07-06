@@ -1,4 +1,39 @@
---Colocar associações
+Vini, Anderson, Stan, bom dia!
+O Vini estava bravo comigo então fiz uma coisa que ele não queria mas acredito que os caras da outra empresa podem gostar.
+Eu reescrevi melhorando o nosso gerador, gera, back, seed, segurança, metade do front e é baseado em um arquivo JSON que descreve o projeto.
+Eu acho que não vamos utilizar Java por mais do que uns 3 ou 4 anos então escrevi em ngModel
+Falta um monte de coisa que está em JAVA mas aqui fica bem mais fácil.
+Se conseguirmos Fazer um front para gerar o JSON que define o PROJETO ficaria ótimo para mostrar para os caras não acham? 
+Tem um monte de coisas pra fazer, lembrei de umas e coloquei aqui.
+Está com tenacy e os atributos customizáveis já estão no back eu acho que fiz um componente para o front mas não lembro se foi aqui ou na Gumga
+
+Para rodar tem que instalar o node (que vocês já devem ter e atualizar o Vicente)
+node src/index.js gera um back
+node src/front.js gera o front (ooooo)
+node src/geregera.js ajuda a gerar um gerador (se não não dava tempo)
+
+Eu revisei o vicente quase todo, tirei alguns erros do back. 
+Tem um arquivo.zip no projeto, decompactem fora e olhem, ele é um projeto para testar a API mas pesado, ele loga, cria token e insere dados, eu conferi no banco mas ainda foram poucos testes, mas melhor do que só olhar.
+
+Entá com angular 6 e bootstrap e eu acho que com progressive web apps, mas eu não sei como funciona então....
+
+tem que copiar na mão os arquivos do spring boot que estão na pasta res/mvn (cuidado que tem uma pasta .mvn dentro, não esqueçam )
+
+Vou dormir um pouco e trabalhar, abraços, mandem notícias.
+
+
+
+--Fazer um cadastro e colocar no gerador para cadastrar atributos genéricos, já tem api
+
+--Gerar no front os outros campos (REUTILIZAR O JAVA)
+
+--Gerar no front as associações (REUTILIZAR O JAVA)
+
+--Existe código repetido no indes.js e front.js, criar um arquivo e centralizar pode ser um util.js
+
+--usar e criar mais atributos no JSON do projeto para tentarmos cobrir quase tudo do sistema, depois só acertamos detalhes, pensei até em colocar regras de negócio
+alem de facilitar a vida, depois podemos gerar para mongo, firebase, ionic, delphi
+
 
 --fazer não sobreescrever os arquivos com AQUELE comentário
   <!--Arquivo gerado utilizando VICGERADOR por anderson as 21 / 03 / 2018 10: 45: 24 -->
@@ -9,8 +44,9 @@
 
 --Colocar os comentários corretos, estáo todos repetidos
 
+--O arquivo geragera.js é um GERADOR de GERADOR, se tiver que criar mais coisas ele ajuda
 
---Fazer um front para gerar o JSON que define o PROJETO
+
 
 Pode ser FIREBASE ou otro repositório e objetos
 
