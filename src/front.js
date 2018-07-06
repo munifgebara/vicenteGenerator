@@ -1,5 +1,9 @@
 const fs = require("fs");
 
+function firstUp(string) {
+  return string.charAt(0).toUpperCase() + string.substr(1);
+}
+
 
 function mkDir(path) {
   console.log(path)
@@ -4322,34 +4326,34 @@ function gera_pietra_guard_guard_ts(project, angularPath) {
 
 
 
-function gera_pais_crud_crud_component_css(project, angularPath) {
+function gera_entidade_crud_crud_component_css(project, entityName, entityData, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   
     `;
-  fs.writeFileSync(`${angularPath}/src/app/pais/crud//crud.component.css`, src, `utf8`);
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/crud//crud.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_crud_crud_component_html(project, angularPath) {
+function gera_entidade_crud_crud_component_html(project, entityName, entityData, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-    <h1 class="h2">Pais</h1>
+    <h1 class="h2">${entityName}</h1>
   </div>
   <router-outlet></router-outlet>
     `;
-  fs.writeFileSync(`${angularPath}/src/app/pais/crud//crud.component.html`, src, `utf8`);
+  fs.writeFileSync(`${angularPath}/src/app//${entityName}/crud//crud.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_crud_crud_component_ts(project, angularPath) {
+function gera_entidade_crud_crud_component_ts(project, entityName, entityData, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4365,13 +4369,13 @@ function gera_pais_crud_crud_component_ts(project, angularPath) {
   
   }
     `;
-  fs.writeFileSync(`${angularPath}/src/app/pais/crud//crud.component.ts`, src, `utf8`);
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/crud//crud.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_detalhes_detalhes_component_css(project, angularPath) {
+function gera_entidade_detalhes_detalhes_component_css(project, entityName, entityData, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4384,14 +4388,14 @@ function gera_pais_detalhes_detalhes_component_css(project, angularPath) {
   .margin-bottom{
       margin-bottom: 20px;
   }
-    `;
-  fs.writeFileSync(`${angularPath}/src/app/pais/detalhes//detalhes.component.css`, src, `utf8`);
+    `; entityName
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/detalhes//detalhes.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_detalhes_detalhes_component_html(project, angularPath) {
+function gera_entidade_detalhes_detalhes_component_html(project, entityName, entityData, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -4443,197 +4447,197 @@ function gera_pais_detalhes_detalhes_component_html(project, angularPath) {
       </div> </div>
   
     `;
-  fs.writeFileSync(`${angularPath}/src/app/pais/detalhes//detalhes.component.html`, src, `utf8`);
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/detalhes//detalhes.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_detalhes_detalhes_component_ts(project, angularPath) {
+function gera_entidade_detalhes_detalhes_component_ts(project, entityName, entityData, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   import { Component, OnInit } from '@angular/core';
   import { Router, ActivatedRoute, Params } from '@angular/router';
   import { Location } from '@angular/common';
-  import { PaisService } from '../pais.service';
-  import { VicReturn } from '../../vic-components/comum/vic-return';
-  import { SuperDetalhesComponent } from '../../vic-components/comum/super-detalhes';
-  import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-  import { BaseEntity } from '../../vic-components/comum/base-entity';
-  
-  
-  @Component({
-    selector: 'app-detalhes',
-    templateUrl: './detalhes.component.html',
-    styleUrls: ['./detalhes.component.css']
-  })
-  export class DetalhesComponent extends SuperDetalhesComponent {
-  
-    detalhesForm: FormGroup;
-  
-    constructor(protected service: PaisService, protected router: Router, protected route: ActivatedRoute,protected paisService:PaisService,
-      private fb: FormBuilder, protected location: Location) {
-      super(service,router,route);
-    }
-  
-  
+  import { ${firstUp(entityName)}Service } from '../${entityName}.service';
+import { VicReturn } from '../../vic-components/comum/vic-return';
+import { SuperDetalhesComponent } from '../../vic-components/comum/super-detalhes';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { BaseEntity } from '../../vic-components/comum/base-entity';
+
+
+@Component({
+  selector: 'app-detalhes',
+  templateUrl: './detalhes.component.html',
+  styleUrls: ['./detalhes.component.css']
+})
+export class DetalhesComponent extends SuperDetalhesComponent {
+
+  detalhesForm: FormGroup;
+
+  constructor(protected service: ${firstUp(entityName)}Service, protected router: Router, protected route: ActivatedRoute,
+    private fb: FormBuilder, protected location: Location) {
+    super(service, router, route);
+  }
+
+
   initForm() {
-  
-        this.detalhesForm = this.fb.group({
-          'nome': ['', Validators.compose([Validators.required])],
-        });
-    }
-  
+
+    this.detalhesForm = this.fb.group({
+      'nome': ['', Validators.compose([Validators.required])],
+    });
+  }
+
   voltar() {
-      this.router.navigate(['../..'], { relativeTo: this.route });
-    }
-  
+    this.router.navigate(['../..'], { relativeTo: this.route });
+  }
+
   cancelar() {
-  
-      let id = this.selecionado["version"] == null ? "new" : this.selecionado["id"];
-  
-      this.service.getOne(id).then(obj => {
-        this.selecionado = obj;
-        this.detalhesForm = this.fb.group({
-            'nome': [this.selecionado['nome'], Validators.compose([Validators.required])],
-              })
+
+    let id = this.selecionado["version"] == null ? "new" : this.selecionado["id"];
+
+    this.service.getOne(id).then(obj => {
+      this.selecionado = obj;
+      this.detalhesForm = this.fb.group({
+        'nome': [this.selecionado['nome'], Validators.compose([Validators.required])],
       })
-    }
-  
-   salvar() {
-      this.service.update(this.selecionado)
-        .then(salvo => {
-          this.selecionado = salvo;
-          this.msg.createSuccessAlert("Objeto salvo", "Operação realizada com sucesso");
-  
-          this.location.go("pais/detalhes/" + salvo.id);
-  
-          this.initForm();
-        })
-        .catch(erro => {
-          this.msg.createErrorAlert("Erro", erro);
-        });
-    }
+    })
   }
-  
-    `;
-  fs.writeFileSync(`${angularPath}/src/app/pais/detalhes//detalhes.component.ts`, src, `utf8`);
+
+  salvar() {
+    this.service.update(this.selecionado)
+      .then(salvo => {
+        this.selecionado = salvo;
+        this.msg.createSuccessAlert("Objeto salvo", "Operação realizada com sucesso");
+
+        this.location.go("${entityName}/detalhes/" + salvo.id);
+
+        this.initForm();
+      })
+      .catch(erro => {
+        this.msg.createErrorAlert("Erro", erro);
+      });
+  }
+}
+
+`;
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/detalhes/detalhes.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_lista_lista_component_css(project, angularPath) {
+function gera_entidade_lista_lista_component_css(project, entityName, entityData, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
-  .padding-bottom-20{
-      padding-bottom: 20px;
-  }
-    `;
-  fs.writeFileSync(`${angularPath}/src/app/pais/lista//lista.component.css`, src, `utf8`);
+  .padding - bottom - 20{
+  padding - bottom: 20px;
+}
+`;
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_lista_lista_component_html(project, angularPath) {
+function gera_entidade_lista_lista_component_html(project, entityName, entityData, angularPath) {
   let src = `
-  <!-- Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 -->
-  <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
-  <h2>Lista {{resposta.quantity}} </h2>
+  < !--Arquivo gerado utilizando VICGERADOR por anderson as 21 / 03 / 2018 10: 45: 24 -- >
+  < !--Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE, pode ser essa mesmo-- >
+  <h2>Lista {{ resposta.quantity }} </h2>
   <div class="row padding-bottom-20">
-      <div class="col-sm-6">
-          <input type="text" id="inPesquisa" name="pesquisa" placeholder="Pesquisa" class="form-control" [(ngModel)]="pesquisa" (keypress)="verificaEnter(\$event)"/>
+    <div class="col-sm-6">
+      <input type="text" id="inPesquisa" name="pesquisa" placeholder="Pesquisa" class="form-control" [(ngModel)]="pesquisa" (keypress)="verificaEnter(\$event)"/>
       </div>
-      <div class="col-sm-3" >
-          <button type="button" class="btn btn-info" (click)="pesquisar()">
+    <div class="col-sm-3" >
+      <button type="button" class="btn btn-info" (click)="pesquisar()">
               <i class="fas fa-search"></i> Pesquisar </button>
-      </div>
-  
-      <div class="col-sm-3 text-right">
-          <button type="button" class="btn btn-success" (click)="novo()">
-              <i class="far fa-file"></i> Novo</button>
-      </div>
   </div>
-  <vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)" (carregarMais)="carregarMais()"></vic-tabela>
+
+  <div class="col-sm-3 text-right">
+    <button type="button" class="btn btn-success" (click)="novo()">
+              <i class="far fa-file"></i> Novo</button>
+      </div >
+  </div >
+  <vic-tabela [(dados)] = "resposta"[colunas] = "colunas"(acao) = "goDetalhes(\$event)"(carregarMais) = "carregarMais()" ></vic - tabela >
     `;
-  fs.writeFileSync(`${angularPath}/src/app/pais/lista//lista.component.html`, src, `utf8`);
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_lista_lista_component_ts(project, angularPath) {
+function gera_entidade_lista_lista_component_ts(project, entityName, entityData, angularPath) {
   let src = `
-  /* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
-  /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
-  import { Component, OnInit } from '@angular/core';
-  import { Router, ActivatedRoute, Params } from '@angular/router';
-  import { PaisService } from '../pais.service';
-  import { BaseEntity } from "../../vic-components/comum/base-entity";
-  import { VicReturn } from '../../vic-components/comum/vic-return';
-  import { SuperListaComponent } from '../../vic-components/comum/super-lista';
-  
-  
-  @Component({
-    selector: 'app-lista',
-    templateUrl: './lista.component.html',
-    styleUrls: ['./lista.component.css']
-  })
-  export class ListaComponent extends SuperListaComponent {
-  
-    colunas = [
-      { active: true, comparisonOperator: "STARTS_WITH", field: "nome", label: "Nome",pedacos: ["nome"]},
-    ];
-  
-    constructor(protected service: PaisService, protected router: Router, protected route: ActivatedRoute) {
-      super(service,router,route);
-    }
-  
-  }
-    `;
-  fs.writeFileSync(`${angularPath}/src/app/pais/lista//lista.component.ts`, src, `utf8`);
-}
+/* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
+/* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ${firstUp(entityName)}Service } from '../${entityName}.service';
+import { BaseEntity } from "../../vic-components/comum/base-entity";
+import { VicReturn } from '../../vic-components/comum/vic-return';
+import { SuperListaComponent } from '../../vic-components/comum/super-lista';
 
 
+@Component({
+  selector: 'app-lista',
+  templateUrl: './lista.component.html',
+  styleUrls: ['./lista.component.css']
+})
+export class ListaComponent extends SuperListaComponent {
 
-
-function gera_pais_pais_routing_module_ts(project, angularPath) {
-  let src = `
-  /* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
-  /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
-  import { NgModule } from '@angular/core';
-  import { Routes, RouterModule } from '@angular/router';
-  import { CrudComponent } from './crud/crud.component';
-  import { ListaComponent } from './lista/lista.component';
-  import { DetalhesComponent } from './detalhes/detalhes.component';
-  
-  
-  const routes: Routes = [
-    {
-      path: 'pais', component: CrudComponent,
-      children: [
-        { path: '', component: ListaComponent },
-        { path: 'detalhes/:id', component: DetalhesComponent }
-      ]
-    }
+  colunas = [
+    { active: true, comparisonOperator: "STARTS_WITH", field: "nome", label: "Nome", pedacos: ["nome"] },
   ];
-  
-  @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
-  })
-  export class PaisRoutingModule { }
-    `;
-  fs.writeFileSync(`${angularPath}/src/app/pais//pais-routing.module.ts`, src, `utf8`);
+
+  constructor(protected service: ${firstUp(entityName)}Service, protected router: Router, protected route: ActivatedRoute) {
+    super(service, router, route);
+  }
+
+}
+`;
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_pais_module_ts(project, angularPath) {
+function gera_entidade_routing_module_ts(project, entityName, entityData, angularPath) {
+  let src = `
+/* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
+/* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { CrudComponent } from './crud/crud.component';
+import { ListaComponent } from './lista/lista.component';
+import { DetalhesComponent } from './detalhes/detalhes.component';
+
+
+const routes: Routes = [
+  {
+    path: '${entityName}', component: CrudComponent,
+    children: [
+      { path: '', component: ListaComponent },
+      { path: 'detalhes/:id', component: DetalhesComponent }
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class ${firstUp(entityName)}RoutingModule { }
+`;
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/${entityName}-routing.module.ts`, src, `utf8`);
+}
+
+
+
+
+function gera_entidade_module_ts(project, entityName, entityData, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4642,7 +4646,7 @@ function gera_pais_pais_module_ts(project, angularPath) {
   import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
   import { CommonModule } from '@angular/common';
   import { VicComponentsModule } from '../vic-components/vic-components.module';
-  import { PaisRoutingModule } from './pais-routing.module';
+  import { ${firstUp(entityName)}RoutingModule } from './${entityName}-routing.module';
   import { CrudComponent } from './crud/crud.component';
   import { ListaComponent } from './lista/lista.component';
   import { DetalhesComponent } from './detalhes/detalhes.component';
@@ -4654,7 +4658,7 @@ function gera_pais_pais_module_ts(project, angularPath) {
     imports: [
       CommonModule,
       FormsModule, OwlDateTimeModule, OwlNativeDateTimeModule,
-      PaisRoutingModule,
+      ${firstUp(entityName)}RoutingModule,
       VicComponentsModule,
       BrowserModule,    
       ReactiveFormsModule 
@@ -4666,16 +4670,16 @@ function gera_pais_pais_module_ts(project, angularPath) {
         DetalhesComponent
   ,]
   })
-  export class PaisModule { }
+  export class ${firstUp(entityName)}Module { }
   
     `;
-  fs.writeFileSync(`${angularPath}/src/app/pais//pais.module.ts`, src, `utf8`);
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/${entityName}.module.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_pais_pais_service_ts(project, angularPath) {
+function gera_entidade_service_ts(project, entityName, entityData, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4686,15 +4690,15 @@ function gera_pais_pais_service_ts(project, angularPath) {
   @Injectable({
     providedIn: 'root'
   })
-  export class PaisService extends SuperService{
+  export class ${firstUp(entityName)}Service extends SuperService{
   
     constructor(http:Http) {
-      super('pais',http);
+      super('${entityName}',http);
     }
   
   }
     `;
-  fs.writeFileSync(`${angularPath}/src/app/pais//pais.service.ts`, src, `utf8`);
+  fs.writeFileSync(`${angularPath}/src/app/${entityName}/${entityName}.service.ts`, src, `utf8`);
 }
 
 function geraproject_src_environments_environment_prod_ts(project, angularPath) {
@@ -4919,22 +4923,48 @@ function generateProject(project) {
   gera_organizacao_organizacao_module_ts(project, angular);
   gera_organizacao_organizacao_service_ts(project, angular);
 
-  mkDir(`${mainDir}/front/project/src/app/pais`);
-  mkDir(`${mainDir}/front/project/src/app/pais/crud/`);
-  gera_pais_crud_crud_component_css(project, angular);
-  gera_pais_crud_crud_component_html(project, angular);
-  gera_pais_crud_crud_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/pais/detalhes/`);
-  gera_pais_detalhes_detalhes_component_css(project, angular);
-  gera_pais_detalhes_detalhes_component_html(project, angular);
-  gera_pais_detalhes_detalhes_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/pais/lista/`);
-  gera_pais_lista_lista_component_css(project, angular);
-  gera_pais_lista_lista_component_html(project, angular);
-  gera_pais_lista_lista_component_ts(project, angular);
-  gera_pais_pais_routing_module_ts(project, angular);
-  gera_pais_pais_module_ts(project, angular);
-  gera_pais_pais_service_ts(project, angular);
+
+  Object.keys(project.entities).forEach(p => {
+    console.log(`Paconte ${p}`);
+    Object.keys(project.entities[p]).forEach(e => {
+      console.log(`Entidade ${e}`);
+      mkDir(`${mainDir}/front/project/src/app/${e}`);
+      mkDir(`${mainDir}/front/project/src/app/${e}/crud/`);
+      gera_entidade_crud_crud_component_css(project, e, project.entities[p][e], angular);
+      gera_entidade_crud_crud_component_html(project, e, project.entities[p][e], angular);
+      gera_entidade_crud_crud_component_ts(project, e, project.entities[p][e], angular);
+      mkDir(`${mainDir}/front/project/src/app/${e}/detalhes/`);
+      gera_entidade_detalhes_detalhes_component_css(project, e, project.entities[p][e], angular);
+      gera_entidade_detalhes_detalhes_component_html(project, e, project.entities[p][e], angular);
+      gera_entidade_detalhes_detalhes_component_ts(project, e, project.entities[p][e], angular);
+      mkDir(`${mainDir}/front/project/src/app/${e}/lista/`);
+      gera_entidade_lista_lista_component_css(project, e, project.entities[p][e], angular);
+      gera_entidade_lista_lista_component_html(project, e, project.entities[p][e], angular);
+      gera_entidade_lista_lista_component_ts(project, e, project.entities[p][e], angular);
+      gera_entidade_routing_module_ts(project, e, project.entities[p][e], angular);
+      gera_entidade_module_ts(project, e, project.entities[p][e], angular);
+      gera_entidade_service_ts(project, e, project.entities[p][e], angular);
+    });
+  });
+
+
+
+  // mkDir(`${mainDir}/front/project/src/app/${entidade}`);
+  // mkDir(`${mainDir}/front/project/src/app/pais/crud/`);
+  // gera_pais_crud_crud_component_css(project, angular);
+  // gera_pais_crud_crud_component_html(project, angular);
+  // gera_pais_crud_crud_component_ts(project, angular);
+  // mkDir(`${mainDir}/front/project/src/app/pais/detalhes/`);
+  // gera_pais_detalhes_detalhes_component_css(project, angular);
+  // gera_pais_detalhes_detalhes_component_html(project, angular);
+  // gera_pais_detalhes_detalhes_component_ts(project, angular);
+  // mkDir(`${mainDir}/front/project/src/app/pais/lista/`);
+  // gera_pais_lista_lista_component_css(project, angular);
+  // gera_pais_lista_lista_component_html(project, angular);
+  // gera_pais_lista_lista_component_ts(project, angular);
+  // gera_pais_pais_routing_module_ts(project, angular);
+  // gera_pais_pais_module_ts(project, angular);
+  // gera_pais_pais_service_ts(project, angular);
 
 
 
