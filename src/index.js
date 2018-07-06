@@ -140,11 +140,17 @@ function geraHelloController(project, path) {
 
     import br.com.munif.framework.vicente.core.RightsHelper;
     import br.com.munif.framework.vicente.core.UIDHelper;
+    import br.com.munif.framework.vicente.core.Utils;
+    import br.com.munif.framework.vicente.core.VicReturn;
     import br.com.munif.framework.vicente.core.VicThreadScope;
     import br.com.munif.framework.vicente.domain.util.EntitiesToSVG;
+    import java.lang.reflect.Method;
+    import java.util.ArrayList;
+    import java.util.Arrays;
     import java.util.HashMap;
+    import java.util.List;
     import java.util.Map;
-    import org.springframework.http.MediaType;
+    import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.ResponseBody;
     import org.springframework.web.bind.annotation.RestController;
@@ -162,7 +168,31 @@ function geraHelloController(project, path) {
     
             return info;
         }
+        @RequestMapping("/enum/{enumName}")
+        public VicReturn<Map<String, String>> enumValues(@PathVariable String enumName) {
+            List<Map<String, String>> toReturn = new ArrayList<>();
+            if (!enumName.contains(".")) {
+                enumName = this.getClass().getCanonicalName().replace("controllers.HelloController", "domain." + Utils.primeiraMaiuscula(enumName));
+            }
+            try {
+                Class<?> clz = Class.forName(enumName);
+                List consts = Arrays.asList(clz.getEnumConstants());
     
+                for (Object obj : consts) {
+                    Method mth = clz.getDeclaredMethod("description");
+                    String descriptrion = mth.invoke(obj).toString();
+                    Map<String, String> v = new HashMap<>();
+                    v.put("value", obj.toString());
+                    v.put("description", descriptrion);
+                    toReturn.add(v);
+                }
+    
+            } catch (Exception ex) {
+                System.out.println("------------------------____>" + ex.toString());
+            }
+            return new VicReturn<Map<String, String>>(toReturn, toReturn.size(), 0, Boolean.FALSE);
+        }
+
         @ResponseBody
         @RequestMapping(value = "/svg", produces = "image/svg+xml")
         public String svg() {
@@ -437,8 +467,8 @@ function geraEnum(project, name, data, path) {
     let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain;
     
     public enum ${firstUp(name)} {
-        ${data.values.reduce((p, v) => `${p}${v.value}("${v.description}"),`, "")}
-        ENUMDESCRIPTION("${data.description}");
+        ${data.values.reduce((p, v) => `${p}${v.value}("${v.description}"),`, "").slice(0, -1)};
+        //ENUMDESCRIPTION("${data.description}");
     
         private String description;
     

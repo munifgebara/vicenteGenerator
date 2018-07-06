@@ -457,7 +457,7 @@ function geraproject__app_component_ts(project, angularPath) {
     selector: 'vic-root',
     template: \`
           <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" >
-              <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Empleados</a>
+              <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">${project.description.title}</a>
               <span *ngIf="loginService.logado" >
                   <span class="navbar-brand"> Login:</span>
                   <span class="navbar-brand">
@@ -578,118 +578,25 @@ function geraproject__app_component_ts(project, angularPath) {
   
   
   
-      //{ link: './movimentofinanceiro', iconeTipo: 'fas', icone: 'fa-home', label: 'MovimentoFinanceiro', active: false },
-  
-  
-  
-  
-  
-      // { link: './pais', iconeTipo: 'fas', icone: 'fa-home', label: 'Pais', active: false },
-  
-      // { link: './cidade', iconeTipo: 'fas', icone: 'fa-home', label: 'Cidade', active: false },
-  
-      // { link: './estado', iconeTipo: 'fas', icone: 'fa-home', label: 'Estado', active: false },
-  
-      // { link: './nacionalidade', iconeTipo: 'fas', icone: 'fa-home', label: 'Nacionalidade', active: false },
-  
-      // { link: './feriaspagas', iconeTipo: 'fas', icone: 'fa-home', label: 'FeriasPagas', active: false },
-  
-      // { link: './responsabilidade', iconeTipo: 'fas', icone: 'fa-home', label: 'Responsabilidade', active: false },
-  
-      // { link: './responsabilidadevaloradicional', iconeTipo: 'fas', icone: 'fa-home', label: 'ResponsabilidadeValorAdicional', active: false },
-  
-      // { link: './tipomovimentofinanceiro', iconeTipo: 'fas', icone: 'fa-home', label: 'TipoMovimentoFinanceiro', active: false },
-  
-      // { link: './motivotermino', iconeTipo: 'fas', icone: 'fa-home', label: 'MotivoTermino', active: false },
-  
-      // { link: './contratotrabalho', iconeTipo: 'fas', icone: 'fa-home', label: 'ContratoTrabalho', active: false },
-  
-      // { link: './qualificacao', iconeTipo: 'fas', icone: 'fa-home', label: 'Qualificacao', active: false },
-  
-      // { link: './movimentofinanceiro', iconeTipo: 'fas', icone: 'fa-home', label: 'MovimentoFinanceiro', active: false },
-  
-      // { link: './cargo', iconeTipo: 'fas', icone: 'fa-home', label: 'Cargo', active: false },
-  
-      // { link: './gerencia', iconeTipo: 'fas', icone: 'fa-home', label: 'Gerencia', active: false },
-  
-      // { link: './cargovalorbase', iconeTipo: 'fas', icone: 'fa-home', label: 'CargoValorBase', active: false },
-  
-      // { link: './qualificacaovaloradicional', iconeTipo: 'fas', icone: 'fa-home', label: 'QualificacaoValorAdicional', active: false },
-  
-      // { link: './tipoparentesco', iconeTipo: 'fas', icone: 'fa-home', label: 'TipoParentesco', active: false },
-  
-      // { link: './sexo', iconeTipo: 'fas', icone: 'fa-home', label: 'Sexo', active: false },
-  
-      // { link: './endereco', iconeTipo: 'fas', icone: 'fa-home', label: 'Endereco', active: false },
-  
-      // { link: './tipodocumento', iconeTipo: 'fas', icone: 'fa-home', label: 'TipoDocumento', active: false },
-  
-      // { link: './estadocivil', iconeTipo: 'fas', icone: 'fa-home', label: 'EstadoCivil', active: false },
-  
-      // { link: './parentesco', iconeTipo: 'fas', icone: 'fa-home', label: 'Parentesco', active: false },
-  
-      // { link: './documento', iconeTipo: 'fas', icone: 'fa-home', label: 'Documento', active: false },
-  
-      // { link: './lugar', iconeTipo: 'fas', icone: 'fa-home', label: 'Lugar', active: false },
-  
-      // { link: './tipocontato', iconeTipo: 'fas', icone: 'fa-home', label: 'TipoContato', active: false },
-  
-      // { link: './contato', iconeTipo: 'fas', icone: 'fa-home', label: 'Contato', active: false },
-  
-      // { link: './tipoobservacao', iconeTipo: 'fas', icone: 'fa-home', label: 'TipoObservacao', active: false },
-  
-      // { link: './observacao', iconeTipo: 'fas', icone: 'fa-home', label: 'Observacao', active: false },
+      
   
       /* MENU  */
       { link: './principal', iconeTipo: 'fas', icone: 'fa-home', label: 'Principal', active: false },
-      {
-        label: 'Contratos', iconeTipo: 'far', icone: 'fa-file-pdf', active: false,
-        subItens: [
-          //{ link: './contrato', iconeTipo: 'far', icone: 'fa-file-pdf', label: 'Contrato', active: false },
-          { link: './pessoa', iconeTipo: 'fas', icone: 'fa-user-plus', label: ' Pessoa', active: false },
-          { link: './cargo', iconeTipo: 'far', icone: 'fa-id-badge', label: 'Cargo', active: false },
-          { link: './contratotrabalho', iconeTipo: 'fas', icone: 'fa-home', label: 'ContratoTrabalho', active: false },
-          { link: './consultas', iconeTipo: 'fas', icone: 'fa-home', label: 'Consultas', active: false },
-          // { link: './cargovalorbase', iconeTipo: 'fas', icone: 'fa-home', label: 'CargoValorBase', active: false },
-          // { link: './responsabilidadevaloradicional', iconeTipo: 'fas', icone: 'fa-home', label: 'ResponsabilidadeValorAdicional', active: false },
-          //       { link: './qualificacaovaloradicional', iconeTipo: 'fas', icone: 'fa-home', label: 'QualificacaoValorAdicional', active: false },
-  
-  
-  
-  
-  
-        ]
-      },
-  
-      {
-        label: 'Localização', iconeTipo: 'fas', icone: 'fa-map-marker-alt', active: false,
-        subItens: [
-          { link: './cidade', iconeTipo: 'far', icone: 'fa-building', label: ' Cidade', active: false },
-          { link: './estado', iconeTipo: 'far', icone: 'fa-star', label: 'Estado', active: false },
-          { link: './pais', iconeTipo: 'fas', icone: 'fa-globe', label: 'Países', active: false },
-          { link: './nacionalidade', iconeTipo: 'fab', icone: 'fa-font-awesome', label: 'Nacionalidade', active: false }
-        ]
-      },
-      {
-        label: 'Tipos', iconeTipo: 'far', icone: 'fa-address-book', active: false,
-        subItens: [
-          { link: './motivotermino', iconeTipo: 'far', icone: 'fa-times-circle', label: 'Motivo Termino', active: false },
-          { link: './tipomovimentofinanceiro', iconeTipo: 'far', icone: 'fa-money-bill-alt', label: 'Tipo Movimento Financeiro', active: false },
-          { link: './sexo', iconeTipo: 'fas', icone: 'fa-venus-mars', label: 'Sexo', active: false },
-          { link: './estadocivil', iconeTipo: 'fab', icone: 'fa-slideshare', label: 'EstadoCivil', active: false },
-          { link: './tipoparentesco', iconeTipo: 'fas', icone: 'fa-child', label: 'TipoParentesco', active: false },
-          { link: './tipodocumento', iconeTipo: 'far', icone: 'fa-file-alt', label: 'TipoDocumento', active: false },
-          { link: './tipoobservacao', iconeTipo: 'fas', icone: 'fa-binoculars', label: ' TipoObservacao', active: false },
-          { link: './tipocontato', iconeTipo: 'far', icone: 'fa-id-card', label: 'TipoContato', active: false },
-          { link: './gerencia', iconeTipo: 'fas', icone: 'fa-home', label: 'Gerencias', active: false }
-        ]
-      },
+
+
+      
       {
         label: 'Segurança', iconeTipo: 'fas', icone: 'fa-lock', active: false,
         subItens: [
           { link: './grupo', iconeTipo: 'fas', icone: 'fa-sitemap', label: 'Grupo', active: false },
           { link: './organizacao', iconeTipo: 'fas', icone: 'fa-university', label: 'Organização', active: false },
           { link: './usuario', iconeTipo: 'far', icone: 'fa-user', label: 'Usuário', active: false }
+        ]
+      },
+      {
+        label: 'Configuração', iconeTipo: 'fas', icone: 'fa-lock', active: false,
+        subItens: [
+          { link: './enums', iconeTipo: 'fas', icone: 'fa-sitemap', label: 'Constantes', active: false },
         ]
       }
     ];
@@ -732,6 +639,11 @@ function geraproject__app_module_ts(project, angularPath) {
   import { ServiceWorkerModule } from '@angular/service-worker';
   import { environment } from '../environments/environment';
 
+  import { UsuarioModule } from './usuario/usuario.module';
+import { GrupoModule } from './grupo/grupo.module';
+import { OrganizacaoModule } from './organizacao/organizacao.module';
+
+
   export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: "left",
     allowNegative: false,
@@ -764,6 +676,9 @@ function geraproject__app_module_ts(project, angularPath) {
     CurrencyMaskModule,
     VicComponentsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    GrupoModule,
+    UsuarioModule,
+    OrganizacaoModule,
     AppRoutingModule
   ],
   providers: [
