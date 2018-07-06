@@ -5,6 +5,34 @@ function firstUp(string) {
 }
 
 
+function safeWriteFileSync(arquivo, src, enc) {
+  let text = fs.readFileSync(arquivo, "utf8");
+  let data = text.split("\n");
+  if (data[0].indexOf('VICIGNORE') != -1) {
+    console.log(`Não sobreescrevendo arquivo ${arquivo}`)
+    return;
+  }
+
+  fs.writeFileSync(arquivo, src, enc);
+}
+
+function insereLinhaAntes(arquivo, marcador, novaLinha) {
+  let text = fs.readFileSync(arquivo, "utf8");
+  if (text.indexOf(novaLinha) != -1) {
+    return; //Se ja tiver inserido não coloca novamente
+  }
+  let data = text.split("\n");
+  let newData = [];
+  data.forEach(linha => {
+    if (linha.indexOf(marcador) != -1) {
+      newData.push(novaLinha);
+    }
+    newData.push(linha);
+  })
+  let saida = newData.join("\n");
+  fs.writeFileSync(arquivo, saida, "utf8");
+}
+
 function mkDir(path) {
   console.log(path)
   if (!fs.existsSync(path)) {
@@ -644,8 +672,10 @@ function geraproject__app_module_ts(project, angularPath) {
   import { environment } from '../environments/environment';
 
   import { UsuarioModule } from './usuario/usuario.module';
-import { GrupoModule } from './grupo/grupo.module';
-import { OrganizacaoModule } from './organizacao/organizacao.module';
+  import { GrupoModule } from './grupo/grupo.module';
+  import { OrganizacaoModule } from './organizacao/organizacao.module';
+
+  //MARCADOR PARA COLOCAR IMPORTS
 
 
   export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -683,6 +713,9 @@ import { OrganizacaoModule } from './organizacao/organizacao.module';
     GrupoModule,
     UsuarioModule,
     OrganizacaoModule,
+
+    //MARCADOR MODULE
+
     AppRoutingModule
   ],
   providers: [
@@ -4544,8 +4577,8 @@ function gera_entidade_lista_lista_component_css(project, entityName, entityData
 
 function gera_entidade_lista_lista_component_html(project, entityName, entityData, angularPath) {
   let src = `
-  < !--Arquivo gerado utilizando VICGERADOR por anderson as 21 / 03 / 2018 10: 45: 24 -- >
-  < !--Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE, pode ser essa mesmo-- >
+  <!--Arquivo gerado utilizando VICGERADOR por anderson as 21 / 03 / 2018 10: 45: 24 -->
+  <!--Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE, pode ser essa mesmo-->
   <h2>Lista {{ resposta.quantity }} </h2>
   <div class="row padding-bottom-20">
     <div class="col-sm-6">
@@ -4561,7 +4594,7 @@ function gera_entidade_lista_lista_component_html(project, entityName, entityDat
               <i class="far fa-file"></i> Novo</button>
       </div >
   </div >
-  <vic-tabela [(dados)] = "resposta"[colunas] = "colunas"(acao) = "goDetalhes(\$event)"(carregarMais) = "carregarMais()" ></vic - tabela >
+  <vic-tabela [(dados)] = "resposta"[colunas] = "colunas"(acao) = "goDetalhes(\$event)"(carregarMais) = "carregarMais()" ></vic-tabela>
     `;
   fs.writeFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.html`, src, `utf8`);
 }
@@ -4944,6 +4977,9 @@ function generateProject(project) {
       gera_entidade_routing_module_ts(project, e, project.entities[p][e], angular);
       gera_entidade_module_ts(project, e, project.entities[p][e], angular);
       gera_entidade_service_ts(project, e, project.entities[p][e], angular);
+      insereLinhaAntes(`${angular}/src/app//app.module.ts`, 'COLOCAR IMPORTS', `  import { ${firstUp(e)}Module } from './${e}/${e}.module';`)
+
+      insereLinhaAntes(`${angular}/src/app//app.module.ts`, 'MARCADOR MODULE', `  ${firstUp(e)}Module,`)
     });
   });
 

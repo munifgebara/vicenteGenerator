@@ -1,0 +1,116 @@
+--Colocar associações
+
+--fazer não sobreescrever os arquivos com AQUELE comentário
+  <!--Arquivo gerado utilizando VICGERADOR por anderson as 21 / 03 / 2018 10: 45: 24 -->
+  <!--Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE, pode ser essa mesmo-->
+
+
+--Separar cada gerador em um arquivos diferents, não precisa ser um para cada um mas pelo menos isolar CRUD, PROJETO, ETC...
+
+--Colocar os comentários corretos, estáo todos repetidos
+
+
+--Fazer um front para gerar o JSON que define o PROJETO
+
+Pode ser FIREBASE ou otro repositório e objetos
+
+
+{
+    "description": {
+        "title": "Estoque",
+        "softwareHouseDomain": "impactit.com.br"
+    },
+    "enumeratedTypes": {
+        "sexo": {
+            "description": "Sexo",
+            "values": [
+                {
+                    "value": "M",
+                    "description": "Masculino"
+                },
+                {
+                    "value": "F",
+                    "description": "Feminino"
+                }
+            ]
+        },
+        "tipoMovimento": {
+            "description": "Tipo Movimento",
+            "values": [
+                {
+                    "value": "E",
+                    "description": "Entrada"
+                },
+                {
+                    "value": "F",
+                    "description": "Saída"
+                }
+            ]
+        },
+        "estadoCivil": {
+            "description": "Estado Cívil",
+            "values": [
+                {
+                    "value": "CASADO",
+                    "description": "Casado"
+                },
+                {
+                    "value": "SOLTEIRO",
+                    "description": "Solteiro"
+                },
+                {
+                    "value": "VIUVO",
+                    "description": "Viuvo"
+                }
+            ]
+        }
+    },
+    "entities": {
+        "mainPackage": {},
+        "pessoas": {
+            "pessoa": {
+                "fields": {
+                    "nome": {
+                        "description": "Nome",
+                        "type": "String",
+                        "required": "true",
+                        "initialValueScript": "",
+                        "validationScript": ""
+                    }
+                },
+                "enums": {
+                    "sexo": {
+                        "enum": "sexo",
+                        "initialValue": "MASCULINO"
+                    }
+                },
+                "associations": {}
+            }
+        }
+    }
+}
+
+
+
+---Arrumar os detalhes do crud
+
+
+      It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+      when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+      you. We recommend using this approach to avoid 'changed after checked' errors.
+       
+      Example: 
+      form = new FormGroup({
+        first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+        last: new FormControl('Drew', Validators.required)
+      });
+    
+vendor.js:52470:9
+
+    It looks like you're using ngModel on the same form field as formControlName. 
+    Support for using the ngModel input property and ngModelChange event with 
+    reactive form directives has been deprecated in Angular v6 and will be removed 
+    in Angular v7.
+    
+    For more information on this, see our API docs here:
+    https://angular.io/api/forms/FormControlName#use-with-ngmodel
