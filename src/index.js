@@ -70,12 +70,12 @@ function generateProject(project) {
     util.criaPasta(`${java}/domain`);
     util.criaPasta(`${java}/repository`);
     util.criaPasta(`${java}/service`);
-        
-
+    if (!fs.existsSync(`${mainDir}/mvnw`)){
+    
     ['mvnw','mvnw.cmd','.mvn/wrapper/maven-wrapper.jar','.mvn/wrapper/maven-wrapper.properties'].forEach(s => fs.createReadStream(`${__dirname}/../res/static/mvn/${s}`).pipe(fs.createWriteStream(`${mainDir}/${s}`)));
-
     ['icon-128x128.png', 'icon-144x144.png', 'icon-152x152.png', 'icon-192x192.png', 'icon-384x384.png', 'icon-512x512.png', 'icon-72x72.png', 'icon-96x96.png'].forEach(s => fs.createReadStream(`${__dirname}/../res/static/${s}`).pipe(fs.createWriteStream(`${mainDir}/front/project/src/assets/icons/${s}`)));
     ['favicon.ico'].forEach(s => fs.createReadStream(`${__dirname}/../res/static/${s}`).pipe(fs.createWriteStream(`${mainDir}/front/project/src/${s}`)));
+    }
 
 
 
