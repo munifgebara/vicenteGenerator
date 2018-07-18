@@ -1,81 +1,7 @@
-const fs = require("fs");
-const util = require("./util");
+const util = require("../util");
 
 
 
-
-
-
-function generateProject(project) {
-    
-    let mainDir = `../${project.description.title.toLowerCase()}2`;
-    console.log(project.description, "=>",mainDir);
-    mkDir(mainDir);
-    mkDir(`${mainDir}/front`);
-    mkDir(`${mainDir}/src`);
-    mkDir(`${mainDir}/src/main`);
-    mkDir(`${mainDir}/src/main/resources`);
-    mkDir(`${mainDir}/src/main/resources/static`);
-    mkDir(`${mainDir}/src/main/java`);
-    let java = `${mainDir}/src/main/java`;
-    project.description.softwareHouseDomain.toLowerCase().split('.').reverse().forEach(element => {
-        java += `/${element}`;
-        mkDir(java);
-    });
-    java += `/projects`;
-    mkDir(java);
-    java += `/${project.description.title.toLowerCase()}backend`;
-    mkDir(java);
-    mkDir(`${java}/api`);
-    mkDir(`${java}/bootstrap`);
-    mkDir(`${java}/configuration`);
-    mkDir(`${java}/controllers`);
-    mkDir(`${java}/domain`);
-    mkDir(`${java}/repository`);
-    mkDir(`${java}/service`);
-    geraPomXML(project, mainDir);
-
-    geraApplicationDevProperties(project, mainDir);
-    geraApplicationProdProperties(project, mainDir);
-    geraApplicationProperties(project, mainDir);
-    geraIndexHtml(project, mainDir);
-
-    geraApplication(project, java);
-
-    geraDomain(project, java);
-    geraDatabaseConfiguration(project, java);
-    geraSecurityConfiguration(project, java);
-    geraWebConfiguration(project, java);
-
-    geraRepositories(project, java);
-    geraServices(project, java);
-    geraApis(project, java);
-
-    geraHelloController(project, java);
-
-    geraSeed(project, java);
-}
-
-function mkDir(path) {
-    if (!fs.existsSync(path)) {
-        fs.mkdirSync(path);
-    }
-}
-
-function mainPackage(project) {
-    let package = "";
-    project.description.softwareHouseDomain.toLowerCase().split('.').reverse().forEach(element => {
-        package += `.${element}`;
-
-    });
-    package = package.substr(1);
-    return package;
-
-}
-
-function firstUp(string) {
-    return string.charAt(0).toUpperCase() + string.substr(1);
-}
 function geraExemplo(project, path) {
     let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend;
     `
@@ -915,7 +841,3 @@ function geraIndexHtml(project, path) {
 
 
 
-
-let jsonData = fs.readFileSync("/home/munif/projetos/estoque.json", "utf8");
-let json = JSON.parse(jsonData);
-generateProject(json);

@@ -1,44 +1,7 @@
 const fs = require("fs");
 
-function firstUp(string) {
-  return string.charAt(0).toUpperCase() + string.substr(1);
-}
+const util = require("./util");
 
-
-function safeWriteFileSync(arquivo, src, enc) {
-  let text = fs.readFileSync(arquivo, "utf8");
-  let data = text.split("\n");
-  if (data[0].indexOf('VICIGNORE') != -1) {
-    console.log(`Não sobreescrevendo arquivo ${arquivo}`)
-    return;
-  }
-
-  fs.writeFileSync(arquivo, src, enc);
-}
-
-function insereLinhaAntes(arquivo, marcador, novaLinha) {
-  let text = fs.readFileSync(arquivo, "utf8");
-  if (text.indexOf(novaLinha) != -1) {
-    return; //Se ja tiver inserido não coloca novamente
-  }
-  let data = text.split("\n");
-  let newData = [];
-  data.forEach(linha => {
-    if (linha.indexOf(marcador) != -1) {
-      newData.push(novaLinha);
-    }
-    newData.push(linha);
-  })
-  let saida = newData.join("\n");
-  safeWriteFileSync(arquivo, saida, "utf8");
-}
-
-function mkDir(path) {
-  console.log(path)
-  if (!fs.existsSync(path)) {
-    fs.mkdirSync(path);
-  }
-}
 
 
 function geraproject__editorconfig(project, angularPath) {
@@ -58,7 +21,7 @@ max_line_length = off
 trim_trailing_whitespace = false
 
   `;
-  safeWriteFileSync(`${angularPath}//.editorconfig`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}//.editorconfig`, src, `utf8`);
 }
 
 
@@ -107,7 +70,7 @@ testem.log
 Thumbs.db
 
   `;
-  safeWriteFileSync(`${angularPath}//.gitignore`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}//.gitignore`, src, `utf8`);
 }
 
 
@@ -144,7 +107,7 @@ Run \`ng e2e\` to execute the end-to-end tests via [Protractor](http://www.protr
 To get more help on the Angular CLI use \`ng help\` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
   `;
-  safeWriteFileSync(`${angularPath}//README.md`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}//README.md`, src, `utf8`);
 }
 
 
@@ -313,7 +276,7 @@ function geraproject_angular_json(project, angularPath) {
   "defaultProject": "project"
 }
   `;
-  safeWriteFileSync(`${angularPath}//angular.json`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}//angular.json`, src, `utf8`);
 }
 
 
@@ -346,7 +309,7 @@ function geraproject_ngsw_config_json(project, angularPath) {
   }]
 }
   `;
-  safeWriteFileSync(`${angularPath}//ngsw-config.json`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}//ngsw-config.json`, src, `utf8`);
 }
 
 
@@ -414,7 +377,7 @@ function geraproject_package_json(project, angularPath) {
 }
 
   `;
-  safeWriteFileSync(`${angularPath}//package.json`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}//package.json`, src, `utf8`);
 }
 
 
@@ -471,7 +434,7 @@ function geraproject__app_routing_module_ts(project, angularPath) {
 
 
   `;
-  safeWriteFileSync(`${angularPath}/src/app//app-routing.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app//app-routing.module.ts`, src, `utf8`);
 }
 
 
@@ -640,7 +603,7 @@ function geraproject__app_component_ts(project, angularPath) {
 
 
   `;
-  safeWriteFileSync(`${angularPath}/src/app//app.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app//app.component.ts`, src, `utf8`);
 }
 
 
@@ -726,7 +689,7 @@ function geraproject__app_module_ts(project, angularPath) {
 export class AppModule { }
 
   `;
-  safeWriteFileSync(`${angularPath}/src/app//app.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app//app.module.ts`, src, `utf8`);
 }
 
 
@@ -736,7 +699,7 @@ function geraproject_src_assets__gitkeep(project, angularPath) {
   let src = `
 
   `;
-  safeWriteFileSync(`${angularPath}/src/assets//.gitkeep`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/assets//.gitkeep`, src, `utf8`);
 }
 
 
@@ -763,7 +726,7 @@ function geraproject_src_index_html(project, angularPath) {
 </html>
 
   `;
-  safeWriteFileSync(`${angularPath}/src//index.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//index.html`, src, `utf8`);
 }
 
 
@@ -803,7 +766,7 @@ module.exports = function (config) {
   });
 };
   `;
-  safeWriteFileSync(`${angularPath}/src//karma.conf.js`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//karma.conf.js`, src, `utf8`);
 }
 
 
@@ -825,7 +788,7 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
 
   `;
-  safeWriteFileSync(`${angularPath}/src//main.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//main.ts`, src, `utf8`);
 }
 
 
@@ -885,7 +848,7 @@ function geraproject_src_manifest_json(project, angularPath) {
   ]
 }
   `;
-  safeWriteFileSync(`${angularPath}/src//manifest.json`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//manifest.json`, src, `utf8`);
 }
 
 
@@ -975,7 +938,7 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
  */
 
   `;
-  safeWriteFileSync(`${angularPath}/src//polyfills.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//polyfills.ts`, src, `utf8`);
 }
 
 
@@ -988,7 +951,7 @@ function geraproject_src_styles_css(project, angularPath) {
 body { margin: 0; }
 
   `;
-  safeWriteFileSync(`${angularPath}/src//styles.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//styles.css`, src, `utf8`);
 }
 
 
@@ -1018,7 +981,7 @@ const context = require.context('./', true, /\.spec\.ts\$/);
 context.keys().map(context);
 
   `;
-  safeWriteFileSync(`${angularPath}/src//test.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//test.ts`, src, `utf8`);
 }
 
 
@@ -1040,7 +1003,7 @@ function geraproject_src_tsconfig_app_json(project, angularPath) {
 }
 
   `;
-  safeWriteFileSync(`${angularPath}/src//tsconfig.app.json`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//tsconfig.app.json`, src, `utf8`);
 }
 
 
@@ -1069,7 +1032,7 @@ function geraproject_src_tsconfig_spec_json(project, angularPath) {
 }
 
   `;
-  safeWriteFileSync(`${angularPath}/src//tsconfig.spec.json`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//tsconfig.spec.json`, src, `utf8`);
 }
 
 
@@ -1096,7 +1059,7 @@ function geraproject_src_tslint_json(project, angularPath) {
 }
 
   `;
-  safeWriteFileSync(`${angularPath}/src//tslint.json`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src//tslint.json`, src, `utf8`);
 }
 
 
@@ -1126,7 +1089,7 @@ function geraproject_tsconfig_json(project, angularPath) {
 }
 
   `;
-  safeWriteFileSync(`${angularPath}//tsconfig.json`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}//tsconfig.json`, src, `utf8`);
 }
 
 
@@ -1266,7 +1229,7 @@ function geraproject_tslint_json(project, angularPath) {
 }
 
   `;
-  safeWriteFileSync(`${angularPath}//tslint.json`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}//tslint.json`, src, `utf8`);
 }
 
 
@@ -1338,7 +1301,7 @@ function geraalert_message_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components//alert-message.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components//alert-message.ts`, src, `utf8`);
 }
 
 
@@ -1380,7 +1343,7 @@ function gerabase_entity_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//base-entity.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//base-entity.ts`, src, `utf8`);
 }
 
 
@@ -1390,7 +1353,7 @@ function geranaoexiste_component_css(project, angularPath) {
   let src = `
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/naoexiste//naoexiste.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/naoexiste//naoexiste.component.css`, src, `utf8`);
 }
 
 
@@ -1403,7 +1366,7 @@ function geranaoexiste_component_html(project, angularPath) {
   </div>
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/naoexiste//naoexiste.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/naoexiste//naoexiste.component.html`, src, `utf8`);
 }
 
 
@@ -1438,7 +1401,7 @@ function geranaoexiste_component_spec_ts(project, angularPath) {
   });
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/naoexiste//naoexiste.component.spec.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/naoexiste//naoexiste.component.spec.ts`, src, `utf8`);
 }
 
 
@@ -1463,7 +1426,7 @@ function geranaoexiste_component_ts(project, angularPath) {
   }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/naoexiste//naoexiste.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/naoexiste//naoexiste.component.ts`, src, `utf8`);
 }
 
 
@@ -1473,7 +1436,7 @@ function geraprincipal_component_css(project, angularPath) {
   let src = `
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/principal//principal.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/principal//principal.component.css`, src, `utf8`);
 }
 
 
@@ -1486,7 +1449,7 @@ function geraprincipal_component_html(project, angularPath) {
   </div>
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/principal//principal.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/principal//principal.component.html`, src, `utf8`);
 }
 
 
@@ -1521,7 +1484,7 @@ function geraprincipal_component_spec_ts(project, angularPath) {
   });
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/principal//principal.component.spec.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/principal//principal.component.spec.ts`, src, `utf8`);
 }
 
 
@@ -1546,7 +1509,7 @@ function geraprincipal_component_ts(project, angularPath) {
   }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/principal//principal.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum/principal//principal.component.ts`, src, `utf8`);
 }
 
 
@@ -1662,7 +1625,7 @@ function gerasuper_detalhes_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//super-detalhes.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//super-detalhes.ts`, src, `utf8`);
 }
 
 
@@ -1815,7 +1778,7 @@ function gerasuper_lista_ts(project, angularPath) {
   }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//super-lista.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//super-lista.ts`, src, `utf8`);
 }
 
 
@@ -1933,7 +1896,7 @@ function gerasuper_service_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//super-service.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//super-service.ts`, src, `utf8`);
 }
 
 
@@ -1960,7 +1923,7 @@ function geravic_return_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//vic-return.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/comum//vic-return.ts`, src, `utf8`);
 }
 
 
@@ -1978,7 +1941,7 @@ function geragrupo_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/domain//grupo.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/domain//grupo.ts`, src, `utf8`);
 }
 
 
@@ -1998,7 +1961,7 @@ function geraorganizacao_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/domain//organizacao.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/domain//organizacao.ts`, src, `utf8`);
 }
 
 
@@ -2020,7 +1983,7 @@ function geratoken_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/domain//token.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/domain//token.ts`, src, `utf8`);
 }
 
 
@@ -2043,7 +2006,7 @@ function gerausuario_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/domain//usuario.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/domain//usuario.ts`, src, `utf8`);
 }
 
 
@@ -2061,7 +2024,7 @@ function geraexcluir_atributos_sistema_pipe_spec_ts(project, angularPath) {
   });
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components//excluir-atributos-sistema.pipe.spec.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components//excluir-atributos-sistema.pipe.spec.ts`, src, `utf8`);
 }
 
 
@@ -2086,7 +2049,7 @@ function geraexcluir_atributos_sistema_pipe_ts(project, angularPath) {
   }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components//excluir-atributos-sistema.pipe.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components//excluir-atributos-sistema.pipe.ts`, src, `utf8`);
 }
 
 
@@ -2120,7 +2083,7 @@ function geravic_components_module_ts(project, angularPath) {
   export class VicComponentsModule { }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components//vic-components.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components//vic-components.module.ts`, src, `utf8`);
 }
 
 
@@ -2130,7 +2093,7 @@ function geravic_many_to_many_component_css(project, angularPath) {
   let src = `
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-many//vic-many-to-many.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-many//vic-many-to-many.component.css`, src, `utf8`);
 }
 
 
@@ -2143,7 +2106,7 @@ function geravic_many_to_many_component_html(project, angularPath) {
   </p>
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-many//vic-many-to-many.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-many//vic-many-to-many.component.html`, src, `utf8`);
 }
 
 
@@ -2178,7 +2141,7 @@ function geravic_many_to_many_component_spec_ts(project, angularPath) {
   });
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-many//vic-many-to-many.component.spec.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-many//vic-many-to-many.component.spec.ts`, src, `utf8`);
 }
 
 
@@ -2245,7 +2208,7 @@ function geravic_many_to_many_component_ts(project, angularPath) {
   }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-many//vic-many-to-many.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-many//vic-many-to-many.component.ts`, src, `utf8`);
 }
 
 
@@ -2259,7 +2222,7 @@ function geravic_many_to_one_component_css(project, angularPath) {
       background-color: darkgray;
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-one//vic-many-to-one.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-one//vic-many-to-one.component.css`, src, `utf8`);
 }
 
 
@@ -2272,7 +2235,7 @@ function geravic_many_to_one_component_html(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-one//vic-many-to-one.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-one//vic-many-to-one.component.html`, src, `utf8`);
 }
 
 
@@ -2307,7 +2270,7 @@ function geravic_many_to_one_component_spec_ts(project, angularPath) {
   });
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-one//vic-many-to-one.component.spec.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-one//vic-many-to-one.component.spec.ts`, src, `utf8`);
 }
 
 
@@ -2421,7 +2384,7 @@ function geravic_many_to_one_component_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-one//vic-many-to-one.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-many-to-one//vic-many-to-one.component.ts`, src, `utf8`);
 }
 
 
@@ -2488,7 +2451,7 @@ function gerasuper_detalhe_om_component_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//super-detalhe-om.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//super-detalhe-om.component.ts`, src, `utf8`);
 }
 
 
@@ -2498,7 +2461,7 @@ function geravic_one_to_many_component_css(project, angularPath) {
   let src = `
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//vic-one-to-many.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//vic-one-to-many.component.css`, src, `utf8`);
 }
 
 
@@ -2511,7 +2474,7 @@ function geravic_one_to_many_component_html(project, angularPath) {
   </p>
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//vic-one-to-many.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//vic-one-to-many.component.html`, src, `utf8`);
 }
 
 
@@ -2546,7 +2509,7 @@ function geravic_one_to_many_component_spec_ts(project, angularPath) {
   });
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//vic-one-to-many.component.spec.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//vic-one-to-many.component.spec.ts`, src, `utf8`);
 }
 
 
@@ -2598,7 +2561,7 @@ function geravic_one_to_many_component_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//vic-one-to-many.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-one-to-many//vic-one-to-many.component.ts`, src, `utf8`);
 }
 
 
@@ -2608,7 +2571,7 @@ function geravic_system_fields_component_css(project, angularPath) {
   let src = `
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-system-fields//vic-system-fields.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-system-fields//vic-system-fields.component.css`, src, `utf8`);
 }
 
 
@@ -2658,7 +2621,7 @@ function geravic_system_fields_component_html(project, angularPath) {
   
   </div>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-system-fields//vic-system-fields.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-system-fields//vic-system-fields.component.html`, src, `utf8`);
 }
 
 
@@ -2693,7 +2656,7 @@ function geravic_system_fields_component_spec_ts(project, angularPath) {
   });
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-system-fields//vic-system-fields.component.spec.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-system-fields//vic-system-fields.component.spec.ts`, src, `utf8`);
 }
 
 
@@ -2729,7 +2692,7 @@ function geravic_system_fields_component_ts(project, angularPath) {
   }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-system-fields//vic-system-fields.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-system-fields//vic-system-fields.component.ts`, src, `utf8`);
 }
 
 
@@ -2739,7 +2702,7 @@ function geravic_tabela_component_css(project, angularPath) {
   let src = `
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.css`, src, `utf8`);
 }
 
 
@@ -2774,7 +2737,7 @@ function geravic_tabela_component_html(project, angularPath) {
   
   </div>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.html`, src, `utf8`);
 }
 
 
@@ -2809,7 +2772,7 @@ function geravic_tabela_component_spec_ts(project, angularPath) {
   });
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.spec.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.spec.ts`, src, `utf8`);
 }
 
 
@@ -2908,7 +2871,7 @@ function geravic_tabela_component_ts(project, angularPath) {
   }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.ts`, src, `utf8`);
 }
 
 
@@ -2928,7 +2891,7 @@ function geralogin_component_css(project, angularPath) {
       margin-bottom: 20px;
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/login//login.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/login//login.component.css`, src, `utf8`);
 }
 
 
@@ -2988,7 +2951,7 @@ function geralogin_component_html(project, angularPath) {
   
   </div>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/login//login.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/login//login.component.html`, src, `utf8`);
 }
 
 
@@ -3023,7 +2986,7 @@ function geralogin_component_spec_ts(project, angularPath) {
   });
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/login//login.component.spec.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/login//login.component.spec.ts`, src, `utf8`);
 }
 
 
@@ -3103,7 +3066,7 @@ function geralogin_component_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/login//login.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/login//login.component.ts`, src, `utf8`);
 }
 
 
@@ -3186,7 +3149,7 @@ function geralogin_service_ts(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/login//login.service.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/login//login.service.ts`, src, `utf8`);
 }
 
 
@@ -3197,7 +3160,7 @@ function gera_usuario_crud_crud_component_css(project, angularPath) {
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario/crud//crud.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario/crud//crud.component.css`, src, `utf8`);
 }
 
 
@@ -3212,7 +3175,7 @@ function gera_usuario_crud_crud_component_html(project, angularPath) {
   </div>
   <router-outlet></router-outlet>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario/crud//crud.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario/crud//crud.component.html`, src, `utf8`);
 }
 
 
@@ -3234,7 +3197,7 @@ function gera_usuario_crud_crud_component_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario/crud//crud.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario/crud//crud.component.ts`, src, `utf8`);
 }
 
 
@@ -3254,7 +3217,7 @@ function gera_usuario_detalhes_detalhes_component_css(project, angularPath) {
       margin-bottom: 20px;
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario/detalhes//detalhes.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario/detalhes//detalhes.component.css`, src, `utf8`);
 }
 
 
@@ -3339,7 +3302,7 @@ function gera_usuario_detalhes_detalhes_component_html(project, angularPath) {
     </div>
   </div>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario/detalhes//detalhes.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario/detalhes//detalhes.component.html`, src, `utf8`);
 }
 
 
@@ -3415,7 +3378,7 @@ function gera_usuario_detalhes_detalhes_component_ts(project, angularPath) {
     }
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario/detalhes//detalhes.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario/detalhes//detalhes.component.ts`, src, `utf8`);
 }
 
 
@@ -3429,7 +3392,7 @@ function gera_usuario_lista_lista_component_css(project, angularPath) {
       padding-bottom: 20px;
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario/lista//lista.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario/lista//lista.component.css`, src, `utf8`);
 }
 
 
@@ -3456,7 +3419,7 @@ function gera_usuario_lista_lista_component_html(project, angularPath) {
   </div>
   <vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)"></vic-tabela>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario/lista//lista.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario/lista//lista.component.html`, src, `utf8`);
 }
 
 
@@ -3496,7 +3459,7 @@ function gera_usuario_lista_lista_component_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario/lista//lista.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario/lista//lista.component.ts`, src, `utf8`);
 }
 
 
@@ -3529,7 +3492,7 @@ function gera_usuario_usuario_routing_module_ts(project, angularPath) {
   })
   export class UsuarioRoutingModule { }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario//usuario-routing.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario//usuario-routing.module.ts`, src, `utf8`);
 }
 
 
@@ -3570,7 +3533,7 @@ function gera_usuario_usuario_module_ts(project, angularPath) {
   })
   export class UsuarioModule { }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario//usuario.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario//usuario.module.ts`, src, `utf8`);
 }
 
 
@@ -3595,7 +3558,7 @@ function gera_usuario_usuario_service_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/usuario//usuario.service.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/usuario//usuario.service.ts`, src, `utf8`);
 }
 
 
@@ -3607,7 +3570,7 @@ function gera_grupo_crud_crud_component_css(project, angularPath) {
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo/crud//crud.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo/crud//crud.component.css`, src, `utf8`);
 }
 
 
@@ -3622,7 +3585,7 @@ function gera_grupo_crud_crud_component_html(project, angularPath) {
   </div>
   <router-outlet></router-outlet>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo/crud//crud.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo/crud//crud.component.html`, src, `utf8`);
 }
 
 
@@ -3644,7 +3607,7 @@ function gera_grupo_crud_crud_component_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo/crud//crud.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo/crud//crud.component.ts`, src, `utf8`);
 }
 
 
@@ -3664,7 +3627,7 @@ function gera_grupo_detalhes_detalhes_component_css(project, angularPath) {
       margin-bottom: 20px;
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo/detalhes//detalhes.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo/detalhes//detalhes.component.css`, src, `utf8`);
 }
 
 
@@ -3718,7 +3681,7 @@ function gera_grupo_detalhes_detalhes_component_html(project, angularPath) {
   
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo/detalhes//detalhes.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo/detalhes//detalhes.component.html`, src, `utf8`);
 }
 
 
@@ -3751,7 +3714,7 @@ function gera_grupo_detalhes_detalhes_component_ts(project, angularPath) {
   }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo/detalhes//detalhes.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo/detalhes//detalhes.component.ts`, src, `utf8`);
 }
 
 
@@ -3784,7 +3747,7 @@ function gera_grupo_grupo_routing_module_ts(project, angularPath) {
   })
   export class GrupoRoutingModule { }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo//grupo-routing.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo//grupo-routing.module.ts`, src, `utf8`);
 }
 
 
@@ -3823,7 +3786,7 @@ function gera_grupo_grupo_module_ts(project, angularPath) {
   export class GrupoModule { }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo//grupo.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo//grupo.module.ts`, src, `utf8`);
 }
 
 
@@ -3848,7 +3811,7 @@ function gera_grupo_grupo_service_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo//grupo.service.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo//grupo.service.ts`, src, `utf8`);
 }
 
 
@@ -3862,7 +3825,7 @@ function gera_grupo_lista_lista_component_css(project, angularPath) {
       padding-bottom: 20px;
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo/lista//lista.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo/lista//lista.component.css`, src, `utf8`);
 }
 
 
@@ -3889,7 +3852,7 @@ function gera_grupo_lista_lista_component_html(project, angularPath) {
   </div>
   <vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)"></vic-tabela>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo/lista//lista.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo/lista//lista.component.html`, src, `utf8`);
 }
 
 
@@ -3925,7 +3888,7 @@ function gera_grupo_lista_lista_component_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/grupo/lista//lista.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/grupo/lista//lista.component.ts`, src, `utf8`);
 }
 
 
@@ -3937,7 +3900,7 @@ function gera_organizacao_crud_crud_component_css(project, angularPath) {
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao/crud//crud.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao/crud//crud.component.css`, src, `utf8`);
 }
 
 
@@ -3952,7 +3915,7 @@ function gera_organizacao_crud_crud_component_html(project, angularPath) {
   </div>
   <router-outlet></router-outlet>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao/crud//crud.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao/crud//crud.component.html`, src, `utf8`);
 }
 
 
@@ -3974,7 +3937,7 @@ function gera_organizacao_crud_crud_component_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao/crud//crud.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao/crud//crud.component.ts`, src, `utf8`);
 }
 
 
@@ -3994,7 +3957,7 @@ function gera_organizacao_detalhes_detalhes_component_css(project, angularPath) 
       margin-bottom: 20px;
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao/detalhes//detalhes.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao/detalhes//detalhes.component.css`, src, `utf8`);
 }
 
 
@@ -4069,7 +4032,7 @@ function gera_organizacao_detalhes_detalhes_component_html(project, angularPath)
       </form>
     </div>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao/detalhes//detalhes.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao/detalhes//detalhes.component.html`, src, `utf8`);
 }
 
 
@@ -4141,7 +4104,7 @@ function gera_organizacao_detalhes_detalhes_component_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao/detalhes//detalhes.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao/detalhes//detalhes.component.ts`, src, `utf8`);
 }
 
 
@@ -4155,7 +4118,7 @@ function gera_organizacao_lista_lista_component_css(project, angularPath) {
       padding-bottom: 20px;
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao/lista//lista.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao/lista//lista.component.css`, src, `utf8`);
 }
 
 
@@ -4182,7 +4145,7 @@ function gera_organizacao_lista_lista_component_html(project, angularPath) {
   </div>
   <vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)"></vic-tabela>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao/lista//lista.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao/lista//lista.component.html`, src, `utf8`);
 }
 
 
@@ -4220,7 +4183,7 @@ function gera_organizacao_lista_lista_component_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao/lista//lista.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao/lista//lista.component.ts`, src, `utf8`);
 }
 
 
@@ -4253,7 +4216,7 @@ function gera_organizacao_organizacao_routing_module_ts(project, angularPath) {
   })
   export class OrganizacaoRoutingModule { }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao//organizacao-routing.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao//organizacao-routing.module.ts`, src, `utf8`);
 }
 
 
@@ -4294,7 +4257,7 @@ function gera_organizacao_organizacao_module_ts(project, angularPath) {
   })
   export class OrganizacaoModule { }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao//organizacao.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao//organizacao.module.ts`, src, `utf8`);
 }
 
 
@@ -4319,7 +4282,7 @@ function gera_organizacao_organizacao_service_ts(project, angularPath) {
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/organizacao//organizacao.service.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/organizacao//organizacao.service.ts`, src, `utf8`);
 }
 
 
@@ -4351,7 +4314,7 @@ function gera_pietra_guard_guard_ts(project, angularPath) {
   }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app//pietra-guard.guard.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app//pietra-guard.guard.ts`, src, `utf8`);
 }
 
 
@@ -4364,7 +4327,7 @@ function gera_entidade_crud_crud_component_css(project, entityName, entityData, 
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/crud//crud.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/crud//crud.component.css`, src, `utf8`);
 }
 
 
@@ -4379,7 +4342,7 @@ function gera_entidade_crud_crud_component_html(project, entityName, entityData,
   </div>
   <router-outlet></router-outlet>
     `;
-  safeWriteFileSync(`${angularPath}/src/app//${entityName}/crud//crud.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app//${entityName}/crud//crud.component.html`, src, `utf8`);
 }
 
 
@@ -4401,7 +4364,7 @@ function gera_entidade_crud_crud_component_ts(project, entityName, entityData, a
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/crud//crud.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/crud//crud.component.ts`, src, `utf8`);
 }
 
 
@@ -4421,7 +4384,7 @@ function gera_entidade_detalhes_detalhes_component_css(project, entityName, enti
       margin-bottom: 20px;
   }
     `; entityName
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/detalhes//detalhes.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/detalhes//detalhes.component.css`, src, `utf8`);
 }
 
 
@@ -4479,7 +4442,7 @@ function gera_entidade_detalhes_detalhes_component_html(project, entityName, ent
       </div> </div>
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/detalhes//detalhes.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/detalhes//detalhes.component.html`, src, `utf8`);
 }
 
 
@@ -4492,7 +4455,7 @@ function gera_entidade_detalhes_detalhes_component_ts(project, entityName, entit
   import { Component, OnInit } from '@angular/core';
   import { Router, ActivatedRoute, Params } from '@angular/router';
   import { Location } from '@angular/common';
-  import { ${firstUp(entityName)}Service } from '../${entityName}.service';
+  import { ${util.firstUp(entityName)}Service } from '../${entityName}.service';
 import { VicReturn } from '../../vic-components/comum/vic-return';
 import { SuperDetalhesComponent } from '../../vic-components/comum/super-detalhes';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -4508,7 +4471,7 @@ export class DetalhesComponent extends SuperDetalhesComponent {
 
   detalhesForm: FormGroup;
 
-  constructor(protected service: ${firstUp(entityName)}Service, protected router: Router, protected route: ActivatedRoute,
+  constructor(protected service: ${util.firstUp(entityName)}Service, protected router: Router, protected route: ActivatedRoute,
     private fb: FormBuilder, protected location: Location) {
     super(service, router, route);
   }
@@ -4554,7 +4517,7 @@ export class DetalhesComponent extends SuperDetalhesComponent {
 }
 
 `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/detalhes/detalhes.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/detalhes/detalhes.component.ts`, src, `utf8`);
 }
 
 
@@ -4568,7 +4531,7 @@ function gera_entidade_lista_lista_component_css(project, entityName, entityData
   padding - bottom: 20px;
 }
 `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.css`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.css`, src, `utf8`);
 }
 
 
@@ -4595,7 +4558,7 @@ function gera_entidade_lista_lista_component_html(project, entityName, entityDat
   </div >
   <vic-tabela [(dados)] = "resposta"[colunas] = "colunas"(acao) = "goDetalhes(\$event)"(carregarMais) = "carregarMais()" ></vic-tabela>
     `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.html`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.html`, src, `utf8`);
 }
 
 
@@ -4607,7 +4570,7 @@ function gera_entidade_lista_lista_component_ts(project, entityName, entityData,
 /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ${firstUp(entityName)}Service } from '../${entityName}.service';
+import { ${util.firstUp(entityName)}Service } from '../${entityName}.service';
 import { BaseEntity } from "../../vic-components/comum/base-entity";
 import { VicReturn } from '../../vic-components/comum/vic-return';
 import { SuperListaComponent } from '../../vic-components/comum/super-lista';
@@ -4624,13 +4587,13 @@ export class ListaComponent extends SuperListaComponent {
     { active: true, comparisonOperator: "STARTS_WITH", field: "nome", label: "Nome", pedacos: ["nome"] },
   ];
 
-  constructor(protected service: ${firstUp(entityName)}Service, protected router: Router, protected route: ActivatedRoute) {
+  constructor(protected service: ${util.firstUp(entityName)}Service, protected router: Router, protected route: ActivatedRoute) {
     super(service, router, route);
   }
 
 }
 `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/lista/lista.component.ts`, src, `utf8`);
 }
 
 
@@ -4661,9 +4624,9 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ${firstUp(entityName)}RoutingModule { }
+export class ${util.firstUp(entityName)}RoutingModule { }
 `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/${entityName}-routing.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/${entityName}-routing.module.ts`, src, `utf8`);
 }
 
 
@@ -4678,7 +4641,7 @@ function gera_entidade_module_ts(project, entityName, entityData, angularPath) {
   import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
   import { CommonModule } from '@angular/common';
   import { VicComponentsModule } from '../vic-components/vic-components.module';
-  import { ${firstUp(entityName)}RoutingModule } from './${entityName}-routing.module';
+  import { ${util.firstUp(entityName)}RoutingModule } from './${entityName}-routing.module';
   import { CrudComponent } from './crud/crud.component';
   import { ListaComponent } from './lista/lista.component';
   import { DetalhesComponent } from './detalhes/detalhes.component';
@@ -4690,7 +4653,7 @@ function gera_entidade_module_ts(project, entityName, entityData, angularPath) {
     imports: [
       CommonModule,
       FormsModule, OwlDateTimeModule, OwlNativeDateTimeModule,
-      ${firstUp(entityName)}RoutingModule,
+      ${util.firstUp(entityName)}RoutingModule,
       VicComponentsModule,
       BrowserModule,    
       ReactiveFormsModule 
@@ -4702,10 +4665,10 @@ function gera_entidade_module_ts(project, entityName, entityData, angularPath) {
         DetalhesComponent
   ,]
   })
-  export class ${firstUp(entityName)}Module { }
+  export class ${util.firstUp(entityName)}Module { }
   
     `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/${entityName}.module.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/${entityName}.module.ts`, src, `utf8`);
 }
 
 
@@ -4722,7 +4685,7 @@ function gera_entidade_service_ts(project, entityName, entityData, angularPath) 
   @Injectable({
     providedIn: 'root'
   })
-  export class ${firstUp(entityName)}Service extends SuperService{
+  export class ${util.firstUp(entityName)}Service extends SuperService{
   
     constructor(http:Http) {
       super('${entityName}',http);
@@ -4730,7 +4693,7 @@ function gera_entidade_service_ts(project, entityName, entityData, angularPath) 
   
   }
     `;
-  safeWriteFileSync(`${angularPath}/src/app/${entityName}/${entityName}.service.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/app/${entityName}/${entityName}.service.ts`, src, `utf8`);
 }
 
 function geraproject_src_environments_environment_prod_ts(project, angularPath) {
@@ -4740,7 +4703,7 @@ export const environment = {
 };
 
   `;
-  safeWriteFileSync(`${angularPath}/src/environments/environment.prod.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/environments/environment.prod.ts`, src, `utf8`);
 }
 
 
@@ -4765,7 +4728,7 @@ export const environment = {
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
   `;
-  safeWriteFileSync(`${angularPath}/src/environments/environment.ts`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/environments/environment.ts`, src, `utf8`);
 }
 
 
@@ -4784,7 +4747,7 @@ Firefox ESR
 not dead
 # IE 9-11
   `;
-  safeWriteFileSync(`${angularPath}/src/browserslist`, src, `utf8`);
+  util.safeWriteFileSync(`${angularPath}/src/browserslist`, src, `utf8`);
 }
 
 
@@ -4796,9 +4759,9 @@ function generateProject(project) {
   console.log(project.description);
   let mainDir = `../${project.description.title.toLowerCase()}2`;
 
-  mkDir(mainDir);
-  mkDir(`${mainDir}/front`);
-  mkDir(`${mainDir}/front/project`);
+  util.mkDir(mainDir);
+  util.mkDir(`${mainDir}/front`);
+  util.mkDir(`${mainDir}/front/project`);
 
   let angular = `${mainDir}/front/project`;
   geraproject__editorconfig(project, angular);
@@ -4807,17 +4770,17 @@ function generateProject(project) {
   geraproject_angular_json(project, angular);
   geraproject_ngsw_config_json(project, angular);
   geraproject_package_json(project, angular);
-  mkDir(`${mainDir}/front/project/src/`);
-  mkDir(`${mainDir}/front/project/src/app/`);
+  util.mkDir(`${mainDir}/front/project/src/`);
+  util.mkDir(`${mainDir}/front/project/src/app/`);
   geraproject__app_routing_module_ts(project, angular);
   geraproject__app_component_ts(project, angular);
   geraproject__app_module_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/assets/`);
+  util.mkDir(`${mainDir}/front/project/src/assets/`);
   geraproject_src_assets__gitkeep(project, angular);
-  mkDir(`${mainDir}/front/project/src/assets/icons/`);
+  util.mkDir(`${mainDir}/front/project/src/assets/icons/`);
 
   geraproject_src_browserslist(project, angular);
-  mkDir(`${mainDir}/front/project/src/environments/`);
+  util.mkDir(`${mainDir}/front/project/src/environments/`);
   geraproject_src_environments_environment_prod_ts(project, angular);
   geraproject_src_environments_environment_ts(project, angular);
   geraproject_src_index_html(project, angular);
@@ -4834,10 +4797,10 @@ function generateProject(project) {
   geraproject_tslint_json(project, angular);
 
 
-  mkDir(`${mainDir}/front/project/src/app/vic-components`);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/comum`);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/comum/naoexiste`);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/comum/principal`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/comum`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/comum/naoexiste`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/comum/principal`);
 
   gera_pietra_guard_guard_ts(project, angular);
   geraalert_message_ts(project, angular);
@@ -4846,14 +4809,14 @@ function generateProject(project) {
   geravic_components_module_ts(project, angular);
 
   geraalert_message_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/comum/`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/comum/`);
   gerabase_entity_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/comum/naoexiste/`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/comum/naoexiste/`);
   geranaoexiste_component_css(project, angular);
   geranaoexiste_component_html(project, angular);
   geranaoexiste_component_spec_ts(project, angular);
   geranaoexiste_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/comum/principal/`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/comum/principal/`);
   geraprincipal_component_css(project, angular);
   geraprincipal_component_html(project, angular);
   geraprincipal_component_spec_ts(project, angular);
@@ -4862,7 +4825,7 @@ function generateProject(project) {
   gerasuper_lista_ts(project, angular);
   gerasuper_service_ts(project, angular);
   geravic_return_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/domain/`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/domain/`);
   geragrupo_ts(project, angular);
   geraorganizacao_ts(project, angular);
   geratoken_ts(project, angular);
@@ -4870,35 +4833,35 @@ function generateProject(project) {
   geraexcluir_atributos_sistema_pipe_spec_ts(project, angular);
   geraexcluir_atributos_sistema_pipe_ts(project, angular);
   geravic_components_module_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/vic-many-to-many/`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/vic-many-to-many/`);
   geravic_many_to_many_component_css(project, angular);
   geravic_many_to_many_component_html(project, angular);
   geravic_many_to_many_component_spec_ts(project, angular);
   geravic_many_to_many_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/vic-many-to-one/`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/vic-many-to-one/`);
   geravic_many_to_one_component_css(project, angular);
   geravic_many_to_one_component_html(project, angular);
   geravic_many_to_one_component_spec_ts(project, angular);
   geravic_many_to_one_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/vic-one-to-many/`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/vic-one-to-many/`);
   gerasuper_detalhe_om_component_ts(project, angular);
   geravic_one_to_many_component_css(project, angular);
   geravic_one_to_many_component_html(project, angular);
   geravic_one_to_many_component_spec_ts(project, angular);
   geravic_one_to_many_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/vic-system-fields/`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/vic-system-fields/`);
   geravic_system_fields_component_css(project, angular);
   geravic_system_fields_component_html(project, angular);
   geravic_system_fields_component_spec_ts(project, angular);
   geravic_system_fields_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/vic-components/vic-tabela/`);
+  util.mkDir(`${mainDir}/front/project/src/app/vic-components/vic-tabela/`);
   geravic_tabela_component_css(project, angular);
   geravic_tabela_component_html(project, angular);
   geravic_tabela_component_spec_ts(project, angular);
   geravic_tabela_component_ts(project, angular);
 
 
-  mkDir(`${mainDir}/front/project/src/app/login`);
+  util.mkDir(`${mainDir}/front/project/src/app/login`);
   geralogin_component_css(project, angular);
   geralogin_component_html(project, angular);
   geralogin_component_spec_ts(project, angular);
@@ -4906,48 +4869,48 @@ function generateProject(project) {
   geralogin_service_ts(project, angular);
 
 
-  mkDir(`${mainDir}/front/project/src/app/usuario/`);
-  mkDir(`${mainDir}/front/project/src/app/usuario/crud/`);
+  util.mkDir(`${mainDir}/front/project/src/app/usuario/`);
+  util.mkDir(`${mainDir}/front/project/src/app/usuario/crud/`);
   gera_usuario_crud_crud_component_css(project, angular);
   gera_usuario_crud_crud_component_html(project, angular);
   gera_usuario_crud_crud_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/usuario/detalhes/`);
+  util.mkDir(`${mainDir}/front/project/src/app/usuario/detalhes/`);
   gera_usuario_detalhes_detalhes_component_css(project, angular);
   gera_usuario_detalhes_detalhes_component_html(project, angular);
   gera_usuario_detalhes_detalhes_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/usuario/lista/`);
+  util.mkDir(`${mainDir}/front/project/src/app/usuario/lista/`);
   gera_usuario_lista_lista_component_css(project, angular);
   gera_usuario_lista_lista_component_html(project, angular);
   gera_usuario_lista_lista_component_ts(project, angular);
   gera_usuario_usuario_routing_module_ts(project, angular);
   gera_usuario_usuario_module_ts(project, angular);
   gera_usuario_usuario_service_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/grupo/`);
-  mkDir(`${mainDir}/front/project/src/app/grupo/crud/`);
+  util.mkDir(`${mainDir}/front/project/src/app/grupo/`);
+  util.mkDir(`${mainDir}/front/project/src/app/grupo/crud/`);
   gera_grupo_crud_crud_component_css(project, angular);
   gera_grupo_crud_crud_component_html(project, angular);
   gera_grupo_crud_crud_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/grupo/detalhes/`);
+  util.mkDir(`${mainDir}/front/project/src/app/grupo/detalhes/`);
   gera_grupo_detalhes_detalhes_component_css(project, angular);
   gera_grupo_detalhes_detalhes_component_html(project, angular);
   gera_grupo_detalhes_detalhes_component_ts(project, angular);
   gera_grupo_grupo_routing_module_ts(project, angular);
   gera_grupo_grupo_module_ts(project, angular);
   gera_grupo_grupo_service_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/grupo/lista/`);
+  util.mkDir(`${mainDir}/front/project/src/app/grupo/lista/`);
   gera_grupo_lista_lista_component_css(project, angular);
   gera_grupo_lista_lista_component_html(project, angular);
   gera_grupo_lista_lista_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/organizacao/`);
-  mkDir(`${mainDir}/front/project/src/app/organizacao/crud/`);
+  util.mkDir(`${mainDir}/front/project/src/app/organizacao/`);
+  util.mkDir(`${mainDir}/front/project/src/app/organizacao/crud/`);
   gera_organizacao_crud_crud_component_css(project, angular);
   gera_organizacao_crud_crud_component_html(project, angular);
   gera_organizacao_crud_crud_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/organizacao/detalhes/`);
+  util.mkDir(`${mainDir}/front/project/src/app/organizacao/detalhes/`);
   gera_organizacao_detalhes_detalhes_component_css(project, angular);
   gera_organizacao_detalhes_detalhes_component_html(project, angular);
   gera_organizacao_detalhes_detalhes_component_ts(project, angular);
-  mkDir(`${mainDir}/front/project/src/app/organizacao/lista/`);
+  util.mkDir(`${mainDir}/front/project/src/app/organizacao/lista/`);
   gera_organizacao_lista_lista_component_css(project, angular);
   gera_organizacao_lista_lista_component_html(project, angular);
   gera_organizacao_lista_lista_component_ts(project, angular);
@@ -4960,26 +4923,26 @@ function generateProject(project) {
     console.log(`Paconte ${p}`);
     Object.keys(project.entities[p]).forEach(e => {
       console.log(`Entidade ${e}`);
-      mkDir(`${mainDir}/front/project/src/app/${e}`);
-      mkDir(`${mainDir}/front/project/src/app/${e}/crud/`);
+      util.mkDir(`${mainDir}/front/project/src/app/${e}`);
+      util.mkDir(`${mainDir}/front/project/src/app/${e}/crud/`);
       gera_entidade_crud_crud_component_css(project, e, project.entities[p][e], angular);
       gera_entidade_crud_crud_component_html(project, e, project.entities[p][e], angular);
       gera_entidade_crud_crud_component_ts(project, e, project.entities[p][e], angular);
-      mkDir(`${mainDir}/front/project/src/app/${e}/detalhes/`);
+      util.mkDir(`${mainDir}/front/project/src/app/${e}/detalhes/`);
       gera_entidade_detalhes_detalhes_component_css(project, e, project.entities[p][e], angular);
       gera_entidade_detalhes_detalhes_component_html(project, e, project.entities[p][e], angular);
       gera_entidade_detalhes_detalhes_component_ts(project, e, project.entities[p][e], angular);
-      mkDir(`${mainDir}/front/project/src/app/${e}/lista/`);
+      util.mkDir(`${mainDir}/front/project/src/app/${e}/lista/`);
       gera_entidade_lista_lista_component_css(project, e, project.entities[p][e], angular);
       gera_entidade_lista_lista_component_html(project, e, project.entities[p][e], angular);
       gera_entidade_lista_lista_component_ts(project, e, project.entities[p][e], angular);
       gera_entidade_routing_module_ts(project, e, project.entities[p][e], angular);
       gera_entidade_module_ts(project, e, project.entities[p][e], angular);
       gera_entidade_service_ts(project, e, project.entities[p][e], angular);
-      insereLinhaAntes(`${angular}/src/app//app.module.ts`, 'COLOCAR IMPORTS', `  import { ${firstUp(e)}Module } from './${e}/${e}.module';`);
+      util.insereLinhaAntes(`${angular}/src/app//app.module.ts`, 'COLOCAR IMPORTS', `  import { ${util.firstUp(e)}Module } from './${e}/${e}.module';`);
 
-      insereLinhaAntes(`${angular}/src/app//app.module.ts`, 'MARCADOR MODULE', `  ${firstUp(e)}Module,`);
-      insereLinhaAntes(`${angular}/src/app//app.component.ts`, 'MARCADOR MENU', `  { link: './${e}', iconeTipo: 'fas', icone: 'fa-sitemap', label: '${firstUp(e)}', active: false },`);
+      util.insereLinhaAntes(`${angular}/src/app//app.module.ts`, 'MARCADOR MODULE', `  ${util.firstUp(e)}Module,`);
+      util.insereLinhaAntes(`${angular}/src/app//app.component.ts`, 'MARCADOR MENU', `  { link: './${e}', iconeTipo: 'fas', icone: 'fa-sitemap', label: '${util.firstUp(e)}', active: false },`);
 
 
     });
@@ -4987,16 +4950,16 @@ function generateProject(project) {
 
 
 
-  // mkDir(`${mainDir}/front/project/src/app/${entidade}`);
-  // mkDir(`${mainDir}/front/project/src/app/pais/crud/`);
+  // util.mkDir(`${mainDir}/front/project/src/app/${entidade}`);
+  // util.mkDir(`${mainDir}/front/project/src/app/pais/crud/`);
   // gera_pais_crud_crud_component_css(project, angular);
   // gera_pais_crud_crud_component_html(project, angular);
   // gera_pais_crud_crud_component_ts(project, angular);
-  // mkDir(`${mainDir}/front/project/src/app/pais/detalhes/`);
+  // util.mkDir(`${mainDir}/front/project/src/app/pais/detalhes/`);
   // gera_pais_detalhes_detalhes_component_css(project, angular);
   // gera_pais_detalhes_detalhes_component_html(project, angular);
   // gera_pais_detalhes_detalhes_component_ts(project, angular);
-  // mkDir(`${mainDir}/front/project/src/app/pais/lista/`);
+  // util.mkDir(`${mainDir}/front/project/src/app/pais/lista/`);
   // gera_pais_lista_lista_component_css(project, angular);
   // gera_pais_lista_lista_component_html(project, angular);
   // gera_pais_lista_lista_component_ts(project, angular);
@@ -5022,7 +4985,8 @@ function generateProject(project) {
 
 
 let jsonData = fs.readFileSync("/home/munif/projetos/estoque.json", "utf8");
-console.log(jsonData);
+//console.log(jsonData);
 let json = JSON.parse(jsonData);
 
 generateProject(json);
+
