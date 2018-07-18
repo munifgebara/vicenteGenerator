@@ -2,165 +2,165 @@ const util = require("../util");
 
 
 
-module.exports.geraproject__editorconfig=geraproject__editorconfig;
-module.exports.geraproject__gitignore=geraproject__gitignore;
-module.exports.geraproject_README_md=geraproject_README_md;
-module.exports.geraproject_angular_json=geraproject_angular_json;
-module.exports.geraproject_ngsw_config_json=geraproject_ngsw_config_json;
-module.exports.geraproject_package_json=geraproject_package_json;
+module.exports.geraproject__editorconfig = geraproject__editorconfig;
+module.exports.geraproject__gitignore = geraproject__gitignore;
+module.exports.geraproject_README_md = geraproject_README_md;
+module.exports.geraproject_angular_json = geraproject_angular_json;
+module.exports.geraproject_ngsw_config_json = geraproject_ngsw_config_json;
+module.exports.geraproject_package_json = geraproject_package_json;
 
 
-module.exports.geraproject__app_routing_module_ts=geraproject__app_routing_module_ts;
-
-
-
-module.exports.geraproject__app_component_ts=geraproject__app_component_ts;
-module.exports.geraproject__app_module_ts=geraproject__app_module_ts;
-
-module.exports.geraproject_src_assets__gitkeep=geraproject_src_assets__gitkeep;
-
-
-module.exports.geraproject_src_browserslist=geraproject_src_browserslist;
-
-module.exports.geraproject_src_environments_environment_prod_ts=geraproject_src_environments_environment_prod_ts;
-module.exports.geraproject_src_environments_environment_ts=geraproject_src_environments_environment_ts;
-module.exports.geraproject_src_index_html=geraproject_src_index_html;
-module.exports.geraproject_src_karma_conf_js=geraproject_src_karma_conf_js;
-module.exports.geraproject_src_main_ts=geraproject_src_main_ts;
-module.exports.geraproject_src_manifest_json=geraproject_src_manifest_json;
-module.exports.geraproject_src_polyfills_ts=geraproject_src_polyfills_ts;
-module.exports.geraproject_src_styles_css=geraproject_src_styles_css;
-module.exports.geraproject_src_test_ts=geraproject_src_test_ts;
-module.exports.geraproject_src_tsconfig_app_json=geraproject_src_tsconfig_app_json;
-module.exports.geraproject_src_tsconfig_spec_json=geraproject_src_tsconfig_spec_json;
-module.exports.geraproject_src_tslint_json=geraproject_src_tslint_json;
-module.exports.geraproject_tsconfig_json=geraproject_tsconfig_json;
-module.exports.geraproject_tslint_json=geraproject_tslint_json;
+module.exports.geraproject__app_routing_module_ts = geraproject__app_routing_module_ts;
 
 
 
-module.exports.gera_pietra_guard_guard_ts=gera_pietra_guard_guard_ts;
-module.exports.geraalert_message_ts=geraalert_message_ts;
-module.exports.geraexcluir_atributos_sistema_pipe_spec_ts=geraexcluir_atributos_sistema_pipe_spec_ts;
-module.exports.geraexcluir_atributos_sistema_pipe_ts=geraexcluir_atributos_sistema_pipe_ts;
-module.exports.geravic_components_module_ts=geravic_components_module_ts;
+module.exports.geraproject__app_component_ts = geraproject__app_component_ts;
+module.exports.geraproject__app_module_ts = geraproject__app_module_ts;
 
-module.exports.geraalert_message_ts=geraalert_message_ts;
+module.exports.geraproject_src_assets__gitkeep = geraproject_src_assets__gitkeep;
 
 
-module.exports.gerabase_entity_ts=gerabase_entity_ts;
+module.exports.geraproject_src_browserslist = geraproject_src_browserslist;
 
-module.exports.geranaoexiste_component_css=geranaoexiste_component_css;
-module.exports.geranaoexiste_component_html=geranaoexiste_component_html;
-module.exports.geranaoexiste_component_spec_ts=geranaoexiste_component_spec_ts;
-module.exports.geranaoexiste_component_ts=geranaoexiste_component_ts;
-
-module.exports.geraprincipal_component_css=geraprincipal_component_css;
-module.exports.geraprincipal_component_html=geraprincipal_component_html;
-module.exports.geraprincipal_component_spec_ts=geraprincipal_component_spec_ts;
-module.exports.geraprincipal_component_ts=geraprincipal_component_ts;
-module.exports.gerasuper_detalhes_ts=gerasuper_detalhes_ts;
-module.exports.gerasuper_lista_ts=gerasuper_lista_ts;
-module.exports.gerasuper_service_ts=gerasuper_service_ts;
-module.exports.geravic_return_ts=geravic_return_ts;
-
-module.exports.geragrupo_ts=geragrupo_ts;
-module.exports.geraorganizacao_ts=geraorganizacao_ts;
-module.exports.geratoken_ts=geratoken_ts;
-module.exports.gerausuario_ts=gerausuario_ts;
-module.exports.geraexcluir_atributos_sistema_pipe_spec_ts=geraexcluir_atributos_sistema_pipe_spec_ts;
-module.exports.geraexcluir_atributos_sistema_pipe_ts=geraexcluir_atributos_sistema_pipe_ts;
-module.exports.geravic_components_module_ts=geravic_components_module_ts;
-
-module.exports.geravic_many_to_many_component_css=geravic_many_to_many_component_css;
-module.exports.geravic_many_to_many_component_html=geravic_many_to_many_component_html;
-module.exports.geravic_many_to_many_component_spec_ts=geravic_many_to_many_component_spec_ts;
-module.exports.geravic_many_to_many_component_ts=geravic_many_to_many_component_ts;
-
-module.exports.geravic_many_to_one_component_css=geravic_many_to_one_component_css;
-module.exports.geravic_many_to_one_component_html=geravic_many_to_one_component_html;
-module.exports.geravic_many_to_one_component_spec_ts=geravic_many_to_one_component_spec_ts;
-module.exports.geravic_many_to_one_component_ts=geravic_many_to_one_component_ts;
-
-module.exports.gerasuper_detalhe_om_component_ts=gerasuper_detalhe_om_component_ts;
-module.exports.geravic_one_to_many_component_css=geravic_one_to_many_component_css;
-module.exports.geravic_one_to_many_component_html=geravic_one_to_many_component_html;
-module.exports.geravic_one_to_many_component_spec_ts=geravic_one_to_many_component_spec_ts;
-module.exports.geravic_one_to_many_component_ts=geravic_one_to_many_component_ts;
-
-
-module.exports.geravic_system_fields_component_css=geravic_system_fields_component_css;
-module.exports.geravic_system_fields_component_html=geravic_system_fields_component_html;
-module.exports.geravic_system_fields_component_spec_ts=geravic_system_fields_component_spec_ts;
-module.exports.geravic_system_fields_component_ts=geravic_system_fields_component_ts;
-
-module.exports.geravic_tabela_component_css=geravic_tabela_component_css;
-module.exports.geravic_tabela_component_html=geravic_tabela_component_html;
-module.exports.geravic_tabela_component_spec_ts=geravic_tabela_component_spec_ts;
-module.exports.geravic_tabela_component_ts=geravic_tabela_component_ts;
+module.exports.geraproject_src_environments_environment_prod_ts = geraproject_src_environments_environment_prod_ts;
+module.exports.geraproject_src_environments_environment_ts = geraproject_src_environments_environment_ts;
+module.exports.geraproject_src_index_html = geraproject_src_index_html;
+module.exports.geraproject_src_karma_conf_js = geraproject_src_karma_conf_js;
+module.exports.geraproject_src_main_ts = geraproject_src_main_ts;
+module.exports.geraproject_src_manifest_json = geraproject_src_manifest_json;
+module.exports.geraproject_src_polyfills_ts = geraproject_src_polyfills_ts;
+module.exports.geraproject_src_styles_css = geraproject_src_styles_css;
+module.exports.geraproject_src_test_ts = geraproject_src_test_ts;
+module.exports.geraproject_src_tsconfig_app_json = geraproject_src_tsconfig_app_json;
+module.exports.geraproject_src_tsconfig_spec_json = geraproject_src_tsconfig_spec_json;
+module.exports.geraproject_src_tslint_json = geraproject_src_tslint_json;
+module.exports.geraproject_tsconfig_json = geraproject_tsconfig_json;
+module.exports.geraproject_tslint_json = geraproject_tslint_json;
 
 
 
-module.exports.geralogin_component_css=geralogin_component_css;
-module.exports.geralogin_component_html=geralogin_component_html;
-module.exports.geralogin_component_spec_ts=geralogin_component_spec_ts;
-module.exports.geralogin_component_ts=geralogin_component_ts;
-module.exports.geralogin_service_ts=geralogin_service_ts;
+module.exports.gera_pietra_guard_guard_ts = gera_pietra_guard_guard_ts;
+module.exports.geraalert_message_ts = geraalert_message_ts;
+module.exports.geraexcluir_atributos_sistema_pipe_spec_ts = geraexcluir_atributos_sistema_pipe_spec_ts;
+module.exports.geraexcluir_atributos_sistema_pipe_ts = geraexcluir_atributos_sistema_pipe_ts;
+module.exports.geravic_components_module_ts = geravic_components_module_ts;
+
+module.exports.geraalert_message_ts = geraalert_message_ts;
 
 
-module.exports.gera_usuario_crud_crud_component_css=gera_usuario_crud_crud_component_css;
-module.exports.gera_usuario_crud_crud_component_html=gera_usuario_crud_crud_component_html;
-module.exports.gera_usuario_crud_crud_component_ts=gera_usuario_crud_crud_component_ts;
-module.exports.gera_usuario_detalhes_detalhes_component_css=gera_usuario_detalhes_detalhes_component_css;
-module.exports.gera_usuario_detalhes_detalhes_component_html=gera_usuario_detalhes_detalhes_component_html;
-module.exports.gera_usuario_detalhes_detalhes_component_ts=gera_usuario_detalhes_detalhes_component_ts;
-module.exports.gera_usuario_lista_lista_component_css=gera_usuario_lista_lista_component_css;
-module.exports.gera_usuario_lista_lista_component_html=gera_usuario_lista_lista_component_html;
-module.exports.gera_usuario_lista_lista_component_ts=gera_usuario_lista_lista_component_ts;
-module.exports.gera_usuario_usuario_routing_module_ts=gera_usuario_usuario_routing_module_ts;
-module.exports.gera_usuario_usuario_module_ts=gera_usuario_usuario_module_ts;
-module.exports.gera_usuario_usuario_service_ts=gera_usuario_usuario_service_ts;
-module.exports.gera_grupo_crud_crud_component_css=gera_grupo_crud_crud_component_css;
-module.exports.gera_grupo_crud_crud_component_html=gera_grupo_crud_crud_component_html;
-module.exports.gera_grupo_crud_crud_component_ts=gera_grupo_crud_crud_component_ts;
+module.exports.gerabase_entity_ts = gerabase_entity_ts;
 
-module.exports.gera_grupo_detalhes_detalhes_component_css=gera_grupo_detalhes_detalhes_component_css;
-module.exports.gera_grupo_detalhes_detalhes_component_html=gera_grupo_detalhes_detalhes_component_html;
-module.exports.gera_grupo_detalhes_detalhes_component_ts=gera_grupo_detalhes_detalhes_component_ts;
-module.exports.gera_grupo_grupo_routing_module_ts=gera_grupo_grupo_routing_module_ts;
-module.exports.gera_grupo_grupo_module_ts=gera_grupo_grupo_module_ts;
-module.exports.gera_grupo_grupo_service_ts=gera_grupo_grupo_service_ts;
+module.exports.geranaoexiste_component_css = geranaoexiste_component_css;
+module.exports.geranaoexiste_component_html = geranaoexiste_component_html;
+module.exports.geranaoexiste_component_spec_ts = geranaoexiste_component_spec_ts;
+module.exports.geranaoexiste_component_ts = geranaoexiste_component_ts;
 
-module.exports.gera_grupo_lista_lista_component_css=gera_grupo_lista_lista_component_css;
-module.exports.gera_grupo_lista_lista_component_html=gera_grupo_lista_lista_component_html;
-module.exports.gera_grupo_lista_lista_component_ts=gera_grupo_lista_lista_component_ts;
-module.exports.gera_organizacao_crud_crud_component_css=gera_organizacao_crud_crud_component_css;
-module.exports.gera_organizacao_crud_crud_component_html=gera_organizacao_crud_crud_component_html;
-module.exports.gera_organizacao_crud_crud_component_ts=gera_organizacao_crud_crud_component_ts;
-module.exports.gera_organizacao_detalhes_detalhes_component_css=gera_organizacao_detalhes_detalhes_component_css;
-module.exports.gera_organizacao_detalhes_detalhes_component_html=gera_organizacao_detalhes_detalhes_component_html;
-module.exports.gera_organizacao_detalhes_detalhes_component_ts=gera_organizacao_detalhes_detalhes_component_ts;
+module.exports.geraprincipal_component_css = geraprincipal_component_css;
+module.exports.geraprincipal_component_html = geraprincipal_component_html;
+module.exports.geraprincipal_component_spec_ts = geraprincipal_component_spec_ts;
+module.exports.geraprincipal_component_ts = geraprincipal_component_ts;
+module.exports.gerasuper_detalhes_ts = gerasuper_detalhes_ts;
+module.exports.gerasuper_lista_ts = gerasuper_lista_ts;
+module.exports.gerasuper_service_ts = gerasuper_service_ts;
+module.exports.geravic_return_ts = geravic_return_ts;
 
-module.exports.gera_organizacao_lista_lista_component_css=gera_organizacao_lista_lista_component_css;
-module.exports.gera_organizacao_lista_lista_component_html=gera_organizacao_lista_lista_component_html;
-module.exports.gera_organizacao_lista_lista_component_ts=gera_organizacao_lista_lista_component_ts;
-module.exports.gera_organizacao_organizacao_routing_module_ts=gera_organizacao_organizacao_routing_module_ts;
-module.exports.gera_organizacao_organizacao_module_ts=gera_organizacao_organizacao_module_ts;
-module.exports.gera_organizacao_organizacao_service_ts=gera_organizacao_organizacao_service_ts;
+module.exports.geragrupo_ts = geragrupo_ts;
+module.exports.geraorganizacao_ts = geraorganizacao_ts;
+module.exports.geratoken_ts = geratoken_ts;
+module.exports.gerausuario_ts = gerausuario_ts;
+module.exports.geraexcluir_atributos_sistema_pipe_spec_ts = geraexcluir_atributos_sistema_pipe_spec_ts;
+module.exports.geraexcluir_atributos_sistema_pipe_ts = geraexcluir_atributos_sistema_pipe_ts;
+module.exports.geravic_components_module_ts = geravic_components_module_ts;
+
+module.exports.geravic_many_to_many_component_css = geravic_many_to_many_component_css;
+module.exports.geravic_many_to_many_component_html = geravic_many_to_many_component_html;
+module.exports.geravic_many_to_many_component_spec_ts = geravic_many_to_many_component_spec_ts;
+module.exports.geravic_many_to_many_component_ts = geravic_many_to_many_component_ts;
+
+module.exports.geravic_many_to_one_component_css = geravic_many_to_one_component_css;
+module.exports.geravic_many_to_one_component_html = geravic_many_to_one_component_html;
+module.exports.geravic_many_to_one_component_spec_ts = geravic_many_to_one_component_spec_ts;
+module.exports.geravic_many_to_one_component_ts = geravic_many_to_one_component_ts;
+
+module.exports.gerasuper_detalhe_om_component_ts = gerasuper_detalhe_om_component_ts;
+module.exports.geravic_one_to_many_component_css = geravic_one_to_many_component_css;
+module.exports.geravic_one_to_many_component_html = geravic_one_to_many_component_html;
+module.exports.geravic_one_to_many_component_spec_ts = geravic_one_to_many_component_spec_ts;
+module.exports.geravic_one_to_many_component_ts = geravic_one_to_many_component_ts;
 
 
-module.exports.gera_entidade_crud_crud_component_css=gera_entidade_crud_crud_component_css;
-module.exports.gera_entidade_crud_crud_component_html=gera_entidade_crud_crud_component_html;
-module.exports.gera_entidade_crud_crud_component_ts=gera_entidade_crud_crud_component_ts;
-module.exports.gera_entidade_detalhes_detalhes_component_css=gera_entidade_detalhes_detalhes_component_css;
-module.exports.gera_entidade_detalhes_detalhes_component_html=gera_entidade_detalhes_detalhes_component_html;
-module.exports.gera_entidade_detalhes_detalhes_component_ts=gera_entidade_detalhes_detalhes_component_ts;
-module.exports.gera_entidade_lista_lista_component_css=gera_entidade_lista_lista_component_css;
-module.exports.gera_entidade_lista_lista_component_html=gera_entidade_lista_lista_component_html;
-module.exports.gera_entidade_lista_lista_component_ts=gera_entidade_lista_lista_component_ts;
-module.exports.gera_entidade_routing_module_ts=gera_entidade_routing_module_ts;
-module.exports.gera_entidade_module_ts=gera_entidade_module_ts;
-module.exports.gera_entidade_service_ts=gera_entidade_service_ts;
+module.exports.geravic_system_fields_component_css = geravic_system_fields_component_css;
+module.exports.geravic_system_fields_component_html = geravic_system_fields_component_html;
+module.exports.geravic_system_fields_component_spec_ts = geravic_system_fields_component_spec_ts;
+module.exports.geravic_system_fields_component_ts = geravic_system_fields_component_ts;
+
+module.exports.geravic_tabela_component_css = geravic_tabela_component_css;
+module.exports.geravic_tabela_component_html = geravic_tabela_component_html;
+module.exports.geravic_tabela_component_spec_ts = geravic_tabela_component_spec_ts;
+module.exports.geravic_tabela_component_ts = geravic_tabela_component_ts;
+
+
+
+module.exports.geralogin_component_css = geralogin_component_css;
+module.exports.geralogin_component_html = geralogin_component_html;
+module.exports.geralogin_component_spec_ts = geralogin_component_spec_ts;
+module.exports.geralogin_component_ts = geralogin_component_ts;
+module.exports.geralogin_service_ts = geralogin_service_ts;
+
+
+module.exports.gera_usuario_crud_crud_component_css = gera_usuario_crud_crud_component_css;
+module.exports.gera_usuario_crud_crud_component_html = gera_usuario_crud_crud_component_html;
+module.exports.gera_usuario_crud_crud_component_ts = gera_usuario_crud_crud_component_ts;
+module.exports.gera_usuario_detalhes_detalhes_component_css = gera_usuario_detalhes_detalhes_component_css;
+module.exports.gera_usuario_detalhes_detalhes_component_html = gera_usuario_detalhes_detalhes_component_html;
+module.exports.gera_usuario_detalhes_detalhes_component_ts = gera_usuario_detalhes_detalhes_component_ts;
+module.exports.gera_usuario_lista_lista_component_css = gera_usuario_lista_lista_component_css;
+module.exports.gera_usuario_lista_lista_component_html = gera_usuario_lista_lista_component_html;
+module.exports.gera_usuario_lista_lista_component_ts = gera_usuario_lista_lista_component_ts;
+module.exports.gera_usuario_usuario_routing_module_ts = gera_usuario_usuario_routing_module_ts;
+module.exports.gera_usuario_usuario_module_ts = gera_usuario_usuario_module_ts;
+module.exports.gera_usuario_usuario_service_ts = gera_usuario_usuario_service_ts;
+module.exports.gera_grupo_crud_crud_component_css = gera_grupo_crud_crud_component_css;
+module.exports.gera_grupo_crud_crud_component_html = gera_grupo_crud_crud_component_html;
+module.exports.gera_grupo_crud_crud_component_ts = gera_grupo_crud_crud_component_ts;
+
+module.exports.gera_grupo_detalhes_detalhes_component_css = gera_grupo_detalhes_detalhes_component_css;
+module.exports.gera_grupo_detalhes_detalhes_component_html = gera_grupo_detalhes_detalhes_component_html;
+module.exports.gera_grupo_detalhes_detalhes_component_ts = gera_grupo_detalhes_detalhes_component_ts;
+module.exports.gera_grupo_grupo_routing_module_ts = gera_grupo_grupo_routing_module_ts;
+module.exports.gera_grupo_grupo_module_ts = gera_grupo_grupo_module_ts;
+module.exports.gera_grupo_grupo_service_ts = gera_grupo_grupo_service_ts;
+
+module.exports.gera_grupo_lista_lista_component_css = gera_grupo_lista_lista_component_css;
+module.exports.gera_grupo_lista_lista_component_html = gera_grupo_lista_lista_component_html;
+module.exports.gera_grupo_lista_lista_component_ts = gera_grupo_lista_lista_component_ts;
+module.exports.gera_organizacao_crud_crud_component_css = gera_organizacao_crud_crud_component_css;
+module.exports.gera_organizacao_crud_crud_component_html = gera_organizacao_crud_crud_component_html;
+module.exports.gera_organizacao_crud_crud_component_ts = gera_organizacao_crud_crud_component_ts;
+module.exports.gera_organizacao_detalhes_detalhes_component_css = gera_organizacao_detalhes_detalhes_component_css;
+module.exports.gera_organizacao_detalhes_detalhes_component_html = gera_organizacao_detalhes_detalhes_component_html;
+module.exports.gera_organizacao_detalhes_detalhes_component_ts = gera_organizacao_detalhes_detalhes_component_ts;
+
+module.exports.gera_organizacao_lista_lista_component_css = gera_organizacao_lista_lista_component_css;
+module.exports.gera_organizacao_lista_lista_component_html = gera_organizacao_lista_lista_component_html;
+module.exports.gera_organizacao_lista_lista_component_ts = gera_organizacao_lista_lista_component_ts;
+module.exports.gera_organizacao_organizacao_routing_module_ts = gera_organizacao_organizacao_routing_module_ts;
+module.exports.gera_organizacao_organizacao_module_ts = gera_organizacao_organizacao_module_ts;
+module.exports.gera_organizacao_organizacao_service_ts = gera_organizacao_organizacao_service_ts;
+
+
+module.exports.gera_entidade_crud_crud_component_css = gera_entidade_crud_crud_component_css;
+module.exports.gera_entidade_crud_crud_component_html = gera_entidade_crud_crud_component_html;
+module.exports.gera_entidade_crud_crud_component_ts = gera_entidade_crud_crud_component_ts;
+module.exports.gera_entidade_detalhes_detalhes_component_css = gera_entidade_detalhes_detalhes_component_css;
+module.exports.gera_entidade_detalhes_detalhes_component_html = gera_entidade_detalhes_detalhes_component_html;
+module.exports.gera_entidade_detalhes_detalhes_component_ts = gera_entidade_detalhes_detalhes_component_ts;
+module.exports.gera_entidade_lista_lista_component_css = gera_entidade_lista_lista_component_css;
+module.exports.gera_entidade_lista_lista_component_html = gera_entidade_lista_lista_component_html;
+module.exports.gera_entidade_lista_lista_component_ts = gera_entidade_lista_lista_component_ts;
+module.exports.gera_entidade_routing_module_ts = gera_entidade_routing_module_ts;
+module.exports.gera_entidade_module_ts = gera_entidade_module_ts;
+module.exports.gera_entidade_service_ts = gera_entidade_service_ts;
 
 
 
@@ -735,7 +735,7 @@ function geraproject__app_component_ts(project, angularPath) {
       {
         label: 'Novos Modulos', iconeTipo: 'fas', icone: 'fa-lock', active: false,
         subItens: [
-            //MARCADOR MENU
+            // MARCADOR MENU
             
         ]
     },
@@ -787,10 +787,10 @@ function geraproject__app_module_ts(project, angularPath) {
   import { PrincipalComponent } from './vic-components/comum/principal/principal.component';
   import { NaoexisteComponent } from './vic-components/comum/naoexiste/naoexiste.component';
   import { TooltipModule } from 'ng2-tooltip-directive';
-  import { CurrencyMaskModule } from "ng2-currency-mask";
+  import { CurrencyMaskModule } from 'ng2-currency-mask';
   import { LoginComponent } from './login/login.component';
 
-  import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from "ng2-currency-mask/src/currency-mask.config";
+  import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
   import { ServiceWorkerModule } from '@angular/service-worker';
   import { environment } from '../environments/environment';
 
@@ -798,17 +798,17 @@ function geraproject__app_module_ts(project, angularPath) {
   import { GrupoModule } from './grupo/grupo.module';
   import { OrganizacaoModule } from './organizacao/organizacao.module';
 
-  //MARCADOR PARA COLOCAR IMPORTS
+  // MARCADOR PARA COLOCAR IMPORTS
 
 
   export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
-    align: "left",
+    align: 'left',
     allowNegative: false,
-    decimal: ",",
+    decimal: ',',
     precision: 2,
-    prefix: "R$ ",
-    suffix: "",
-    thousands: "."
+    prefix: 'R$ ',
+    suffix: '',
+    thousands: '.'
   };
   
   
@@ -837,7 +837,7 @@ function geraproject__app_module_ts(project, angularPath) {
     UsuarioModule,
     OrganizacaoModule,
 
-    //MARCADOR MODULE
+    // MARCADOR MODULE
 
     AppRoutingModule
   ],
@@ -949,7 +949,7 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
 
   `;
-  util.escreveArquivo(`${angularPath}/src//main.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/main.ts`, src, `utf8`);
 }
 
 
@@ -1009,7 +1009,7 @@ function geraproject_src_manifest_json(project, angularPath) {
   ]
 }
   `;
-  util.escreveArquivo(`${angularPath}/src//manifest.json`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/manifest.json`, src, `utf8`);
 }
 
 
@@ -4544,7 +4544,8 @@ function gera_entidade_detalhes_detalhes_component_css(project, entityName, enti
   .margin-bottom{
       margin-bottom: 20px;
   }
-    `; entityName
+    `;
+  entityName
   util.escreveArquivo(`${angularPath}/src/app/${entityName}/detalhes//detalhes.component.css`, src, `utf8`);
 }
 
@@ -4910,10 +4911,3 @@ not dead
   `;
   util.escreveArquivo(`${angularPath}/src/browserslist`, src, `utf8`);
 }
-
-
-
-
-
-
-

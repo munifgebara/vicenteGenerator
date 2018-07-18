@@ -1,20 +1,20 @@
 const util = require("../util");
 
-module.exports.geraPomXML=geraPomXML;
-module.exports.geraApplicationDevProperties=geraApplicationDevProperties;
-module.exports.geraApplicationProdProperties=geraApplicationProdProperties;
-module.exports.geraApplicationProperties=geraApplicationProperties;
-module.exports.geraIndexHtml=geraIndexHtml;
-module.exports.geraApplication=geraApplication;
-module.exports.geraDomain=geraDomain;
-module.exports.geraDatabaseConfiguration=geraDatabaseConfiguration;
-module.exports.geraSecurityConfiguration=geraSecurityConfiguration;
-module.exports.geraWebConfiguration=geraWebConfiguration;
-module.exports.geraRepositories=geraRepositories;
-module.exports.geraServices=geraServices;
-module.exports.geraApis=geraApis;
-module.exports.geraHelloController=geraHelloController;
-module.exports.geraSeed=geraSeed;
+module.exports.geraPomXML = geraPomXML;
+module.exports.geraApplicationDevProperties = geraApplicationDevProperties;
+module.exports.geraApplicationProdProperties = geraApplicationProdProperties;
+module.exports.geraApplicationProperties = geraApplicationProperties;
+module.exports.geraIndexHtml = geraIndexHtml;
+module.exports.geraApplication = geraApplication;
+module.exports.geraDomain = geraDomain;
+module.exports.geraDatabaseConfiguration = geraDatabaseConfiguration;
+module.exports.geraSecurityConfiguration = geraSecurityConfiguration;
+module.exports.geraWebConfiguration = geraWebConfiguration;
+module.exports.geraRepositories = geraRepositories;
+module.exports.geraServices = geraServices;
+module.exports.geraApis = geraApis;
+module.exports.geraHelloController = geraHelloController;
+module.exports.geraSeed = geraSeed;
 
 
 
@@ -229,7 +229,6 @@ function geraApis(project, path) {
 function geraApi(project, p, e, data, path) {
     let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.api;
     /* Arquivo gerado utilizando VICGERADOR por munif */
-    /* Arquivo gerado utilizando VICGERADOR por munif as 13/03/2018 08:23:28 */
     /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
     
     import br.com.munif.framework.vicente.api.BaseAPI;
@@ -319,6 +318,7 @@ function geraSecurityConfiguration(project, path) {
     `
     util.escreveArquivo(`${path}/configuration/SecurityConfiguration.java`, src, `utf8`);
 }
+
 function geraWebConfiguration(project, path) {
     let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
 
@@ -467,7 +467,8 @@ function geraAssociationGetSet(e, field, data) {
         public ${util.primeiraMaiuscula (e)} ${field}(Set<${util.primeiraMaiuscula (data.associations[field].targetEntity)}> ${field}) {
             this.${field} = ${field};
             return this;
-        }`    }
+        }`
+    }
 
     if (data.associations[field].multiplicity === 'ManyToOne') {
         return `
@@ -535,8 +536,7 @@ function geraAssociation(e, field, data) {
 function geraEntitie(project, p, e, data, path) {
     if (p === 'mainPackage') {
         p = '';
-    }
-    else {
+    } else {
         util.criaPasta(`${path}/domain/${p}`)
         p = '.' + p;
 
@@ -544,6 +544,7 @@ function geraEntitie(project, p, e, data, path) {
     let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain${p};
 import org.hibernate.envers.Audited;
 import br.com.munif.framework.vicente.domain.BaseEntity;
+import br.com.munif.framework.vicente.domain.tenancyfields.VicTenancyFieldsBaseEntity;
 import br.com.munif.framework.vicente.domain.BaseEntityHelper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.ZonedDateTime;
@@ -558,7 +559,7 @@ ${    Object.keys(project.entities).reduce((a, p) => `${a}import ${util.pacotePr
 @Entity
 @Table(name = "${e.toLowerCase()}")
 @Audited
-public class ${util.primeiraMaiuscula (e)} extends BaseEntity {
+public class ${util.primeiraMaiuscula (e)} extends VicTenancyFieldsBaseEntity {
 
 ${Object.keys(data.fields).reduce((a, field) =>
             `${a}    @Column(name = "${field.toLowerCase()}")
@@ -793,6 +794,7 @@ function geraApplicationProperties(project, path) {
     `;
     util.escreveArquivo(`${path}/src/main/resources/application.properties`, src, `utf8`);
 }
+
 function geraApplicationDevProperties(project, path) {
     let src = `
     #logging.level.org.h2.server: DEBUG
@@ -810,6 +812,7 @@ function geraApplicationDevProperties(project, path) {
     `;
     util.escreveArquivo(`${path}/src/main/resources/application-dev.properties`, src, `utf8`);
 }
+
 function geraApplicationProdProperties(project, path) {
     let src = `#logging.level.org.h2.server: DEBUG
     # Database
@@ -821,6 +824,7 @@ function geraApplicationProdProperties(project, path) {
     `;
     util.escreveArquivo(`${path}/src/main/resources/application-prod.properties`, src, `utf8`);
 }
+
 function geraIndexHtml(project, path) {
     let src = `<!DOCTYPE html>
     <!--
@@ -842,17 +846,3 @@ function geraIndexHtml(project, path) {
     `;
     util.escreveArquivo(`${path}/src/main/resources/static/index.html`, src, `utf8`);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
