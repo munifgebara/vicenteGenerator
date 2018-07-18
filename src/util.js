@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 
-let nivelMaximo=10;
+let nivelMaximo=5;
 
 function viclog (s,nivel=2){
     if (nivel<=nivelMaximo){
@@ -31,7 +31,7 @@ module.exports.escreveArquivo = function (arquivo, src, enc) {
             return;
         }
         if (text == src) {
-            viclog(`Arquivos idênticos, não sobreescrevendo arquivo ${arquivo}`)
+            viclog(`Arquivos idênticos, não sobreescrevendo arquivo ${arquivo}`,6)
             return;
 
         }
@@ -43,11 +43,20 @@ module.exports.escreveArquivo = function (arquivo, src, enc) {
     fs.writeFileSync(arquivo, src, enc);
 }
 
+module.exports.escreveArquivoApenasSeNaoExistir = function (arquivo, src, enc) {
+    if (!fs.existsSync(arquivo)) {
+    viclog(`Criando arquivo ${arquivo}`);
+    fs.writeFileSync(arquivo, src, enc);
+    }
+}
+
+
+
 module.exports.insereLinhaAntes = function (arquivo, marcador, novaLinha) {
     let linhaInserida=false;
     let text = fs.readFileSync(arquivo, "utf8");
     if (text.indexOf(novaLinha) != -1) {
-        viclog(`${arquivo} já contem a linha ${novaLinha}`);
+        viclog(`${arquivo} já contem a linha ${novaLinha}`,6);
         return; //Se ja tiver inserido não coloca novamente
     }
     let data = text.split("\n");
@@ -62,7 +71,7 @@ module.exports.insereLinhaAntes = function (arquivo, marcador, novaLinha) {
     })
     let saida = newData.join("\n");
     if (linhaInserida) {
-        this.safeWriteFileSync(arquivo, saida, "utf8");
+        this.escreveArquivo(arquivo, saida, "utf8");
     }
 }
 
