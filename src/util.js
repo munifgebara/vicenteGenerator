@@ -74,7 +74,7 @@ module.exports.criaPasta = function (path) {
 }
 
 
-module.exports.projetoPrincipal=function(project) {
+module.exports.pacotePrincipal=function(project) {
     let package = "";
     project.description.softwareHouseDomain.toLowerCase().split('.').reverse().forEach(element => {
         package += `.${element}`;

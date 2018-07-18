@@ -1,15 +1,31 @@
 const util = require("../util");
 
+module.exports.geraPomXML=geraPomXML;
+module.exports.geraApplicationDevProperties=geraApplicationDevProperties;
+module.exports.geraApplicationProdProperties=geraApplicationProdProperties;
+module.exports.geraApplicationProperties=geraApplicationProperties;
+module.exports.geraIndexHtml=geraIndexHtml;
+module.exports.geraApplication=geraApplication;
+module.exports.geraDomain=geraDomain;
+module.exports.geraDatabaseConfiguration=geraDatabaseConfiguration;
+module.exports.geraSecurityConfiguration=geraSecurityConfiguration;
+module.exports.geraWebConfiguration=geraWebConfiguration;
+module.exports.geraRepositories=geraRepositories;
+module.exports.geraServices=geraServices;
+module.exports.geraApis=geraApis;
+module.exports.geraHelloController=geraHelloController;
+module.exports.geraSeed=geraSeed;
+
 
 
 function geraExemplo(project, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend;
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend;
     `
-    fs.writeFileSync(`${path}/exemplo.exx`, src, `utf8`);
+    util.escreveArquivo(`${path}/exemplo.exx`, src, `utf8`);
 }
 
 function geraSeed(project, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.bootstrap;
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.bootstrap;
 
     import java.math.BigDecimal;
     import java.time.ZoneId;
@@ -58,12 +74,12 @@ function geraSeed(project, path) {
 
 
     `
-    fs.writeFileSync(`${path}/bootstrap/Seed.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/bootstrap/Seed.java`, src, `utf8`);
 }
 
 
 function geraHelloController(project, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.controllers;
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.controllers;
 
     import br.com.munif.framework.vicente.core.RightsHelper;
     import br.com.munif.framework.vicente.core.UIDHelper;
@@ -131,7 +147,7 @@ function geraHelloController(project, path) {
 
 
     `
-    fs.writeFileSync(`${path}/controllers/HelloController.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/controllers/HelloController.java`, src, `utf8`);
 }
 
 function geraRepositories(project, path) {
@@ -145,24 +161,24 @@ function geraRepositories(project, path) {
 
 
 function geraRepositorie(project, p, e, data, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.repository;
-    /* Arquivo gerado utilizando VICGERADOR por munif as ${Date()} */
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.repository;
+    /* Arquivo gerado utilizando VICGERADOR por munif */
 /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
 
 
-import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${firstUp(e)}` : `${p}.${firstUp(e)}`};
+import ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${util.primeiraMaiuscula (e)}` : `${p}.${util.primeiraMaiuscula (e)}`};
 import br.com.munif.framework.vicente.application.VicRepository;
 
 import org.springframework.stereotype.Repository;
 
 @SuppressWarnings("unused")
 @Repository
-public interface ${firstUp(e)}Repository extends VicRepository<${firstUp(e)}>{
+public interface ${util.primeiraMaiuscula (e)}Repository extends VicRepository<${util.primeiraMaiuscula (e)}>{
     
 }
     `
 
-    fs.writeFileSync(`${path}/repository/${firstUp(e)}Repository.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/repository/${util.primeiraMaiuscula (e)}Repository.java`, src, `utf8`);
 }
 
 
@@ -177,27 +193,27 @@ function geraServices(project, path) {
 
 
 function geraService(project, p, e, data, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.service;
-    /* Arquivo gerado utilizando VICGERADOR por munif as ${Date()} */
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.service;
+    /* Arquivo gerado utilizando VICGERADOR por munif */
     /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
     
     import br.com.munif.framework.vicente.application.BaseService;
     import br.com.munif.framework.vicente.application.VicRepository;
-    import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${firstUp(e)}` : `${p}.${firstUp(e)}`};
+    import ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${util.primeiraMaiuscula (e)}` : `${p}.${util.primeiraMaiuscula (e)}`};
     import org.springframework.stereotype.Service;
     
     
     @Service
-    public class ${firstUp(e)}Service extends BaseService<${firstUp(e)}>{
+    public class ${util.primeiraMaiuscula (e)}Service extends BaseService<${util.primeiraMaiuscula (e)}>{
         
-        public ${firstUp(e)}Service(VicRepository<${firstUp(e)}> repository) {
+        public ${util.primeiraMaiuscula (e)}Service(VicRepository<${util.primeiraMaiuscula (e)}> repository) {
             super(repository);
         }
         
     }
     `
 
-    fs.writeFileSync(`${path}/service/${firstUp(e)}Service.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/service/${util.primeiraMaiuscula (e)}Service.java`, src, `utf8`);
 }
 
 function geraApis(project, path) {
@@ -211,27 +227,27 @@ function geraApis(project, path) {
 
 
 function geraApi(project, p, e, data, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.api;
-    /* Arquivo gerado utilizando VICGERADOR por munif as ${Date()} */
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.api;
+    /* Arquivo gerado utilizando VICGERADOR por munif */
     /* Arquivo gerado utilizando VICGERADOR por munif as 13/03/2018 08:23:28 */
     /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
     
     import br.com.munif.framework.vicente.api.BaseAPI;
     import br.com.munif.framework.vicente.application.BaseService;
-    import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${firstUp(e)}` : `${p}.${firstUp(e)}`};
+    import ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${util.primeiraMaiuscula (e)}` : `${p}.${util.primeiraMaiuscula (e)}`};
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RestController;
     import org.apache.log4j.Logger;
     
     @RestController
     @RequestMapping("/api/${e.toLowerCase()}")
-    public class ${firstUp(e)}Api extends BaseAPI<${firstUp(e)}> {
+    public class ${util.primeiraMaiuscula (e)}Api extends BaseAPI<${util.primeiraMaiuscula (e)}> {
     
-        private final Logger log = Logger.getLogger(${firstUp(e)}Api.class);
+        private final Logger log = Logger.getLogger(${util.primeiraMaiuscula (e)}Api.class);
     
         private static final String ENTITY_NAME = "${e}";
     
-        public ${firstUp(e)}Api(BaseService<${firstUp(e)}> service) {
+        public ${util.primeiraMaiuscula (e)}Api(BaseService<${util.primeiraMaiuscula (e)}> service) {
             super(service);
         }
         
@@ -239,15 +255,15 @@ function geraApi(project, p, e, data, path) {
     }
     `
 
-    fs.writeFileSync(`${path}/api/${firstUp(e)}Api.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/api/${util.primeiraMaiuscula (e)}Api.java`, src, `utf8`);
 }
 
 
 
 function geraDatabaseConfiguration(project, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
 
-    import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.*;
+    import ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.*;
     import br.com.munif.framework.vicente.application.VicRepositoryImpl;
     import org.springframework.boot.SpringApplication;
     import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -260,7 +276,7 @@ function geraDatabaseConfiguration(project, path) {
     
     @Configuration
     @ComponentScan(basePackages = {
-        "${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend", 
+        "${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend", 
         "br.com.munif.framework.vicente.application.victenancyfields", 
         "br.com.munif.framework.vicente.api.errors",
         "br.com.munif.framework.vicente.security"
@@ -268,11 +284,11 @@ function geraDatabaseConfiguration(project, path) {
     @EnableAutoConfiguration()
     @EntityScan(basePackages = {
         "br.com.munif.framework.vicente.domain", 
-        "${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain",
+        "${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain",
         "br.com.munif.framework.vicente.security"
     })
     @EnableJpaRepositories(basePackages = {
-        "${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.repository", 
+        "${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.repository", 
         "br.com.munif.framework.vicente.application.victenancyfields",
         "br.com.munif.framework.vicente.security.repository"
     }, repositoryBaseClass = VicRepositoryImpl.class)
@@ -281,12 +297,12 @@ function geraDatabaseConfiguration(project, path) {
     
     }
     `
-    fs.writeFileSync(`${path}/configuration/DatabaseConfiguration.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/configuration/DatabaseConfiguration.java`, src, `utf8`);
 }
 
 
 function geraSecurityConfiguration(project, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
     
     //@Configuration
     public class SecurityConfiguration {//extends WebSecurityConfigurerAdapter {
@@ -301,10 +317,10 @@ function geraSecurityConfiguration(project, path) {
     }
 
     `
-    fs.writeFileSync(`${path}/configuration/SecurityConfiguration.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/configuration/SecurityConfiguration.java`, src, `utf8`);
 }
 function geraWebConfiguration(project, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.configuration;
 
 import br.com.munif.framework.vicente.security.api.VicRequestFilter;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -373,7 +389,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements WebAppl
 
 }
     `
-    fs.writeFileSync(`${path}/configuration/WebConfiguration.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/configuration/WebConfiguration.java`, src, `utf8`);
 }
 
 
@@ -391,15 +407,15 @@ function geraEnums(project, path) {
 }
 
 function geraEnum(project, name, data, path) {
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain;
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain;
     
-    public enum ${firstUp(name)} {
+    public enum ${util.primeiraMaiuscula (name)} {
         ${data.values.reduce((p, v) => `${p}${v.value}("${v.description}"),`, "").slice(0, -1)};
         //ENUMDESCRIPTION("${data.description}");
     
         private String description;
     
-        ${firstUp(name)}(String description) {
+        ${util.primeiraMaiuscula (name)}(String description) {
             this.description = description;
         }
     
@@ -408,7 +424,7 @@ function geraEnum(project, name, data, path) {
         }
     }
     `;
-    fs.writeFileSync(`${path}/domain/${firstUp(name)}.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/domain/${util.primeiraMaiuscula (name)}.java`, src, `utf8`);
 }
 
 
@@ -425,60 +441,60 @@ function geraEntities(project, path) {
 function geraAssociationGetSet(e, field, data) {
     if (data.associations[field].multiplicity === 'OneToMany') {
         return `
-        public Set<${firstUp(data.associations[field].targetEntity)}> get${firstUp(field)}(){
+        public Set<${util.primeiraMaiuscula (data.associations[field].targetEntity)}> get${util.primeiraMaiuscula (field)}(){
             return ${field};
         }
                
-        public void set${firstUp(field)}(Set<${firstUp(data.associations[field].targetEntity)}> ${field}){
+        public void set${util.primeiraMaiuscula (field)}(Set<${util.primeiraMaiuscula (data.associations[field].targetEntity)}> ${field}){
             this.${field}=${field};
         }
     
-        public ${firstUp(e)} ${field}(Set<${firstUp(data.associations[field].targetEntity)}> ${field}) {
+        public ${util.primeiraMaiuscula (e)} ${field}(Set<${util.primeiraMaiuscula (data.associations[field].targetEntity)}> ${field}) {
             this.${field} = ${field};
             return this;
         }`
     }
     if (data.associations[field].multiplicity === 'ManyToMany') {
         return `
-        public Set<${firstUp(data.associations[field].targetEntity)}> get${firstUp(field)}(){
+        public Set<${util.primeiraMaiuscula (data.associations[field].targetEntity)}> get${util.primeiraMaiuscula (field)}(){
             return ${field};
         }
                
-        public void set${firstUp(field)}(Set<${firstUp(data.associations[field].targetEntity)}> ${field}){
+        public void set${util.primeiraMaiuscula (field)}(Set<${util.primeiraMaiuscula (data.associations[field].targetEntity)}> ${field}){
             this.${field}=${field};
         }
     
-        public ${firstUp(e)} ${field}(Set<${firstUp(data.associations[field].targetEntity)}> ${field}) {
+        public ${util.primeiraMaiuscula (e)} ${field}(Set<${util.primeiraMaiuscula (data.associations[field].targetEntity)}> ${field}) {
             this.${field} = ${field};
             return this;
         }`    }
 
     if (data.associations[field].multiplicity === 'ManyToOne') {
         return `
-        public ${firstUp(data.associations[field].targetEntity)} get${firstUp(field)}(){
+        public ${util.primeiraMaiuscula (data.associations[field].targetEntity)} get${util.primeiraMaiuscula (field)}(){
             return ${field};
         }
                
-        public void set${firstUp(field)}(${firstUp(data.associations[field].targetEntity)} ${field}){
+        public void set${util.primeiraMaiuscula (field)}(${util.primeiraMaiuscula (data.associations[field].targetEntity)} ${field}){
             this.${field}=${field};
         }
     
-        public ${firstUp(e)} ${field}(${firstUp(data.associations[field].targetEntity)} ${field}) {
+        public ${util.primeiraMaiuscula (e)} ${field}(${util.primeiraMaiuscula (data.associations[field].targetEntity)} ${field}) {
             this.${field} = ${field};
             return this;
         }`
     }
     if (data.associations[field].multiplicity === 'OneToOne') {
         return `
-        public ${firstUp(data.associations[field].targetEntity)} get${firstUp(field)}(){
+        public ${util.primeiraMaiuscula (data.associations[field].targetEntity)} get${util.primeiraMaiuscula (field)}(){
             return ${field};
         }
                
-        public void set${firstUp(field)}(${firstUp(data.associations[field].targetEntity)} ${field}){
+        public void set${util.primeiraMaiuscula (field)}(${util.primeiraMaiuscula (data.associations[field].targetEntity)} ${field}){
             this.${field}=${field};
         }
     
-        public ${firstUp(e)} ${field}(${firstUp(data.associations[field].targetEntity)} ${field}) {
+        public ${util.primeiraMaiuscula (e)} ${field}(${util.primeiraMaiuscula (data.associations[field].targetEntity)} ${field}) {
             this.${field} = ${field};
             return this;
         }`
@@ -491,26 +507,26 @@ function geraAssociation(e, field, data) {
         return `
     @${data.associations[field].multiplicity}(mappedBy = "${e}", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"${e}"})
-    private Set<${firstUp(data.associations[field].targetEntity)}> ${field} ;
+    private Set<${util.primeiraMaiuscula (data.associations[field].targetEntity)}> ${field} ;
 `
     }
     if (data.associations[field].multiplicity === 'ManyToMany') {
         return `
     @${data.associations[field].multiplicity}
-    private Set<${firstUp(data.associations[field].targetEntity)}> ${field} ;
+    private Set<${util.primeiraMaiuscula (data.associations[field].targetEntity)}> ${field} ;
 `
     }
 
     if (data.associations[field].multiplicity === 'ManyToOne') {
         return `
     @${data.associations[field].multiplicity}
-    private ${firstUp(data.associations[field].targetEntity)} ${field} ;
+    private ${util.primeiraMaiuscula (data.associations[field].targetEntity)} ${field} ;
 `
     }
     if (data.associations[field].multiplicity === 'OneToOne') {
         return `
     @${data.associations[field].multiplicity}
-    private ${firstUp(data.associations[field].targetEntity)} ${field} ;
+    private ${util.primeiraMaiuscula (data.associations[field].targetEntity)} ${field} ;
 `
     }
 
@@ -521,11 +537,11 @@ function geraEntitie(project, p, e, data, path) {
         p = '';
     }
     else {
-        mkDir(`${path}/domain/${p}`)
+        util.criaPasta(`${path}/domain/${p}`)
         p = '.' + p;
 
     }
-    let src = `package ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain${p};
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain${p};
 import org.hibernate.envers.Audited;
 import br.com.munif.framework.vicente.domain.BaseEntity;
 import br.com.munif.framework.vicente.domain.BaseEntityHelper;
@@ -535,14 +551,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
-${    Object.keys(project.entities).reduce((a, p) => `${a}import ${mainPackage(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `*` : `${p}.*`};
+${    Object.keys(project.entities).reduce((a, p) => `${a}import ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `*` : `${p}.*`};
 `  , "")}
 
 
 @Entity
 @Table(name = "${e.toLowerCase()}")
 @Audited
-public class ${firstUp(e)} extends BaseEntity {
+public class ${util.primeiraMaiuscula (e)} extends BaseEntity {
 
 ${Object.keys(data.fields).reduce((a, field) =>
             `${a}    @Column(name = "${field.toLowerCase()}")
@@ -552,7 +568,7 @@ ${Object.keys(data.fields).reduce((a, field) =>
 
 ${Object.keys(data.enums).reduce((a, field) =>
             `${a}    @Enumerated(EnumType.STRING)
-private ${firstUp(data.enums[field].enum)} ${field};
+private ${util.primeiraMaiuscula (data.enums[field].enum)} ${field};
 `, "")}
 
 
@@ -560,19 +576,19 @@ ${Object.keys(data.associations).reduce((a, field) =>
             `${a}${geraAssociation(e, field, data)}
 `, "")}
 
-public ${firstUp(e)}(){
+public ${util.primeiraMaiuscula (e)}(){
 
     }
 
-    ${Object.keys(data.fields).reduce((a, field) => `${a}public ${data.fields[field].type} get${firstUp(field)}(){
+    ${Object.keys(data.fields).reduce((a, field) => `${a}public ${data.fields[field].type} get${util.primeiraMaiuscula (field)}(){
         return ${field};
     }
            
-    public void set${firstUp(field)}(${data.fields[field].type} ${field}){
+    public void set${util.primeiraMaiuscula (field)}(${data.fields[field].type} ${field}){
         this.${field}=${field};
     }
 
-    public ${firstUp(e)} ${field}(${data.fields[field].type} ${field}) {
+    public ${util.primeiraMaiuscula (e)} ${field}(${data.fields[field].type} ${field}) {
         this.${field} = ${field};
         return this;
     }
@@ -580,15 +596,15 @@ public ${firstUp(e)}(){
     `, ""
         )}
 
-        ${Object.keys(data.enums).reduce((a, field) => `${a}public ${firstUp(data.enums[field].enum)} get${firstUp(field)}(){
+        ${Object.keys(data.enums).reduce((a, field) => `${a}public ${util.primeiraMaiuscula (data.enums[field].enum)} get${util.primeiraMaiuscula (field)}(){
             return ${field};
         }
                
-        public void set${firstUp(field)}(${firstUp(data.enums[field].enum)} ${field}){
+        public void set${util.primeiraMaiuscula (field)}(${util.primeiraMaiuscula (data.enums[field].enum)} ${field}){
             this.${field}=${field};
         }
     
-        public ${firstUp(e)} ${field}(${firstUp(data.enums[field].enum)} ${field}) {
+        public ${util.primeiraMaiuscula (e)} ${field}(${util.primeiraMaiuscula (data.enums[field].enum)} ${field}) {
             this.${field} = ${field};
             return this;
         }
@@ -601,7 +617,7 @@ public ${firstUp(e)}(){
 
 
 }`;
-    fs.writeFileSync(`${path}/domain/${p.substr(1)}/${firstUp(e)}.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/domain/${p.substr(1)}/${util.primeiraMaiuscula (e)}.java`, src, `utf8`);
 
 }
 
@@ -609,8 +625,7 @@ public ${firstUp(e)}(){
 
 function geraApplication(project, path) {
 
-    let src = `package ${mainPackage(project)
-        }.projects.${project.description.title.toLowerCase()}backend;
+    let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend;
 
 import br.com.munif.framework.vicente.domain.BaseEntity;
 import org.springframework.boot.SpringApplication;
@@ -623,7 +638,7 @@ public class BackEndApplication {
         SpringApplication.run(BackEndApplication.class, args);
     }
 } `;
-    fs.writeFileSync(`${path}/BackEndApplication.java`, src, `utf8`);
+    util.escreveArquivo(`${path}/BackEndApplication.java`, src, `utf8`);
 }
 
 function geraPomXML(project, path) {
@@ -632,7 +647,7 @@ function geraPomXML(project, path) {
              xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <modelVersion>4.0.0</modelVersion>
     
-        <groupId>${mainPackage(project)}.projects</groupId>
+        <groupId>${util.pacotePrincipal(project)}.projects</groupId>
         <artifactId>${project.description.title.toLowerCase()}backend</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <packaging>jar</packaging>
@@ -761,7 +776,7 @@ function geraPomXML(project, path) {
     
     </project>
     `;
-    fs.writeFileSync(`${path}/pom.xml`, src, `utf8`);
+    util.escreveArquivo(`${path}/pom.xml`, src, `utf8`);
 }
 
 
@@ -776,7 +791,7 @@ function geraApplicationProperties(project, path) {
     spring.jpa.hibernate.ddl-auto=create-drop
     #logging.level.org.hibernate.SQL=debug
     `;
-    fs.writeFileSync(`${path}/src/main/resources/application.properties`, src, `utf8`);
+    util.escreveArquivo(`${path}/src/main/resources/application.properties`, src, `utf8`);
 }
 function geraApplicationDevProperties(project, path) {
     let src = `
@@ -793,7 +808,7 @@ function geraApplicationDevProperties(project, path) {
     #spring.jpa.properties.hibernate.format_sql=true
     
     `;
-    fs.writeFileSync(`${path}/src/main/resources/application-dev.properties`, src, `utf8`);
+    util.escreveArquivo(`${path}/src/main/resources/application-dev.properties`, src, `utf8`);
 }
 function geraApplicationProdProperties(project, path) {
     let src = `#logging.level.org.h2.server: DEBUG
@@ -804,7 +819,7 @@ function geraApplicationProdProperties(project, path) {
     spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
     spring.jpa.hibernate.ddl-auto=validate
     `;
-    fs.writeFileSync(`${path}/src/main/resources/application-prod.properties`, src, `utf8`);
+    util.escreveArquivo(`${path}/src/main/resources/application-prod.properties`, src, `utf8`);
 }
 function geraIndexHtml(project, path) {
     let src = `<!DOCTYPE html>
@@ -825,7 +840,7 @@ function geraIndexHtml(project, path) {
         </body>
     </html>
     `;
-    fs.writeFileSync(`${path}/src/main/resources/static/index.html`, src, `utf8`);
+    util.escreveArquivo(`${path}/src/main/resources/static/index.html`, src, `utf8`);
 }
 
 
