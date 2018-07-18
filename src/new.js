@@ -12,6 +12,15 @@ function generateProject(project) {
     let mainDir = `/home/munif/temp/${project.description.title.toLowerCase()}`;
     console.log(project.description, "=>",mainDir);
     util.criaPasta(mainDir);
+    util.criaPasta(`${mainDir}/.mvn`);
+    util.criaPasta(`${mainDir}/.mvn/wrapper`);
+
+    ['mvnw','mvnw.cmd','.mvn/wrapper/maven-wrapper.jar','.mvn/wrapper/maven-wrapper.properties'].forEach(s => fs.createReadStream(`${__dirname}/../res/static/mvn/${s}`).pipe(fs.createWriteStream(`${mainDir}/${s}`)));
+
+
+
+
+
     util.criaPasta(`${mainDir}/front`);
     util.criaPasta(`${mainDir}/src`);
     util.criaPasta(`${mainDir}/src/main`);
@@ -51,4 +60,9 @@ function generateProject(project) {
     bc.geraApis(project, java);
     bc.geraHelloController(project, java);
     bc.geraSeed(project, java);
+
+    
+
+
+    console.log(__dirname);
 }
