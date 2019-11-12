@@ -36,7 +36,8 @@ function geraSeed(project, path) {
     import java.time.temporal.TemporalAmount;
     import java.time.temporal.TemporalUnit;
     import java.util.List;
-    import org.apache.log4j.Logger;
+    import org.apache.logging.log4j.Logger;
+    import org.apache.logging.log4j.LogManager;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.context.ApplicationListener;
     import org.springframework.context.event.ContextRefreshedEvent;
@@ -50,7 +51,7 @@ function geraSeed(project, path) {
     @Component
     public class Seed implements ApplicationListener<ContextRefreshedEvent> {
 
-        private Logger log = Logger.getLogger(Seed.class);
+        private Logger log = LogManager.getLogger(Seed.class);
 
         @Autowired
         private SeedSecurity seedSecurity;
@@ -86,7 +87,7 @@ function geraHelloController(project, path) {
     import br.com.munif.framework.vicente.core.Utils;
     import br.com.munif.framework.vicente.core.VicReturn;
     import br.com.munif.framework.vicente.core.VicThreadScope;
-    import br.com.munif.framework.vicente.domain.util.EntitiesToSVG;
+    import br.com.munif.framework.vicente.domain.entities.EntitiesToSVG;
     import java.lang.reflect.Method;
     import java.util.ArrayList;
     import java.util.Arrays;
@@ -115,7 +116,7 @@ function geraHelloController(project, path) {
         public VicReturn<Map<String, String>> enumValues(@PathVariable String enumName) {
             List<Map<String, String>> toReturn = new ArrayList<>();
             if (!enumName.contains(".")) {
-                enumName = this.getClass().getCanonicalName().replace("controllers.HelloController", "domain." + Utils.primeiraMaiuscula(enumName));
+                enumName = this.getClass().getCanonicalName().replace("controllers.HelloController", "domain." + Utils.firstCapital(enumName));
             }
             try {
                 Class<?> clz = Class.forName(enumName);
@@ -236,13 +237,14 @@ function geraApi(project, p, e, data, path) {
     import ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${util.primeiraMaiuscula (e)}` : `${p}.${util.primeiraMaiuscula (e)}`};
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RestController;
-    import org.apache.log4j.Logger;
+    import org.apache.logging.log4j.Logger;
+    import org.apache.logging.log4j.LogManager;
     
     @RestController
     @RequestMapping("/api/${e.toLowerCase()}")
     public class ${util.primeiraMaiuscula (e)}Api extends BaseAPI<${util.primeiraMaiuscula (e)}> {
     
-        private final Logger log = Logger.getLogger(${util.primeiraMaiuscula (e)}Api.class);
+        private final Logger log = LogManager.getLogger(${util.primeiraMaiuscula (e)}Api.class);
     
         private static final String ENTITY_NAME = "${e}";
     
@@ -334,11 +336,14 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import br.com.munif.framework.vicente.security.service.TokenService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -349,14 +354,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class WebConfiguration extends WebMvcConfigurerAdapter implements WebApplicationInitializer {
 
+    @Autowired
+    private TokenService tokenService;
+
     @Bean
     public VicRequestFilter vicRequestFilter() {
-        return new VicRequestFilter("br.com.munif.projects.empleadosapi");
+        return new VicRequestFilter(tokenService);
+        // return new VicRequestFilter("br.com.munif.projects.empleadosapi");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(vicRequestFilter());
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowCredentials(true).allowedHeaders("*").allowedMethods("*");
     }
 
     @Override
@@ -659,7 +673,7 @@ function geraPomXML(project, path) {
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
             <java.version>1.8</java.version>
-            <vicente.version>0.12.0-SNAPSHOT</vicente.version>
+            <vicente.version>2.0.0-SNAPSHOT</vicente.version>
             <hibernate.version>5.2.13.Final</hibernate.version>
         </properties>
     
@@ -667,7 +681,7 @@ function geraPomXML(project, path) {
         <parent>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-parent</artifactId>
-            <version>1.5.10.RELEASE</version>
+            <version>2.2.0.RELEASE</version>
             <relativePath/> <!-- lookup parent from repository -->
         </parent>
     
@@ -733,12 +747,21 @@ function geraPomXML(project, path) {
                 <artifactId>security</artifactId>
                 <version>\${vicente.version}</version>
             </dependency>
-    
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
                 <artifactId>jackson-datatype-jsr310</artifactId>
                 <version>2.9.4</version>
                 <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>2.2.0.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-test</artifactId>
+                <version>3.1.0.RELEASE</version>
             </dependency>
         </dependencies>
     
@@ -787,7 +810,7 @@ function geraApplicationProperties(project, path) {
     # Database
     spring.datasource.url= jdbc:mysql://localhost:3306/${project.description.title.toLowerCase()}?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
     spring.datasource.username=root
-    spring.datasource.password=senha
+    spring.datasource.password=password
     spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
     spring.jpa.hibernate.ddl-auto=create-drop
     #logging.level.org.hibernate.SQL=debug
@@ -801,7 +824,7 @@ function geraApplicationDevProperties(project, path) {
     # Database
     spring.datasource.url= jdbc:mysql://localhost:3306/${project.description.title.toLowerCase()}dev?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
     spring.datasource.username=root
-    spring.datasource.password=senha
+    spring.datasource.password=password
     spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
     #spring.jpa.hibernate.ddl-auto=create
     spring.jpa.hibernate.ddl-auto=create
@@ -818,7 +841,7 @@ function geraApplicationProdProperties(project, path) {
     # Database
     spring.datasource.url= jdbc:mysql://localhost:3306/${project.description.title.toLowerCase()}api?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
     spring.datasource.username=root
-    spring.datasource.password=senha
+    spring.datasource.password=password
     spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL57Dialect
     spring.jpa.hibernate.ddl-auto=validate
     `;

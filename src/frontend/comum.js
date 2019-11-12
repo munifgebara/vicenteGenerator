@@ -64,10 +64,10 @@ module.exports.gerasuper_lista_ts = gerasuper_lista_ts;
 module.exports.gerasuper_service_ts = gerasuper_service_ts;
 module.exports.geravic_return_ts = geravic_return_ts;
 
-module.exports.geragrupo_ts = geragrupo_ts;
-module.exports.geraorganizacao_ts = geraorganizacao_ts;
+module.exports.geragroup_ts = geragroup_ts;
+module.exports.geraorganization_ts = geraorganization_ts;
 module.exports.geratoken_ts = geratoken_ts;
-module.exports.gerausuario_ts = gerausuario_ts;
+module.exports.gerauser_ts = gerauser_ts;
 module.exports.geraexcluir_atributos_sistema_pipe_spec_ts = geraexcluir_atributos_sistema_pipe_spec_ts;
 module.exports.geraexcluir_atributos_sistema_pipe_ts = geraexcluir_atributos_sistema_pipe_ts;
 module.exports.geravic_components_module_ts = geravic_components_module_ts;
@@ -108,45 +108,45 @@ module.exports.geralogin_component_ts = geralogin_component_ts;
 module.exports.geralogin_service_ts = geralogin_service_ts;
 
 
-module.exports.gera_usuario_crud_crud_component_css = gera_usuario_crud_crud_component_css;
-module.exports.gera_usuario_crud_crud_component_html = gera_usuario_crud_crud_component_html;
-module.exports.gera_usuario_crud_crud_component_ts = gera_usuario_crud_crud_component_ts;
-module.exports.gera_usuario_detalhes_detalhes_component_css = gera_usuario_detalhes_detalhes_component_css;
-module.exports.gera_usuario_detalhes_detalhes_component_html = gera_usuario_detalhes_detalhes_component_html;
-module.exports.gera_usuario_detalhes_detalhes_component_ts = gera_usuario_detalhes_detalhes_component_ts;
-module.exports.gera_usuario_lista_lista_component_css = gera_usuario_lista_lista_component_css;
-module.exports.gera_usuario_lista_lista_component_html = gera_usuario_lista_lista_component_html;
-module.exports.gera_usuario_lista_lista_component_ts = gera_usuario_lista_lista_component_ts;
-module.exports.gera_usuario_usuario_routing_module_ts = gera_usuario_usuario_routing_module_ts;
-module.exports.gera_usuario_usuario_module_ts = gera_usuario_usuario_module_ts;
-module.exports.gera_usuario_usuario_service_ts = gera_usuario_usuario_service_ts;
-module.exports.gera_grupo_crud_crud_component_css = gera_grupo_crud_crud_component_css;
-module.exports.gera_grupo_crud_crud_component_html = gera_grupo_crud_crud_component_html;
-module.exports.gera_grupo_crud_crud_component_ts = gera_grupo_crud_crud_component_ts;
+module.exports.gera_user_crud_crud_component_css = gera_user_crud_crud_component_css;
+module.exports.gera_user_crud_crud_component_html = gera_user_crud_crud_component_html;
+module.exports.gera_user_crud_crud_component_ts = gera_user_crud_crud_component_ts;
+module.exports.gera_user_detalhes_detalhes_component_css = gera_user_detalhes_detalhes_component_css;
+module.exports.gera_user_detalhes_detalhes_component_html = gera_user_detalhes_detalhes_component_html;
+module.exports.gera_user_detalhes_detalhes_component_ts = gera_user_detalhes_detalhes_component_ts;
+module.exports.gera_user_lista_lista_component_css = gera_user_lista_lista_component_css;
+module.exports.gera_user_lista_lista_component_html = gera_user_lista_lista_component_html;
+module.exports.gera_user_lista_lista_component_ts = gera_user_lista_lista_component_ts;
+module.exports.gera_user_user_routing_module_ts = gera_user_user_routing_module_ts;
+module.exports.gera_user_user_module_ts = gera_user_user_module_ts;
+module.exports.gera_user_user_service_ts = gera_user_user_service_ts;
+module.exports.gera_group_crud_crud_component_css = gera_group_crud_crud_component_css;
+module.exports.gera_group_crud_crud_component_html = gera_group_crud_crud_component_html;
+module.exports.gera_group_crud_crud_component_ts = gera_group_crud_crud_component_ts;
 
-module.exports.gera_grupo_detalhes_detalhes_component_css = gera_grupo_detalhes_detalhes_component_css;
-module.exports.gera_grupo_detalhes_detalhes_component_html = gera_grupo_detalhes_detalhes_component_html;
-module.exports.gera_grupo_detalhes_detalhes_component_ts = gera_grupo_detalhes_detalhes_component_ts;
-module.exports.gera_grupo_grupo_routing_module_ts = gera_grupo_grupo_routing_module_ts;
-module.exports.gera_grupo_grupo_module_ts = gera_grupo_grupo_module_ts;
-module.exports.gera_grupo_grupo_service_ts = gera_grupo_grupo_service_ts;
+module.exports.gera_group_detalhes_detalhes_component_css = gera_group_detalhes_detalhes_component_css;
+module.exports.gera_group_detalhes_detalhes_component_html = gera_group_detalhes_detalhes_component_html;
+module.exports.gera_group_detalhes_detalhes_component_ts = gera_group_detalhes_detalhes_component_ts;
+module.exports.gera_group_group_routing_module_ts = gera_group_group_routing_module_ts;
+module.exports.gera_group_group_module_ts = gera_group_group_module_ts;
+module.exports.gera_group_group_service_ts = gera_group_group_service_ts;
 
-module.exports.gera_grupo_lista_lista_component_css = gera_grupo_lista_lista_component_css;
-module.exports.gera_grupo_lista_lista_component_html = gera_grupo_lista_lista_component_html;
-module.exports.gera_grupo_lista_lista_component_ts = gera_grupo_lista_lista_component_ts;
-module.exports.gera_organizacao_crud_crud_component_css = gera_organizacao_crud_crud_component_css;
-module.exports.gera_organizacao_crud_crud_component_html = gera_organizacao_crud_crud_component_html;
-module.exports.gera_organizacao_crud_crud_component_ts = gera_organizacao_crud_crud_component_ts;
-module.exports.gera_organizacao_detalhes_detalhes_component_css = gera_organizacao_detalhes_detalhes_component_css;
-module.exports.gera_organizacao_detalhes_detalhes_component_html = gera_organizacao_detalhes_detalhes_component_html;
-module.exports.gera_organizacao_detalhes_detalhes_component_ts = gera_organizacao_detalhes_detalhes_component_ts;
+module.exports.gera_group_lista_lista_component_css = gera_group_lista_lista_component_css;
+module.exports.gera_group_lista_lista_component_html = gera_group_lista_lista_component_html;
+module.exports.gera_group_lista_lista_component_ts = gera_group_lista_lista_component_ts;
+module.exports.gera_organization_crud_crud_component_css = gera_organization_crud_crud_component_css;
+module.exports.gera_organization_crud_crud_component_html = gera_organization_crud_crud_component_html;
+module.exports.gera_organization_crud_crud_component_ts = gera_organization_crud_crud_component_ts;
+module.exports.gera_organization_detalhes_detalhes_component_css = gera_organization_detalhes_detalhes_component_css;
+module.exports.gera_organization_detalhes_detalhes_component_html = gera_organization_detalhes_detalhes_component_html;
+module.exports.gera_organization_detalhes_detalhes_component_ts = gera_organization_detalhes_detalhes_component_ts;
 
-module.exports.gera_organizacao_lista_lista_component_css = gera_organizacao_lista_lista_component_css;
-module.exports.gera_organizacao_lista_lista_component_html = gera_organizacao_lista_lista_component_html;
-module.exports.gera_organizacao_lista_lista_component_ts = gera_organizacao_lista_lista_component_ts;
-module.exports.gera_organizacao_organizacao_routing_module_ts = gera_organizacao_organizacao_routing_module_ts;
-module.exports.gera_organizacao_organizacao_module_ts = gera_organizacao_organizacao_module_ts;
-module.exports.gera_organizacao_organizacao_service_ts = gera_organizacao_organizacao_service_ts;
+module.exports.gera_organization_lista_lista_component_css = gera_organization_lista_lista_component_css;
+module.exports.gera_organization_lista_lista_component_html = gera_organization_lista_lista_component_html;
+module.exports.gera_organization_lista_lista_component_ts = gera_organization_lista_lista_component_ts;
+module.exports.gera_organization_organization_routing_module_ts = gera_organization_organization_routing_module_ts;
+module.exports.gera_organization_organization_module_ts = gera_organization_organization_module_ts;
+module.exports.gera_organization_organization_service_ts = gera_organization_organization_service_ts;
 
 
 module.exports.gera_entidade_crud_crud_component_css = gera_entidade_crud_crud_component_css;
@@ -504,7 +504,7 @@ function geraproject_package_json(project, angularPath) {
     "@angular/pwa": "^0.6.8",
     "@angular/router": "^6.0.3",
     "core-js": "^2.5.4",
-    "rxjs": "^6.0.0",
+    "rxjs": "6.0.0",
     "rxjs-compat": "^6.2.1",
     "zone.js": "^0.8.26",
     "ng-pick-datetime": "^5.1.6",
@@ -617,17 +617,17 @@ function geraproject__app_component_ts(project, angularPath) {
               <span *ngIf="loginService.logado" >
                   <span class="navbar-brand"> Login:</span>
                   <span class="navbar-brand">
-                      <span class="form-control ">{{ loginService.token.usuario.login }} </span>
+                      <span class="form-control ">{{ loginService.token.user.login }} </span>
                   </span>
                   <span class="navbar-brand"> Organização:</span>
                   <span class="navbar-brand">
-                      <span class="form-control "> {{ loginService.token.usuario.organizacao.nome }}</span>
+                      <span class="form-control "> {{ loginService.token.user.organization.name }}</span>
                   </span>
                   <span class="navbar-brand"> Grupo Corrente:</span>
                   <span class="navbar-brand">
-                      <select [compareWith]="byId" [ngModel]="loginService.grupoAtual" (ngModelChange)="onValorChange($event)" class="form-control">
+                      <select [compareWith]="byId" [ngModel]="loginService.groupAtual" (ngModelChange)="onValorChange($event)" class="form-control">
                       <option value> Nenhum </option>
-                      <option *ngFor="let opcao of loginService.token.usuario.grupos" [ngValue]="opcao">{{ opcao['codigo'] }}-{{ opcao['nome'] }} </option>
+                      <option *ngFor="let opcao of loginService.token.user.groups" [ngValue]="opcao">{{ opcao['code'] }}-{{ opcao['name'] }} </option>
                   </select >
               </span >
   
@@ -705,7 +705,7 @@ function geraproject__app_component_ts(project, angularPath) {
     }
   
     onValorChange(obj: BaseEntity) {
-      this.loginService.grupoAtual = obj;
+      this.loginService.groupAtual = obj;
     }
   
   
@@ -743,9 +743,9 @@ function geraproject__app_component_ts(project, angularPath) {
       {
         label: 'Segurança', iconeTipo: 'fas', icone: 'fa-lock', active: false,
         subItens: [
-          { link: './grupo', iconeTipo: 'fas', icone: 'fa-sitemap', label: 'Grupo', active: false },
-          { link: './organizacao', iconeTipo: 'fas', icone: 'fa-university', label: 'Organização', active: false },
-          { link: './usuario', iconeTipo: 'far', icone: 'fa-user', label: 'Usuário', active: false }
+          { link: './group', iconeTipo: 'fas', icone: 'fa-sitemap', label: 'Grupo', active: false },
+          { link: './organization', iconeTipo: 'fas', icone: 'fa-university', label: 'Organização', active: false },
+          { link: './user', iconeTipo: 'far', icone: 'fa-user', label: 'Usuário', active: false }
         ]
       },
       {
@@ -794,9 +794,9 @@ function geraproject__app_module_ts(project, angularPath) {
   import { ServiceWorkerModule } from '@angular/service-worker';
   import { environment } from '../environments/environment';
 
-  import { UsuarioModule } from './usuario/usuario.module';
-  import { GrupoModule } from './grupo/grupo.module';
-  import { OrganizacaoModule } from './organizacao/organizacao.module';
+  import { UsuarioModule } from './user/user.module';
+  import { GrupoModule } from './group/group.module';
+  import { OrganizacaoModule } from './organization/organization.module';
 
   // MARCADOR PARA COLOCAR IMPORTS
 
@@ -1971,8 +1971,8 @@ function gerasuper_service_ts(project, angularPath) {
   
     createAuthorizationHeader(): Headers {
       let headers = new Headers();
-      headers.append('authorization', LoginService.ins.token.token);
-      headers.append('group', LoginService.ins.grupoAtual.codigo);
+      headers.append('authorization', LoginService.ins.token.value);
+      headers.append('group', LoginService.ins.groupAtual.code);
       return headers;
   
     }
@@ -2090,39 +2090,39 @@ function geravic_return_ts(project, angularPath) {
 
 
 
-function geragrupo_ts(project, angularPath) {
+function geragroup_ts(project, angularPath) {
   let src = `
   export interface Grupo {
       id: string;
       extra: string;
       version: number;
-      nome: string;
-      codigo: string;
+      name: string;
+      code: string;
   }
   
   
     `;
-  util.escreveArquivo(`${angularPath}/src/app/vic-components/domain//grupo.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/vic-components/domain//group.ts`, src, `utf8`);
 }
 
 
 
 
-function geraorganizacao_ts(project, angularPath) {
+function geraorganization_ts(project, angularPath) {
   let src = `
   
   export interface Organizacao {
       id: string;
       extra: string;
       version: number;
-      nome: string;
-      codigo: string;
-      superior?: Organizacao;
+      name: string;
+      code: string;
+      upper?: Organizacao;
   }
   
   
     `;
-  util.escreveArquivo(`${angularPath}/src/app/vic-components/domain//organizacao.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/vic-components/domain//organization.ts`, src, `utf8`);
 }
 
 
@@ -2130,14 +2130,14 @@ function geraorganizacao_ts(project, angularPath) {
 
 function geratoken_ts(project, angularPath) {
   let src = `
-  import { Usuario } from "./usuario";
+  import { Usuario } from "./user";
   
   export interface Token {
       id: string;
       extra: string;
       version: number;
-      token: string;
-      usuario: Usuario;
+      value: string;
+      user: Usuario;
       expiracao: number;
   }
   
@@ -2150,24 +2150,24 @@ function geratoken_ts(project, angularPath) {
 
 
 
-function gerausuario_ts(project, angularPath) {
+function gerauser_ts(project, angularPath) {
   let src = `
-  import { Grupo } from "./grupo";
-  import { Organizacao } from "./organizacao";
+  import { Grupo } from "./group";
+  import { Organizacao } from "./organization";
   
   export interface Usuario {
       id: string;
       extra: string;
       version: number;
       login: string;
-      senha: string;
-      grupos: Grupo[];
-      organizacao: Organizacao;
+      password: string;
+      groups: Grupo[];
+      organization: Organizacao;
   }
   
   
     `;
-  util.escreveArquivo(`${angularPath}/src/app/vic-components/domain//usuario.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/vic-components/domain//user.ts`, src, `utf8`);
 }
 
 
@@ -2452,7 +2452,7 @@ function geravic_many_to_one_component_ts(project, angularPath) {
     
     <div class="input-group" [formGroup]="group" >
     <select [compareWith]="byId" [ngModel]="valor" (ngModelChange)="onValorChange(\$event)" class="form-control" (keydown)="filtra(\$event)"
-      [formControlName]="nomeNoForm" >
+      [formControlName]="nameNoForm" >
       
       <option value> Nenhum </option>
       <option *ngFor="let opcao of opcoes" [ngValue]="opcao">{{resolve(opcao,atributoLabel)}} </option>
@@ -2475,7 +2475,7 @@ function geravic_many_to_one_component_ts(project, angularPath) {
   
     @Input() service: SuperService;
     @Input() atributoLabel: string;
-    @Input() nomeNoForm: string;
+    @Input() nameNoForm: string;
     @Input() group: FormGroup;
   
     constructor() { }
@@ -3071,7 +3071,7 @@ function geralogin_component_html(project, angularPath) {
       <div class="row">
         <div class="col-sm-12 margin-bottom">
           <label>Login:</label>
-          <input type="text" id="idnome" name="nome" placeholder="email@organizacao" formControlName="loginInput" class="form-control"
+          <input type="text" id="idname" name="name" placeholder="email@organization" formControlName="loginInput" class="form-control"
           />
   
           <div class="alert alert-danger" *ngIf="!loginForm.controls['loginInput'].valid && loginForm.controls['loginInput'].touched"
@@ -3083,11 +3083,11 @@ function geralogin_component_html(project, angularPath) {
   
         <div class="col-sm-12 margin-bottom">
           <label>Senha:</label>
-          <input type="password" id="idsenha" name="senha" placeholder="Senha" formControlName="senhaInput" class="form-control" />
+          <input type="password" id="idpassword" name="password" placeholder="Senha" formControlName="passwordInput" class="form-control" />
   
-          <div class="alert alert-danger" *ngIf="!loginForm.controls['senhaInput'].valid && loginForm.controls['senhaInput'].touched"
+          <div class="alert alert-danger" *ngIf="!loginForm.controls['passwordInput'].valid && loginForm.controls['passwordInput'].touched"
             style="margin-top:10px">
-            Por favor informe uma senha!
+            Por favor informe uma password!
           </div>
         </div>
       </div>
@@ -3158,7 +3158,7 @@ function geralogin_component_ts(project, angularPath) {
   import { Component, OnInit } from '@angular/core';
   import { LoginService } from './login.service';
   import { Router } from '@angular/router';
-  import { UsuarioService } from '../usuario/usuario.service';
+  import { UsuarioService } from '../user/user.service';
   import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   import { AlertMessage } from '../vic-components/alert-message';
   
@@ -3172,11 +3172,11 @@ function geralogin_component_ts(project, angularPath) {
     erro = new AlertMessage();;
     loginForm: FormGroup;
   
-    constructor(public loginService: LoginService, private router: Router, public usuarioService: UsuarioService,
+    constructor(public loginService: LoginService, private router: Router, public userService: UsuarioService,
       private fb: FormBuilder) {
       this.loginForm = fb.group({
         'loginInput': ['admin@munif.com.br', Validators.compose([Validators.required, Validators.email])],
-        'senhaInput': ['qwe123', Validators.compose([Validators.required])]
+        'passwordInput': ['qwe123', Validators.compose([Validators.required])]
       });
   
     }
@@ -3191,11 +3191,11 @@ function geralogin_component_ts(project, angularPath) {
         return;
       }
   
-      this.loginService.loga(this.loginForm.value.loginInput, this.loginForm.value.senhaInput).then(r => {
+      this.loginService.loga(this.loginForm.value.loginInput, this.loginForm.value.passwordInput).then(r => {
         if (r.ok) {
           this.router.navigate([this.loginService.proximaUrl]);
         } else {
-          this.erro.createErrorAlert("Login inválido", "Login ou senha incorretos. Tente novamente.");
+          this.erro.createErrorAlert("Login inválido", "Login ou password incorretos. Tente novamente.");
         }
       });
     }
@@ -3206,9 +3206,9 @@ function geralogin_component_ts(project, angularPath) {
         return;
       }
   
-      this.usuarioService.add({ login: this.loginForm.value.loginInput, senha: this.loginForm.value.senhaInput })
+      this.userService.add({ login: this.loginForm.value.loginInput, password: this.loginForm.value.passwordInput })
         .then(r => {
-          this.loginService.loga(this.loginForm.value.loginInput, this.loginForm.value.senhaInput).then(r => {
+          this.loginService.loga(this.loginForm.value.loginInput, this.loginForm.value.passwordInput).then(r => {
             if (r.ok) {
               this.router.navigate([this.loginService.proximaUrl]);
             }
@@ -3248,7 +3248,7 @@ function geralogin_service_ts(project, angularPath) {
   
       public static ins: LoginService;;
   
-      public grupoAtual: any;
+      public groupAtual: any;
   
       public proximaUrl: string;
   
@@ -3276,19 +3276,19 @@ function geralogin_service_ts(project, angularPath) {
   
       createAuthorizationHeader(): Headers {
           let headers = new Headers();
-          headers.append('authorization', this.token.token);
+          headers.append('authorization', this.token.value);
           return headers;
       }
   
-      loga(login: string, senha: string) {
-          return this.http.post(\`\${this.baseUrl}/\${this.caminho}/login/bypassword\`, { login, senha })
+      loga(login: string, password: string) {
+          return this.http.post(\`\${this.baseUrl}/\${this.caminho}/login/bypassword\`, { login, password })
               .toPromise().then(response => {
                   let r = response.json();
   
                   if (r.ok) {
                       this.logado = true;
                       this.token = r.token;
-                      this.grupoAtual = this.token.usuario.grupos[0];
+                      this.groupAtual = this.token.user.groups[0];
                   }
                   return r;
               })
@@ -3297,7 +3297,7 @@ function geralogin_service_ts(project, angularPath) {
       logout() {
           this.logado = false;
           this.token = null;
-          return this.http.post(\`\${this.baseUrl}/\${this.caminho}/logout\`, { login: null, senha: null })
+          return this.http.post(\`\${this.baseUrl}/\${this.caminho}/logout\`, { login: null, password: null })
               .toPromise().then(response => {
                   this.logado = false;
                   this.token = null;
@@ -3315,19 +3315,19 @@ function geralogin_service_ts(project, angularPath) {
 
 
 
-function gera_usuario_crud_crud_component_css(project, angularPath) {
+function gera_user_crud_crud_component_css(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario/crud//crud.component.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user/crud//crud.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_crud_crud_component_html(project, angularPath) {
+function gera_user_crud_crud_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -3336,13 +3336,13 @@ function gera_usuario_crud_crud_component_html(project, angularPath) {
   </div>
   <router-outlet></router-outlet>
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario/crud//crud.component.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user/crud//crud.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_crud_crud_component_ts(project, angularPath) {
+function gera_user_crud_crud_component_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3358,13 +3358,13 @@ function gera_usuario_crud_crud_component_ts(project, angularPath) {
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario/crud//crud.component.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user/crud//crud.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_detalhes_detalhes_component_css(project, angularPath) {
+function gera_user_detalhes_detalhes_component_css(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3378,13 +3378,13 @@ function gera_usuario_detalhes_detalhes_component_css(project, angularPath) {
       margin-bottom: 20px;
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario/detalhes//detalhes.component.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user/detalhes//detalhes.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_detalhes_detalhes_component_html(project, angularPath) {
+function gera_user_detalhes_detalhes_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -3399,7 +3399,7 @@ function gera_usuario_detalhes_detalhes_component_html(project, angularPath) {
         <strong>{{msg.message}}</strong> {{msg.description}}
         <a (click)="msg.show = false" style="float: right; margin-right: -10px; margin-top: -10px;cursor: pointer;">x</a>
       </div>
-      <h2>{{ selecionado.nome| uppercase }}</h2>
+      <h2>{{ selecionado.name| uppercase }}</h2>
       <form [formGroup]="detalhesForm">
   
         <div class="row">
@@ -3415,23 +3415,23 @@ function gera_usuario_detalhes_detalhes_component_html(project, angularPath) {
   
           <div class="col-sm-12 margin-bottom">
             <label>SENHA:</label>
-            <input type="text" id="idsenha" name="senha" placeholder="SENHA" [(ngModel)]="selecionado.senha" formControlName="senha"
+            <input type="text" id="idpassword" name="password" placeholder="SENHA" [(ngModel)]="selecionado.password" formControlName="password"
               class="form-control"  />
-            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['senha'].valid && detalhesForm.controls['senha'].touched" style="margin-top:10px">
+            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['password'].valid && detalhesForm.controls['password'].touched" style="margin-top:10px">
               O campo SENHA é obrigatório.
             </div>
           </div>
   
           <div class="col-sm-12 margin-bottom" *ngIf="(isNew(selecionado)||canUpdate(selecionado)  && mostrar )">
             <label>GRUPOS:</label>
-            <vic-many-to-many [(valor)]="selecionado.grupos" [service]="grupoService" atributoLabel="nome" [group]="detalhesForm"></vic-many-to-many>
+            <vic-many-to-many [(valor)]="selecionado.groups" [service]="groupService" atributoLabel="name" [group]="detalhesForm"></vic-many-to-many>
           </div>
   
           <div class="col-sm-12 margin-bottom">
             <label>ORGANIZACAO:</label>
-            <vic-many-to-one [(valor)]="selecionado.organizacao" [service]="organizacaoService" atributoLabel="nome" [group]="detalhesForm"
-              nomeNoForm="organizacao"></vic-many-to-one>
-            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['organizacao'].valid && detalhesForm.controls['organizacao'].touched"
+            <vic-many-to-one [(valor)]="selecionado.organization" [service]="organizationService" atributoLabel="name" [group]="detalhesForm"
+              nameNoForm="organization"></vic-many-to-one>
+            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['organization'].valid && detalhesForm.controls['organization'].touched"
               style="margin-top:10px">
               O campo ORGANIZACAO é obrigatório.
             </div>
@@ -3463,22 +3463,22 @@ function gera_usuario_detalhes_detalhes_component_html(project, angularPath) {
     </div>
   </div>
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario/detalhes//detalhes.component.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user/detalhes//detalhes.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_detalhes_detalhes_component_ts(project, angularPath) {
+function gera_user_detalhes_detalhes_component_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   import { Component, OnInit } from '@angular/core';
   import { Router, ActivatedRoute, Params } from '@angular/router';
   import { Location } from '@angular/common';
-  import { UsuarioService } from '../usuario.service';
-  import { OrganizacaoService } from '../../organizacao/organizacao.service';
-  import { GrupoService } from '../../grupo/grupo.service';
+  import { UsuarioService } from '../user.service';
+  import { OrganizacaoService } from '../../organization/organization.service';
+  import { GrupoService } from '../../group/group.service';
   import { VicReturn } from '../../vic-components/comum/vic-return';
   import { SuperDetalhesComponent } from '../../vic-components/comum/super-detalhes';
   import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
@@ -3494,7 +3494,7 @@ function gera_usuario_detalhes_detalhes_component_ts(project, angularPath) {
     detalhesForm: FormGroup;
     mostrar = true;
   
-    constructor(protected service: UsuarioService, protected router: Router, protected route: ActivatedRoute,protected grupoService:GrupoService,protected organizacaoService:OrganizacaoService,protected usuarioService:UsuarioService,
+    constructor(protected service: UsuarioService, protected router: Router, protected route: ActivatedRoute,protected groupService:GrupoService,protected organizationService:OrganizacaoService,protected userService:UsuarioService,
       private fb: FormBuilder, protected location: Location) {
       super(service, router, route);
     }
@@ -3502,9 +3502,9 @@ function gera_usuario_detalhes_detalhes_component_ts(project, angularPath) {
     initForm() {    
       this.detalhesForm = this.fb.group({
         'login': new FormControl({ value: this.selecionado['login'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
-        'senha': new FormControl({ value: this.selecionado['senha'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
-        'grupos': new FormControl({ value: this.selecionado['grupos'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }),
-        'organizacao': new FormControl({ value: this.selecionado['organizacao'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
+        'password': new FormControl({ value: this.selecionado['password'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
+        'groups': new FormControl({ value: this.selecionado['groups'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }),
+        'organization': new FormControl({ value: this.selecionado['organization'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
       });
     }
   
@@ -3539,13 +3539,13 @@ function gera_usuario_detalhes_detalhes_component_ts(project, angularPath) {
     }
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario/detalhes//detalhes.component.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user/detalhes//detalhes.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_lista_lista_component_css(project, angularPath) {
+function gera_user_lista_lista_component_css(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3553,13 +3553,13 @@ function gera_usuario_lista_lista_component_css(project, angularPath) {
       padding-bottom: 20px;
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario/lista//lista.component.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user/lista//lista.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_lista_lista_component_html(project, angularPath) {
+function gera_user_lista_lista_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -3580,19 +3580,19 @@ function gera_usuario_lista_lista_component_html(project, angularPath) {
   </div>
   <vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)"></vic-tabela>
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario/lista//lista.component.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user/lista//lista.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_lista_lista_component_ts(project, angularPath) {
+function gera_user_lista_lista_component_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   import { Component, OnInit } from '@angular/core';
   import { Router, ActivatedRoute, Params } from '@angular/router';
-  import { UsuarioService } from '../usuario.service';
+  import { UsuarioService } from '../user.service';
   import { BaseEntity } from "../../vic-components/comum/base-entity";
   import { VicReturn } from '../../vic-components/comum/vic-return';
   import { SuperListaComponent } from '../../vic-components/comum/super-lista';
@@ -3607,11 +3607,11 @@ function gera_usuario_lista_lista_component_ts(project, angularPath) {
   
     colunas = [
       { active: true, comparisonOperator: "STARTS_WITH", field: "login", label: "Login",pedacos: ["login"]},
-      { active: true, comparisonOperator: "STARTS_WITH", field: "senha", label: "Senha",pedacos: ["senha"]},
-      { active: true, comparisonOperator: "STARTS_WITH", field: "organizacao.nome", label: "Organizacao",pedacos: ["organizacao", "nome"]},
-      { active: true, comparisonOperator: "STARTS_WITH", field: "organizacao.codigo", label: "Codigo",pedacos: ["organizacao", "codigo"]},
-      { active: false, comparisonOperator: "STARTS_WITH", field: "organizacao.superior.nome", label: "Superior",pedacos: ["organizacao", "superior", "nome"]},
-      { active: false, comparisonOperator: "STARTS_WITH", field: "organizacao.superior.codigo", label: "Codigo",pedacos: ["organizacao", "superior", "codigo"]},
+      { active: true, comparisonOperator: "STARTS_WITH", field: "password", label: "Senha",pedacos: ["password"]},
+      { active: true, comparisonOperator: "STARTS_WITH", field: "organization.name", label: "Organizacao",pedacos: ["organization", "name"]},
+      { active: true, comparisonOperator: "STARTS_WITH", field: "organization.code", label: "Codigo",pedacos: ["organization", "code"]},
+      { active: false, comparisonOperator: "STARTS_WITH", field: "organization.upper.name", label: "Superior",pedacos: ["organization", "upper", "name"]},
+      { active: false, comparisonOperator: "STARTS_WITH", field: "organization.upper.code", label: "Codigo",pedacos: ["organization", "upper", "code"]},
     ];
   
     constructor(protected service: UsuarioService, protected router: Router, protected route: ActivatedRoute) {
@@ -3620,13 +3620,13 @@ function gera_usuario_lista_lista_component_ts(project, angularPath) {
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario/lista//lista.component.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user/lista//lista.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_usuario_routing_module_ts(project, angularPath) {
+function gera_user_user_routing_module_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3639,7 +3639,7 @@ function gera_usuario_usuario_routing_module_ts(project, angularPath) {
   
   const routes: Routes = [
     {
-      path: 'usuario', component: CrudComponent,
+      path: 'user', component: CrudComponent,
       children: [
         { path: '', component: ListaComponent },
         { path: 'detalhes/:id', component: DetalhesComponent }
@@ -3653,13 +3653,13 @@ function gera_usuario_usuario_routing_module_ts(project, angularPath) {
   })
   export class UsuarioRoutingModule { }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario//usuario-routing.module.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user//user-routing.module.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_usuario_module_ts(project, angularPath) {
+function gera_user_user_module_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3668,7 +3668,7 @@ function gera_usuario_usuario_module_ts(project, angularPath) {
   import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
   import { CommonModule } from '@angular/common';
   import { VicComponentsModule } from '../vic-components/vic-components.module';
-  import { UsuarioRoutingModule } from './usuario-routing.module';
+  import { UsuarioRoutingModule } from './user-routing.module';
   import { CrudComponent } from './crud/crud.component';
   import { ListaComponent } from './lista/lista.component';
   import { DetalhesComponent } from './detalhes/detalhes.component';
@@ -3694,13 +3694,13 @@ function gera_usuario_usuario_module_ts(project, angularPath) {
   })
   export class UsuarioModule { }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario//usuario.module.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user//user.module.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_usuario_usuario_service_ts(project, angularPath) {
+function gera_user_user_service_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3714,30 +3714,30 @@ function gera_usuario_usuario_service_ts(project, angularPath) {
   export class UsuarioService extends SuperService{
   
     constructor(http:Http) {
-      super('usuario',http);
+      super('user',http);
     }
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/usuario//usuario.service.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/user//user.service.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_crud_crud_component_css(project, angularPath) {
+function gera_group_crud_crud_component_css(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo/crud//crud.component.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group/crud//crud.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_crud_crud_component_html(project, angularPath) {
+function gera_group_crud_crud_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -3746,13 +3746,13 @@ function gera_grupo_crud_crud_component_html(project, angularPath) {
   </div>
   <router-outlet></router-outlet>
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo/crud//crud.component.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group/crud//crud.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_crud_crud_component_ts(project, angularPath) {
+function gera_group_crud_crud_component_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3768,13 +3768,13 @@ function gera_grupo_crud_crud_component_ts(project, angularPath) {
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo/crud//crud.component.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group/crud//crud.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_detalhes_detalhes_component_css(project, angularPath) {
+function gera_group_detalhes_detalhes_component_css(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3788,13 +3788,13 @@ function gera_grupo_detalhes_detalhes_component_css(project, angularPath) {
       margin-bottom: 20px;
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo/detalhes//detalhes.component.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group/detalhes//detalhes.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_detalhes_detalhes_component_html(project, angularPath) {
+function gera_group_detalhes_detalhes_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -3805,18 +3805,18 @@ function gera_grupo_detalhes_detalhes_component_html(project, angularPath) {
     </div>
     <div *ngIf="selecionado">
   
-      <h2>{{ selecionado.nome| uppercase }}</h2>
+      <h2>{{ selecionado.name| uppercase }}</h2>
   
       <div class="row">
   
     <div class="col-sm-12 margin-bottom">
       <label>NOME:</label>
-        <input type="text" id="idnome" name="nome" placeholder="NOME" [(ngModel)]="selecionado.nome" class="form-control" />
+        <input type="text" id="idname" name="name" placeholder="NOME" [(ngModel)]="selecionado.name" class="form-control" />
     </div>
   
     <div class="col-sm-12 margin-bottom">
       <label>CODIGO:</label>
-        <input type="text" id="idcodigo" name="codigo" placeholder="CODIGO" [(ngModel)]="selecionado.codigo" class="form-control" />
+        <input type="text" id="idcode" name="code" placeholder="CODIGO" [(ngModel)]="selecionado.code" class="form-control" />
     </div>
   
       </div>
@@ -3842,20 +3842,20 @@ function gera_grupo_detalhes_detalhes_component_html(project, angularPath) {
   
   
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo/detalhes//detalhes.component.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group/detalhes//detalhes.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_detalhes_detalhes_component_ts(project, angularPath) {
+function gera_group_detalhes_detalhes_component_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   import { Component, OnInit } from '@angular/core';
   import { Router, ActivatedRoute, Params } from '@angular/router';
   import { Location } from '@angular/common';
-  import { GrupoService } from '../grupo.service';
+  import { GrupoService } from '../group.service';
   import { VicReturn } from '../../vic-components/comum/vic-return';
   import { SuperDetalhesComponent } from '../../vic-components/comum/super-detalhes';
   
@@ -3867,7 +3867,7 @@ function gera_grupo_detalhes_detalhes_component_ts(project, angularPath) {
   })
   export class DetalhesComponent extends SuperDetalhesComponent {
   
-    constructor(protected service: GrupoService, protected router: Router, protected route: ActivatedRoute,protected grupoService:GrupoService) {
+    constructor(protected service: GrupoService, protected router: Router, protected route: ActivatedRoute,protected groupService:GrupoService) {
       super(service,router,route);
     }
   
@@ -3875,13 +3875,13 @@ function gera_grupo_detalhes_detalhes_component_ts(project, angularPath) {
   }
   
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo/detalhes//detalhes.component.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group/detalhes//detalhes.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_grupo_routing_module_ts(project, angularPath) {
+function gera_group_group_routing_module_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3894,7 +3894,7 @@ function gera_grupo_grupo_routing_module_ts(project, angularPath) {
   
   const routes: Routes = [
     {
-      path: 'grupo', component: CrudComponent,
+      path: 'group', component: CrudComponent,
       children: [
         { path: '', component: ListaComponent },
         { path: 'detalhes/:id', component: DetalhesComponent }
@@ -3908,13 +3908,13 @@ function gera_grupo_grupo_routing_module_ts(project, angularPath) {
   })
   export class GrupoRoutingModule { }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo//grupo-routing.module.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group//group-routing.module.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_grupo_module_ts(project, angularPath) {
+function gera_group_group_module_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3923,7 +3923,7 @@ function gera_grupo_grupo_module_ts(project, angularPath) {
   import { FormsModule }   from '@angular/forms';
   import { CommonModule } from '@angular/common';
   import { VicComponentsModule } from '../vic-components/vic-components.module';
-  import { GrupoRoutingModule } from './grupo-routing.module';
+  import { GrupoRoutingModule } from './group-routing.module';
   import { CrudComponent } from './crud/crud.component';
   import { ListaComponent } from './lista/lista.component';
   import { DetalhesComponent } from './detalhes/detalhes.component';
@@ -3947,13 +3947,13 @@ function gera_grupo_grupo_module_ts(project, angularPath) {
   export class GrupoModule { }
   
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo//grupo.module.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group//group.module.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_grupo_service_ts(project, angularPath) {
+function gera_group_group_service_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3967,18 +3967,18 @@ function gera_grupo_grupo_service_ts(project, angularPath) {
   export class GrupoService extends SuperService{
   
     constructor(http:Http) {
-      super('grupo',http);
+      super('group',http);
     }
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo//grupo.service.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group//group.service.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_lista_lista_component_css(project, angularPath) {
+function gera_group_lista_lista_component_css(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -3986,13 +3986,13 @@ function gera_grupo_lista_lista_component_css(project, angularPath) {
       padding-bottom: 20px;
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo/lista//lista.component.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group/lista//lista.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_lista_lista_component_html(project, angularPath) {
+function gera_group_lista_lista_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -4013,19 +4013,19 @@ function gera_grupo_lista_lista_component_html(project, angularPath) {
   </div>
   <vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)"></vic-tabela>
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo/lista//lista.component.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group/lista//lista.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_grupo_lista_lista_component_ts(project, angularPath) {
+function gera_group_lista_lista_component_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   import { Component, OnInit } from '@angular/core';
   import { Router, ActivatedRoute, Params } from '@angular/router';
-  import { GrupoService } from '../grupo.service';
+  import { GrupoService } from '../group.service';
   import { BaseEntity } from "../../vic-components/comum/base-entity";
   import { VicReturn } from '../../vic-components/comum/vic-return';
   import { SuperListaComponent } from '../../vic-components/comum/super-lista';
@@ -4039,8 +4039,8 @@ function gera_grupo_lista_lista_component_ts(project, angularPath) {
   export class ListaComponent extends SuperListaComponent {
   
     colunas = [
-      { active: true, comparisonOperator: "STARTS_WITH", field: "nome", label: "Nome",pedacos: ["nome"]},
-      { active: true, comparisonOperator: "STARTS_WITH", field: "codigo", label: "Codigo",pedacos: ["codigo"]},
+      { active: true, comparisonOperator: "STARTS_WITH", field: "name", label: "Nome",pedacos: ["name"]},
+      { active: true, comparisonOperator: "STARTS_WITH", field: "code", label: "Codigo",pedacos: ["code"]},
     ];
   
     constructor(protected service: GrupoService, protected router: Router, protected route: ActivatedRoute) {
@@ -4049,25 +4049,25 @@ function gera_grupo_lista_lista_component_ts(project, angularPath) {
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/grupo/lista//lista.component.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/group/lista//lista.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_crud_crud_component_css(project, angularPath) {
+function gera_organization_crud_crud_component_css(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao/crud//crud.component.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization/crud//crud.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_crud_crud_component_html(project, angularPath) {
+function gera_organization_crud_crud_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -4076,13 +4076,13 @@ function gera_organizacao_crud_crud_component_html(project, angularPath) {
   </div>
   <router-outlet></router-outlet>
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao/crud//crud.component.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization/crud//crud.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_crud_crud_component_ts(project, angularPath) {
+function gera_organization_crud_crud_component_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4098,13 +4098,13 @@ function gera_organizacao_crud_crud_component_ts(project, angularPath) {
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao/crud//crud.component.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization/crud//crud.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_detalhes_detalhes_component_css(project, angularPath) {
+function gera_organization_detalhes_detalhes_component_css(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4118,13 +4118,13 @@ function gera_organizacao_detalhes_detalhes_component_css(project, angularPath) 
       margin-bottom: 20px;
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao/detalhes//detalhes.component.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization/detalhes//detalhes.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_detalhes_detalhes_component_html(project, angularPath) {
+function gera_organization_detalhes_detalhes_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -4138,23 +4138,23 @@ function gera_organizacao_detalhes_detalhes_component_html(project, angularPath)
         <strong>{{msg.message}}</strong> {{msg.description}}
         <a (click)="msg.show = false" style="float: right; margin-right: -10px; margin-top: -10px;cursor: pointer;">x</a>
       </div>
-      <h2>{{ selecionado.nome| uppercase }}</h2>
+      <h2>{{ selecionado.name| uppercase }}</h2>
       <form [formGroup]="detalhesForm">
         <div class="row">
   
           <div class="col-sm-12 margin-bottom">
             <label>NOME:</label>
-            <input type="text" id="idnome" name="nome" placeholder="NOME" formControlName="nome" [(ngModel)]="selecionado.nome" class="form-control"/>
-            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['nome'].valid && detalhesForm.controls['nome'].touched" style="margin-top:10px">
+            <input type="text" id="idname" name="name" placeholder="NOME" formControlName="name" [(ngModel)]="selecionado.name" class="form-control"/>
+            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['name'].valid && detalhesForm.controls['name'].touched" style="margin-top:10px">
               O campo NOME é obrigatório.
             </div>
           </div>
   
           <div class="col-sm-12 margin-bottom">
             <label>CODIGO:</label>
-            <input type="text" id="idcodigo" name="codigo" placeholder="CODIGO" formControlName="codigo" [(ngModel)]="selecionado.codigo"
+            <input type="text" id="idcode" name="code" placeholder="CODIGO" formControlName="code" [(ngModel)]="selecionado.code"
               class="form-control"  />
-            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['codigo'].valid && detalhesForm.controls['codigo'].touched"
+            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['code'].valid && detalhesForm.controls['code'].touched"
               style="margin-top:10px">
               O campo CODIGO é obrigatório.
             </div>
@@ -4162,10 +4162,10 @@ function gera_organizacao_detalhes_detalhes_component_html(project, angularPath)
   
           <div class="col-sm-12 margin-bottom">
             <label>SUPERIOR:</label>
-            <vic-many-to-one [(valor)]="selecionado.superior" [service]="organizacaoService" atributoLabel="nome" [group]="detalhesForm"
-              nomeNoForm="superior">
+            <vic-many-to-one [(valor)]="selecionado.upper" [service]="organizationService" atributoLabel="name" [group]="detalhesForm"
+              nameNoForm="upper">
             </vic-many-to-one>
-            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['superior'].valid && detalhesForm.controls['superior'].touched"
+            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['upper'].valid && detalhesForm.controls['upper'].touched"
               style="margin-top:10px">
               O campo SUPERIOR é obrigatório.
             </div>
@@ -4193,20 +4193,20 @@ function gera_organizacao_detalhes_detalhes_component_html(project, angularPath)
       </form>
     </div>
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao/detalhes//detalhes.component.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization/detalhes//detalhes.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_detalhes_detalhes_component_ts(project, angularPath) {
+function gera_organization_detalhes_detalhes_component_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   import { Component, OnInit } from '@angular/core';
   import { Router, ActivatedRoute, Params } from '@angular/router';
   import { Location } from '@angular/common';
-  import { OrganizacaoService } from '../organizacao.service';
+  import { OrganizacaoService } from '../organization.service';
   import { VicReturn } from '../../vic-components/comum/vic-return';
   import { SuperDetalhesComponent } from '../../vic-components/comum/super-detalhes';
   import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -4221,16 +4221,16 @@ function gera_organizacao_detalhes_detalhes_component_ts(project, angularPath) {
   
     detalhesForm: FormGroup;
   
-    constructor(protected service: OrganizacaoService, protected router: Router, protected route: ActivatedRoute, protected organizacaoService: OrganizacaoService,
+    constructor(protected service: OrganizacaoService, protected router: Router, protected route: ActivatedRoute, protected organizationService: OrganizacaoService,
       private fb: FormBuilder, protected location: Location) {
       super(service, router, route);
     }
   
     initForm() {
       this.detalhesForm = this.fb.group({
-        'nome': new FormControl({ value: this.selecionado['nome'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
-        'codigo': new FormControl({ value: this.selecionado['codigo'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
-        'superior': new FormControl({ value: this.selecionado['superior'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
+        'name': new FormControl({ value: this.selecionado['name'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
+        'code': new FormControl({ value: this.selecionado['code'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
+        'upper': new FormControl({ value: this.selecionado['upper'], disabled: this.notNew(this.selecionado) && !this.canUpdate(this.selecionado) }, Validators.compose([Validators.required])),
       });
     }
   
@@ -4265,13 +4265,13 @@ function gera_organizacao_detalhes_detalhes_component_ts(project, angularPath) {
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao/detalhes//detalhes.component.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization/detalhes//detalhes.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_lista_lista_component_css(project, angularPath) {
+function gera_organization_lista_lista_component_css(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4279,13 +4279,13 @@ function gera_organizacao_lista_lista_component_css(project, angularPath) {
       padding-bottom: 20px;
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao/lista//lista.component.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization/lista//lista.component.css`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_lista_lista_component_html(project, angularPath) {
+function gera_organization_lista_lista_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
@@ -4306,19 +4306,19 @@ function gera_organizacao_lista_lista_component_html(project, angularPath) {
   </div>
   <vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)"></vic-tabela>
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao/lista//lista.component.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization/lista//lista.component.html`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_lista_lista_component_ts(project, angularPath) {
+function gera_organization_lista_lista_component_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
   import { Component, OnInit } from '@angular/core';
   import { Router, ActivatedRoute, Params } from '@angular/router';
-  import { OrganizacaoService } from '../organizacao.service';
+  import { OrganizacaoService } from '../organization.service';
   import { BaseEntity } from "../../vic-components/comum/base-entity";
   import { VicReturn } from '../../vic-components/comum/vic-return';
   import { SuperListaComponent } from '../../vic-components/comum/super-lista';
@@ -4332,10 +4332,10 @@ function gera_organizacao_lista_lista_component_ts(project, angularPath) {
   export class ListaComponent extends SuperListaComponent {
   
     colunas = [
-      { active: true, comparisonOperator: "STARTS_WITH", field: "nome", label: "Nome",pedacos: ["nome"]},
-      { active: true, comparisonOperator: "STARTS_WITH", field: "codigo", label: "Codigo",pedacos: ["codigo"]},
-      { active: true, comparisonOperator: "STARTS_WITH", field: "superior.nome", label: "Superior",pedacos: ["superior", "nome"]},
-      { active: true, comparisonOperator: "STARTS_WITH", field: "superior.codigo", label: "Codigo",pedacos: ["superior", "codigo"]},
+      { active: true, comparisonOperator: "STARTS_WITH", field: "name", label: "Nome",pedacos: ["name"]},
+      { active: true, comparisonOperator: "STARTS_WITH", field: "code", label: "Codigo",pedacos: ["code"]},
+      { active: true, comparisonOperator: "STARTS_WITH", field: "upper.name", label: "Superior",pedacos: ["upper", "name"]},
+      { active: true, comparisonOperator: "STARTS_WITH", field: "upper.code", label: "Codigo",pedacos: ["upper", "code"]},
     ];
   
     constructor(protected service: OrganizacaoService, protected router: Router, protected route: ActivatedRoute) {
@@ -4344,13 +4344,13 @@ function gera_organizacao_lista_lista_component_ts(project, angularPath) {
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao/lista//lista.component.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization/lista//lista.component.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_organizacao_routing_module_ts(project, angularPath) {
+function gera_organization_organization_routing_module_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4363,7 +4363,7 @@ function gera_organizacao_organizacao_routing_module_ts(project, angularPath) {
   
   const routes: Routes = [
     {
-      path: 'organizacao', component: CrudComponent,
+      path: 'organization', component: CrudComponent,
       children: [
         { path: '', component: ListaComponent },
         { path: 'detalhes/:id', component: DetalhesComponent }
@@ -4377,13 +4377,13 @@ function gera_organizacao_organizacao_routing_module_ts(project, angularPath) {
   })
   export class OrganizacaoRoutingModule { }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao//organizacao-routing.module.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization//organization-routing.module.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_organizacao_module_ts(project, angularPath) {
+function gera_organization_organization_module_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4392,7 +4392,7 @@ function gera_organizacao_organizacao_module_ts(project, angularPath) {
   import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
   import { CommonModule } from '@angular/common';
   import { VicComponentsModule } from '../vic-components/vic-components.module';
-  import { OrganizacaoRoutingModule } from './organizacao-routing.module';
+  import { OrganizacaoRoutingModule } from './organization-routing.module';
   import { CrudComponent } from './crud/crud.component';
   import { ListaComponent } from './lista/lista.component';
   import { DetalhesComponent } from './detalhes/detalhes.component';
@@ -4418,13 +4418,13 @@ function gera_organizacao_organizacao_module_ts(project, angularPath) {
   })
   export class OrganizacaoModule { }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao//organizacao.module.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization//organization.module.ts`, src, `utf8`);
 }
 
 
 
 
-function gera_organizacao_organizacao_service_ts(project, angularPath) {
+function gera_organization_organization_service_ts(project, angularPath) {
   let src = `
   /* Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 */
   /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
@@ -4438,12 +4438,12 @@ function gera_organizacao_organizacao_service_ts(project, angularPath) {
   export class OrganizacaoService extends SuperService{
   
     constructor(http:Http) {
-      super('organizacao',http);
+      super('organization',http);
     }
   
   }
     `;
-  util.escreveArquivo(`${angularPath}/src/app/organizacao//organizacao.service.ts`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/app/organization//organization.service.ts`, src, `utf8`);
 }
 
 
@@ -4566,15 +4566,15 @@ function gera_entidade_detalhes_detalhes_component_html(project, entityName, ent
           <strong>{{msg.message}}</strong> {{msg.description}}
           <a (click)="msg.show = false" style="float: right; margin-right: -10px; margin-top: -10px;cursor: pointer;">x</a>
         </div>
-      <h2>{{ selecionado.nome| uppercase }}</h2>
+      <h2>{{ selecionado.name| uppercase }}</h2>
   
   <form [formGroup]="detalhesForm">
       <div class="row">
   
     <div class="col-sm-12 margin-bottom">
       <label>NOME:</label>
-        <input type="text" id="idnome" name="nome" formControlName="nome" placeholder="NOME" [(ngModel)]="selecionado.nome" class="form-control" [disabled]="notNew(selecionado)&&!canUpdate(selecionado)" />
-            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['nome'].valid && detalhesForm.controls['nome'].touched" style="margin-top:10px">
+        <input type="text" id="idname" name="name" formControlName="name" placeholder="NOME" [(ngModel)]="selecionado.name" class="form-control" [disabled]="notNew(selecionado)&&!canUpdate(selecionado)" />
+            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['name'].valid && detalhesForm.controls['name'].touched" style="margin-top:10px">
               O campo NOME é obrigatório.
             </div>
     </div>
@@ -4642,7 +4642,7 @@ export class DetalhesComponent extends SuperDetalhesComponent {
   initForm() {
 
     this.detalhesForm = this.fb.group({
-      'nome': ['', Validators.compose([Validators.required])],
+      'name': ['', Validators.compose([Validators.required])],
     });
   }
 
@@ -4657,7 +4657,7 @@ export class DetalhesComponent extends SuperDetalhesComponent {
     this.service.getOne(id).then(obj => {
       this.selecionado = obj;
       this.detalhesForm = this.fb.group({
-        'nome': [this.selecionado['nome'], Validators.compose([Validators.required])],
+        'name': [this.selecionado['name'], Validators.compose([Validators.required])],
       })
     })
   }
@@ -4746,7 +4746,7 @@ import { SuperListaComponent } from '../../vic-components/comum/super-lista';
 export class ListaComponent extends SuperListaComponent {
 
   colunas = [
-    { active: true, comparisonOperator: "STARTS_WITH", field: "nome", label: "Nome", pedacos: ["nome"] },
+    { active: true, comparisonOperator: "STARTS_WITH", field: "name", label: "Nome", pedacos: ["name"] },
   ];
 
   constructor(protected service: ${util.primeiraMaiuscula(entityName)}Service, protected router: Router, protected route: ActivatedRoute) {
