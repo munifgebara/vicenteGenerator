@@ -1971,7 +1971,7 @@ function gerasuper_service_ts(project, angularPath) {
   
     createAuthorizationHeader(): Headers {
       let headers = new Headers();
-      headers.append('authorization', LoginService.ins.token.token);
+      headers.append('authorization', LoginService.ins.token.value);
       headers.append('group', LoginService.ins.groupAtual.code);
       return headers;
   
@@ -2136,7 +2136,7 @@ function geratoken_ts(project, angularPath) {
       id: string;
       extra: string;
       version: number;
-      token: string;
+      value: string;
       user: Usuario;
       expiracao: number;
   }
@@ -3276,7 +3276,7 @@ function geralogin_service_ts(project, angularPath) {
   
       createAuthorizationHeader(): Headers {
           let headers = new Headers();
-          headers.append('authorization', this.token.token);
+          headers.append('authorization', this.token.value);
           return headers;
       }
   
