@@ -4,13 +4,12 @@ const bc = require("./backend/comum");
 const fc = require("./frontend/comum");
 
 
-
-let jsonData = fs.readFileSync("/home/munif/projetos/estoque.json", "utf8");
+let jsonData = fs.readFileSync(require('os').homedir() + `/projetos/${process.argv[2] || 'estoque'}.json`, "utf8");
 let json = JSON.parse(jsonData);
 generateProject(json);
 
 function generateProject(project) {
-    let mainDir = `/home/munif/temp/${project.description.title.toLowerCase()}`;
+    let mainDir = require('os').homedir() + `/temp/${project.description.title.toLowerCase()}`;
     console.log(project.description, "=>",mainDir);
     util.criaPasta(mainDir);
     util.criaPasta(`${mainDir}/.mvn`);
@@ -36,18 +35,18 @@ function generateProject(project) {
     util.criaPasta(`${mainDir}/front/project/src/app/vic-components/vic-system-fields/`);
     util.criaPasta(`${mainDir}/front/project/src/app/vic-components/vic-tabela/`);
     util.criaPasta(`${mainDir}/front/project/src/app/login`);
-    util.criaPasta(`${mainDir}/front/project/src/app/usuario/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/usuario/crud/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/usuario/detalhes/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/usuario/lista/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/grupo/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/grupo/crud/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/grupo/detalhes/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/grupo/lista/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/organizacao/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/organizacao/crud/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/organizacao/detalhes/`);
-    util.criaPasta(`${mainDir}/front/project/src/app/organizacao/lista/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/user/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/user/crud/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/user/detalhes/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/user/lista/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/group/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/group/crud/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/group/detalhes/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/group/lista/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/organization/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/organization/crud/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/organization/detalhes/`);
+    util.criaPasta(`${mainDir}/front/project/src/app/organization/lista/`);
     util.criaPasta(`${mainDir}/src`);
     util.criaPasta(`${mainDir}/src/main`);
     util.criaPasta(`${mainDir}/src/main/resources`);
@@ -157,10 +156,10 @@ function generateProject(project) {
         fc.gerasuper_service_ts(project, angular);
         fc.geravic_return_ts(project, angular);
         
-        fc.geragrupo_ts(project, angular);
-        fc.geraorganizacao_ts(project, angular);
+        fc.geragroup_ts(project, angular);
+        fc.geraorganization_ts(project, angular);
         fc.geratoken_ts(project, angular);
-        fc.gerausuario_ts(project, angular);
+        fc.gerauser_ts(project, angular);
         fc.geraexcluir_atributos_sistema_pipe_spec_ts(project, angular);
         fc.geraexcluir_atributos_sistema_pipe_ts(project, angular);
         fc.geravic_components_module_ts(project, angular);
@@ -201,45 +200,45 @@ function generateProject(project) {
         fc.geralogin_service_ts(project, angular);
       
       
-        fc.gera_usuario_crud_crud_component_css(project, angular);
-        fc.gera_usuario_crud_crud_component_html(project, angular);
-        fc.gera_usuario_crud_crud_component_ts(project, angular);
-        fc.gera_usuario_detalhes_detalhes_component_css(project, angular);
-        fc.gera_usuario_detalhes_detalhes_component_html(project, angular);
-        fc.gera_usuario_detalhes_detalhes_component_ts(project, angular);
-        fc.gera_usuario_lista_lista_component_css(project, angular);
-        fc.gera_usuario_lista_lista_component_html(project, angular);
-        fc.gera_usuario_lista_lista_component_ts(project, angular);
-        fc.gera_usuario_usuario_routing_module_ts(project, angular);
-        fc.gera_usuario_usuario_module_ts(project, angular);
-        fc.gera_usuario_usuario_service_ts(project, angular);
-        fc.gera_grupo_crud_crud_component_css(project, angular);
-        fc.gera_grupo_crud_crud_component_html(project, angular);
-        fc.gera_grupo_crud_crud_component_ts(project, angular);
+        fc.gera_user_crud_crud_component_css(project, angular);
+        fc.gera_user_crud_crud_component_html(project, angular);
+        fc.gera_user_crud_crud_component_ts(project, angular);
+        fc.gera_user_detalhes_detalhes_component_css(project, angular);
+        fc.gera_user_detalhes_detalhes_component_html(project, angular);
+        fc.gera_user_detalhes_detalhes_component_ts(project, angular);
+        fc.gera_user_lista_lista_component_css(project, angular);
+        fc.gera_user_lista_lista_component_html(project, angular);
+        fc.gera_user_lista_lista_component_ts(project, angular);
+        fc.gera_user_user_routing_module_ts(project, angular);
+        fc.gera_user_user_module_ts(project, angular);
+        fc.gera_user_user_service_ts(project, angular);
+        fc.gera_group_crud_crud_component_css(project, angular);
+        fc.gera_group_crud_crud_component_html(project, angular);
+        fc.gera_group_crud_crud_component_ts(project, angular);
 
-        fc.gera_grupo_detalhes_detalhes_component_css(project, angular);
-        fc.gera_grupo_detalhes_detalhes_component_html(project, angular);
-        fc.gera_grupo_detalhes_detalhes_component_ts(project, angular);
-        fc.gera_grupo_grupo_routing_module_ts(project, angular);
-        fc.gera_grupo_grupo_module_ts(project, angular);
-        fc.gera_grupo_grupo_service_ts(project, angular);
+        fc.gera_group_detalhes_detalhes_component_css(project, angular);
+        fc.gera_group_detalhes_detalhes_component_html(project, angular);
+        fc.gera_group_detalhes_detalhes_component_ts(project, angular);
+        fc.gera_group_group_routing_module_ts(project, angular);
+        fc.gera_group_group_module_ts(project, angular);
+        fc.gera_group_group_service_ts(project, angular);
 
-        fc.gera_grupo_lista_lista_component_css(project, angular);
-        fc.gera_grupo_lista_lista_component_html(project, angular);
-        fc.gera_grupo_lista_lista_component_ts(project, angular);
-        fc.gera_organizacao_crud_crud_component_css(project, angular);
-        fc.gera_organizacao_crud_crud_component_html(project, angular);
-        fc.gera_organizacao_crud_crud_component_ts(project, angular);
-        fc.gera_organizacao_detalhes_detalhes_component_css(project, angular);
-        fc.gera_organizacao_detalhes_detalhes_component_html(project, angular);
-        fc.gera_organizacao_detalhes_detalhes_component_ts(project, angular);
+        fc.gera_group_lista_lista_component_css(project, angular);
+        fc.gera_group_lista_lista_component_html(project, angular);
+        fc.gera_group_lista_lista_component_ts(project, angular);
+        fc.gera_organization_crud_crud_component_css(project, angular);
+        fc.gera_organization_crud_crud_component_html(project, angular);
+        fc.gera_organization_crud_crud_component_ts(project, angular);
+        fc.gera_organization_detalhes_detalhes_component_css(project, angular);
+        fc.gera_organization_detalhes_detalhes_component_html(project, angular);
+        fc.gera_organization_detalhes_detalhes_component_ts(project, angular);
         
-        fc.gera_organizacao_lista_lista_component_css(project, angular);
-        fc.gera_organizacao_lista_lista_component_html(project, angular);
-        fc.gera_organizacao_lista_lista_component_ts(project, angular);
-        fc.gera_organizacao_organizacao_routing_module_ts(project, angular);
-        fc.gera_organizacao_organizacao_module_ts(project, angular);
-        fc.gera_organizacao_organizacao_service_ts(project, angular);
+        fc.gera_organization_lista_lista_component_css(project, angular);
+        fc.gera_organization_lista_lista_component_html(project, angular);
+        fc.gera_organization_lista_lista_component_ts(project, angular);
+        fc.gera_organization_organization_routing_module_ts(project, angular);
+        fc.gera_organization_organization_module_ts(project, angular);
+        fc.gera_organization_organization_service_ts(project, angular);
       
       
         Object.keys(project.entities).forEach(p => {

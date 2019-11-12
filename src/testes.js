@@ -23,4 +23,4 @@ function insereLinhaAntes(arquivo, marcador, novaLinha) {
 
 
 
-insereLinhaAntes('/home/munif/projetos/vicenteGenerator/f.txt', 'marcador', 'NOVA55');
+insereLinhaAntes(require('os').homedir() + '/projetos/vicenteGenerator/f.txt', 'marcador', 'NOVA55');
