@@ -302,9 +302,8 @@ function geraproject_angular_json(project, angularPath) {
               "src/assets"
             ],
             "styles": [
-              {
-                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
-              },
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -481,6 +480,7 @@ function geraproject_package_json(project, angularPath) {
     "ng2-tooltip-directive": "^2.8.17",
     "ngx-bootstrap": "^5.2.0",
     "@angular/service-worker": "^8.2.13",
+    "hammerjs": "^2.0.8",
     "bootstrap": "^4.3.1"
   },
   "devDependencies": {
@@ -754,6 +754,23 @@ import { environment } from '../environments/environment';
 import { UsuarioModule } from './user/user.module';
 import { GrupoModule } from './group/group.module';
 import { OrganizacaoModule } from './organization/organization.module';
+import {
+  MatAutocompleteModule,
+  MatButtonModule, MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule, MatChipsModule,
+  MatDatepickerModule, MatDialogModule, MatExpansionModule,
+  MatFormFieldModule, MatGridListModule, MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
+  MatToolbarModule, MatTooltipModule
+} from "@angular/material";
+
 
 // MARCADOR PARA COLOCAR IMPORTS
 
@@ -778,8 +795,40 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   ],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule,
-    BrowserAnimationsModule,
     HttpModule,
+    BrowserAnimationsModule,
+
+    MatCheckboxModule,
+    MatButtonModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     AlertModule.forRoot(),
@@ -805,7 +854,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 export class AppModule { }
 
   `;
-  util.escreveArquivoApenasSeNaoExistir(`${angularPath}/src/app//app.module.ts`, src, `utf8`);
+  util.escreveArquivoApenasSeNaoExistir(`${angularPath}/src/app/app.module.ts`, src, `utf8`);
 }
 
 
@@ -833,6 +882,8 @@ function geraproject_src_index_html(project, angularPath) {
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1976d2">
 </head>
@@ -842,7 +893,7 @@ function geraproject_src_index_html(project, angularPath) {
 </html>
 
   `;
-  util.escreveArquivo(`${angularPath}/src//index.html`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/index.html`, src, `utf8`);
 }
 
 
@@ -891,6 +942,7 @@ module.exports = function (config) {
 
 function geraproject_src_main_ts(project, angularPath) {
   let src = `
+import 'hammerjs';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
@@ -1048,10 +1100,11 @@ function geraproject_src_styles_css(project, angularPath) {
   let src = `
 /* You can add global styles to this file, and also import other style files */
 
-body { margin: 0; }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   `;
-  util.escreveArquivo(`${angularPath}/src//styles.css`, src, `utf8`);
+  util.escreveArquivo(`${angularPath}/src/styles.css`, src, `utf8`);
 }
 
 
