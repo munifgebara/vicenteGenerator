@@ -578,7 +578,7 @@ import { BaseEntity } from './vic-components/comum/base-entity';
 <mat-toolbar color="primary">
   <mat-toolbar-row class="main-mat-toolbar-row">
       <div>
-          <button type="button" mat-button (click)="drawer.toggle()">
+          <button type="button" mat-button (click)="drawer.toggle()" *ngIf="loginService.token && loginService.token.user">
               <mat-icon aria-hidden="false" aria-label="Home">
                   menu
               </mat-icon>
@@ -604,7 +604,7 @@ import { BaseEntity } from './vic-components/comum/base-entity';
           <mat-menu #menu="matMenu">
               <button mat-menu-item>
                   <mat-icon>vpn_key</mat-icon>
-                  <span>Change e-mail</span>
+                  <span>Change password</span>
               </button>
               <button mat-menu-item>
                   <mat-icon>close</mat-icon>
@@ -1116,36 +1116,46 @@ function geraproject_src_polyfills_ts(project, angularPath) {
 
 function geraproject_src_styles_css(project, angularPath) {
   let src = `
-  /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
 
-  html, body { height: 100%; }
-  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-  main, mat-drawer-container {
-    height: 100%;
-  }
-  
-  .main-mat-toolbar-row {
-    display: flex;
-    justify-content: space-between;
-  }
-  div.toolbar-info {
-    font-size: 15px;
-    font-weight: 100;
-    padding: 13px;
-  }
-  div.toolbar-info > span {
-    padding-left: 20px;
-  }
-  .main-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-    margin: 10px;
-  }
-  .main-sidenav-content {
-    display: flex;
-    flex-direction: column;
-  }
-  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+main, mat-drawer-container {
+  height: 100%;
+}
+
+.main-mat-toolbar-row {
+  display: flex;
+  justify-content: space-between;
+}
+div.toolbar-info {
+  font-size: 15px;
+  font-weight: 100;
+  padding: 13px;
+}
+div.toolbar-info > span {
+  padding-left: 20px;
+}
+.main-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  margin: 10px;
+}
+.main-sidenav-content {
+  display: flex;
+  flex-direction: column;
+}
+table {
+  width: 100%;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+td, th {
+  width: 25%;
+}
+ 
   `;
   util.escreveArquivo(`${angularPath}/src/styles.css`, src, `utf8`);
 }
