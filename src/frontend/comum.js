@@ -575,59 +575,77 @@ import { BaseEntity } from './vic-components/comum/base-entity';
 @Component({
   selector: 'vic-root',
   template: \`
-        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" >
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">${project.description.title}</a>
-            <span *ngIf="loginService.logado" >
-                <span class="navbar-brand"> Login:</span>
-                <span class="navbar-brand">
-                    <span class="form-control ">{{ loginService.token.user.login }} </span>
-                </span>
-                <span class="navbar-brand"> Organização:</span>
-                <span class="navbar-brand">
-                    <span class="form-control "> {{ loginService.token.user.organization.name }}</span>
-                </span>
-                <span class="navbar-brand"> Grupo Corrente:</span>
-                <span class="navbar-brand">
-                    <select [compareWith]="byId" [ngModel]="loginService.groupAtual" (ngModelChange)="onValorChange($event)" class="form-control">
-                    <option value> Nenhum </option>
-                    <option *ngFor="let opcao of loginService.token.user.groups" [ngValue]="opcao">{{ opcao['code'] }}-{{ opcao['name'] }} </option>
-                </select >
-            </span >
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="main-mat-toolbar-row">
+      <div>
+          <button type="button" mat-button (click)="drawer.toggle()">
+              <mat-icon aria-hidden="false" aria-label="Home">
+                  menu
+              </mat-icon>
+          </button>
+          <span>${project.description.title}</span>
+      </div>
+      <div class="toolbar-info" *ngIf="loginService.token && loginService.token.user">
+          <span>Organization: {{ loginService.token.user.organization.name }}</span>
+          <span>
+              <mat-form-field>
+                <mat-select [compareWith]="byId" [ngModel]="loginService.groupAtual"
+                            (ngModelChange)="onValorChange($event)">
+                    <mat-option *ngFor="let opcao of loginService.token.user.groups" [value]="opcao">
+                        {{ opcao['code'] }}-{{ opcao['name'] }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+          </span>
+          <span>{{ loginService.token.user.login }}</span>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+              <div mat-card-avatar class="main-header-image"></div>
+          </button>
+          <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                  <mat-icon>vpn_key</mat-icon>
+                  <span>Change e-mail</span>
+              </button>
+              <button mat-menu-item>
+                  <mat-icon>close</mat-icon>
+                  <span>Exit</span>
+              </button>
+          </mat-menu>
+      </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<main role="main">
+  <mat-drawer-container autosize>
+      <mat-drawer #drawer mode="side">
+          <ul>
+              <li class="nav-item" *ngFor="let item of menu">
+                  <a class="nav-link {{item.active?'active':''}}" [routerLink]="[item.link]"
+                     (click)="onMenuClick(item)" *ngIf="item.link">
+                      <i class="{{item.iconeTipo}} {{item.icone}}"></i> {{ item.label }}
+                  </a>
+                  <a class="nav-link {{item.active?'active':''}}" (click)="onMenuPaiClick(item)"
+                     *ngIf="!item.link">
+                      <i class="{{item.iconeTipo}} {{item.icone}}"></i> {{ item.label }}
+                      <i class="fas fa-angle-down " style="float:right;margin-top: 5px;"></i>
+                  </a>
+                  <ul class="nav flex-column" *ngIf="item.active">
+                      <li class="nav-item" *ngFor="let subItem of item.subItens">
+                          <a class="nav-link subItem {{subItem.active?'active':''}}"
+                             (click)="onSubMenuClick(item,subItem)" [routerLink]="[subItem.link]">
+                              <i class="{{subItem.iconeTipo}} {{subItem.icone}}"></i> {{ subItem.label }}
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+          </ul>
+      </mat-drawer>
 
-        <a class="btn btn-danger" style="margin-right : 10px" href="#">
-            <i class="fas fa-sign-out-alt" (click)="sair()"></i>Sair</a >
-        </span >
-    </nav >
-        <div class="container-fluid">
-            <div class="row">
-                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                    <div class="sidebar-sticky">
-                        <ul class="nav flex-column">
+      <div class="main-sidenav-content">
+          <router-outlet></router-outlet>
+      </div>
 
-                            <li class="nav-item" *ngFor="let item of menu">
-                            <a class="nav-link {{item.active?'active':''}}" [routerLink]="[item.link]" (click)="onMenuClick(item)" *ngIf="item.link">
-                                <i class="{{item.iconeTipo}} {{item.icone}}"></i> {{ item.label }}
-                            </a>
-                        <a class="nav-link {{item.active?'active':''}}" (click)="onMenuPaiClick(item)" *ngIf="!item.link">
-                                <i class="{{item.iconeTipo}} {{item.icone}}"></i> {{ item.label }}
-                        <i class="fas fa-angle-down " style="float:right;margin-top: 5px;"></i>
-                            </a>
-                    <ul class="nav flex-column" *ngIf="item.active">
-                                <li class="nav-item" *ngFor="let subItem of item.subItens">
-                                    <a class="nav-link subItem {{subItem.active?'active':''}}" (click)="onSubMenuClick(item,subItem)" [routerLink]="[subItem.link]">
-                                        <i class="{{subItem.iconeTipo}} {{subItem.icone}}"></i> {{ subItem.label }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </li >
-                    </ul >
-                </div >
-            </nav >
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <router-outlet></router-outlet>
-        </main>
-        </div >
-    </div >
+  </mat-drawer-container>
+</main>
         \`,
   styles: [\`
             .subItem{
@@ -1098,11 +1116,36 @@ function geraproject_src_polyfills_ts(project, angularPath) {
 
 function geraproject_src_styles_css(project, angularPath) {
   let src = `
-/* You can add global styles to this file, and also import other style files */
+  /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  main, mat-drawer-container {
+    height: 100%;
+  }
+  
+  .main-mat-toolbar-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  div.toolbar-info {
+    font-size: 15px;
+    font-weight: 100;
+    padding: 13px;
+  }
+  div.toolbar-info > span {
+    padding-left: 20px;
+  }
+  .main-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+    margin: 10px;
+  }
+  .main-sidenav-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
   `;
   util.escreveArquivo(`${angularPath}/src/styles.css`, src, `utf8`);
 }
@@ -3082,57 +3125,37 @@ function geralogin_component_css(project, angularPath) {
 
 function geralogin_component_html(project, angularPath) {
   let src = `
-  <div class="container">
-    <form [formGroup]="loginForm">
-  
-      <div class="alert {{erro.cssClass}}" role="alert" *ngIf="erro.show">
-        <strong>{{erro.message}}</strong> {{erro.description}}
-        <a (click)="erro.show = false" style="float: right;   margin-right: -10px;  margin-top: -10px;">x</a>
-      </div>
-  
-      <div class="row">
-        <div class="col-sm-12 margin-bottom">
-          <label>Login:</label>
-          <input type="text" id="idname" name="name" placeholder="email@organization" formControlName="loginInput" class="form-control"
-          />
-  
-          <div class="alert alert-danger" *ngIf="!loginForm.controls['loginInput'].valid && loginForm.controls['loginInput'].touched"
-            style="margin-top:10px">
-            Email inválido, por favor informe um email válido!
-          </div>
-  
-        </div>
-  
-        <div class="col-sm-12 margin-bottom">
-          <label>Senha:</label>
-          <input type="password" id="idpassword" name="password" placeholder="Senha" formControlName="passwordInput" class="form-control" />
-  
-          <div class="alert alert-danger" *ngIf="!loginForm.controls['passwordInput'].valid && loginForm.controls['passwordInput'].touched"
-            style="margin-top:10px">
-            Por favor informe uma password!
-          </div>
-        </div>
-      </div>
-  
-      <div class="row">
-        <div class="col-sm-6 text-left">
-  <!--        <button type="button" class="btn btn-warning" disabled="true">
-            <i class="fas fa-key"></i> Recuperar Senha
-          </button> -->
-        </div>
-        <div class="col-sm-6 text-right">
-  <!--        <button type="button" class="btn btn-info" [disabled]="!loginForm.valid" (click)="criarUsuario()" >
-            <i class="fas fa-user-plus"></i> Criar Usuário
-          </button> -->
-          <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid" (click)="logar()">
-            <i class="fas fa-sign-in-alt"></i> Logar
-          </button>
-        </div>
-      </div>
-  
-    </form>
-  
-  </div>
+  <mat-grid-list cols="1" rowHeight="300px">
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-form" [formGroup]="loginForm">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Username" name="username" formControlName="loginInput" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" type="password" name="password" formControlName="passwordInput"
+                   required>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="criarUsuario()">Create Account</button>
+        <button mat-raised-button (click)="logar()" color="primary">
+          <mat-icon [style.display]="showSpinner ? 'inline-block' : 'none'">
+            <mat-spinner color="warn" diameter="20"></mat-spinner>
+          </mat-icon>
+          Login
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
     `;
   util.escreveArquivo(`${angularPath}/src/app/login//login.component.html`, src, `utf8`);
 }
