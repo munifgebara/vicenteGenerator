@@ -575,77 +575,80 @@ import { BaseEntity } from './vic-components/comum/base-entity';
 @Component({
   selector: 'vic-root',
   template: \`
-<mat-toolbar color="primary">
-  <mat-toolbar-row class="main-mat-toolbar-row">
-      <div>
-          <button type="button" mat-button (click)="drawer.toggle()" *ngIf="loginService.token && loginService.token.user">
-              <mat-icon aria-hidden="false" aria-label="Home">
-                  menu
-              </mat-icon>
-          </button>
-          <span>${project.description.title}</span>
-      </div>
-      <div class="toolbar-info" *ngIf="loginService.token && loginService.token.user">
-          <span>Organization: {{ loginService.token.user.organization.name }}</span>
-          <span>
-              <mat-form-field>
-                <mat-select [compareWith]="byId" [ngModel]="loginService.groupAtual"
-                            (ngModelChange)="onValorChange($event)">
-                    <mat-option *ngFor="let opcao of loginService.token.user.groups" [value]="opcao">
-                        {{ opcao['code'] }}-{{ opcao['name'] }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-          </span>
-          <span>{{ loginService.token.user.login }}</span>
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-              <div mat-card-avatar class="main-header-image"></div>
-          </button>
-          <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                  <mat-icon>vpn_key</mat-icon>
-                  <span>Change password</span>
-              </button>
-              <button mat-menu-item>
-                  <mat-icon>close</mat-icon>
-                  <span>Exit</span>
-              </button>
-          </mat-menu>
-      </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-<main role="main">
-  <mat-drawer-container autosize>
-      <mat-drawer #drawer mode="side">
-          <ul>
-              <li class="nav-item" *ngFor="let item of menu">
-                  <a class="nav-link {{item.active?'active':''}}" [routerLink]="[item.link]"
-                     (click)="onMenuClick(item)" *ngIf="item.link">
-                      <i class="{{item.iconeTipo}} {{item.icone}}"></i> {{ item.label }}
-                  </a>
-                  <a class="nav-link {{item.active?'active':''}}" (click)="onMenuPaiClick(item)"
-                     *ngIf="!item.link">
-                      <i class="{{item.iconeTipo}} {{item.icone}}"></i> {{ item.label }}
-                      <i class="fas fa-angle-down " style="float:right;margin-top: 5px;"></i>
-                  </a>
-                  <ul class="nav flex-column" *ngIf="item.active">
-                      <li class="nav-item" *ngFor="let subItem of item.subItens">
-                          <a class="nav-link subItem {{subItem.active?'active':''}}"
-                             (click)="onSubMenuClick(item,subItem)" [routerLink]="[subItem.link]">
-                              <i class="{{subItem.iconeTipo}} {{subItem.icone}}"></i> {{ subItem.label }}
-                          </a>
+      <mat-toolbar color="primary">
+          <mat-toolbar-row class="main-mat-toolbar-row">
+              <div>
+                  <button type="button" mat-button (click)="drawer.toggle()"
+                          *ngIf="loginService.token && loginService.token.user">
+                      <mat-icon aria-label="Menu">
+                          menu
+                      </mat-icon>
+                  </button>
+                  <span>{{title}}</span>
+              </div>
+              <div class="toolbar-info" *ngIf="loginService.token && loginService.token.user">
+                  <span class="hide-on-tablet">Organization: {{ loginService.token.user.organization.name }}</span>
+                  <span>
+                    <mat-form-field class="toolbar-group-select">
+                      <mat-select [compareWith]="byId" [ngModel]="loginService.groupAtual"
+                                  (ngModelChange)="onValorChange($event)">
+                          <mat-option *ngFor="let opcao of loginService.token.user.groups" [value]="opcao">
+                              {{ opcao['code'] }}-{{ opcao['name'] }}
+                          </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </span>
+                  <span>
+                      <button mat-icon-button [matMenuTriggerFor]="menu" class="toolbar-avatar">
+                      <span class="hide-on-mobile">{{ loginService.token.user.login }}</span>
+                      <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Avatar">
+                  </button>
+                  <mat-menu #menu="matMenu">
+                      <button mat-menu-item>
+                          <mat-icon>vpn_key</mat-icon>
+                          <span>Change password</span>
+                      </button>
+                      <button mat-menu-item>
+                          <mat-icon>close</mat-icon>
+                          <span>Exit</span>
+                      </button>
+                  </mat-menu>
+                  </span>
+              </div>
+          </mat-toolbar-row>
+      </mat-toolbar>
+      <main role="main">
+          <mat-drawer-container>
+              <mat-drawer #drawer mode="over">
+                  <ul>
+                      <li class="nav-item" *ngFor="let item of menu">
+                          <button mat-button  [routerLink]="[item.link]"
+                             (click)="onMenuClick(item)" *ngIf="item.link">
+                              <i class="{{item.iconeTipo}} {{item.icone}}"></i> {{ item.label }}
+                          </button>
+                          <button mat-button (click)="onMenuPaiClick(item)"
+                             *ngIf="!item.link">
+                              <i class="{{item.iconeTipo}} {{item.icone}}"></i> {{ item.label }}
+                              <i class="fas fa-angle-down " style="float:right;margin-top: 5px;"></i>
+                          </button>
+                          <ul class="nav flex-column" *ngIf="item.active">
+                              <li class="nav-item" *ngFor="let subItem of item.subItens">
+                                  <button mat-button style="padding-left: 30px;"
+                                     (click)="onSubMenuClick(item,subItem)" [routerLink]="[subItem.link]">
+                                      <i class="{{subItem.iconeTipo}} {{subItem.icone}}"></i> {{ subItem.label }}
+                                  </button>
+                              </li>
+                          </ul>
                       </li>
                   </ul>
-              </li>
-          </ul>
-      </mat-drawer>
+              </mat-drawer>
 
-      <div class="main-sidenav-content">
-          <router-outlet></router-outlet>
-      </div>
+              <div class="main-sidenav-content">
+                  <router-outlet></router-outlet>
+              </div>
 
-  </mat-drawer-container>
-</main>
+          </mat-drawer-container>
+      </main>
         \`,
   styles: [\`
             .subItem{
@@ -655,7 +658,7 @@ import { BaseEntity } from './vic-components/comum/base-entity';
     \`]
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+  title = '${project.description.title}';
   pesquisa = "";
   rota = "./principal";
 
@@ -691,6 +694,7 @@ export class AppComponent implements OnInit {
 
 
   onMenuClick(e) {
+    this.title = e.label;
     this.desativaTodos();
     e.active = true;
   }
@@ -698,6 +702,7 @@ export class AppComponent implements OnInit {
 
   onSubMenuClick(item, subItem) {
     item.subItens.forEach(i => i.active = false);
+    this.title = subItem.label;
     subItem.active = true;
   }
 
@@ -1118,8 +1123,15 @@ function geraproject_src_styles_css(project, angularPath) {
   let src = `
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 main, mat-drawer-container {
   height: 100%;
 }
@@ -1128,32 +1140,94 @@ main, mat-drawer-container {
   display: flex;
   justify-content: space-between;
 }
+
 div.toolbar-info {
   font-size: 15px;
   font-weight: 100;
-  padding: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 div.toolbar-info > span {
   padding-left: 20px;
 }
-.main-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-  margin: 10px;
-}
+
 .main-sidenav-content {
   display: flex;
   flex-direction: column;
 }
+
+button.toolbar-avatar {
+  width: 100%;
+  height: 100%;
+  text-align: initial;
+  margin-left: 10px;
+}
+
+button.toolbar-avatar img {
+  margin: 2px;
+  padding: 2px;
+  border: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+mat-drawer-content {
+  padding: 20px;
+}
+
 table {
   width: 100%;
 }
+
+td, th {
+  width: 25%;
+}
+
+.toolbar-group-select {
+  width: 150px;
+}
+
+@media screen and (max-width: 600px) {
+  .hide-on-mobile {
+    visibility: hidden;
+    clear: both;
+    display: none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .hide-on-tablet {
+    visibility: hidden;
+    clear: both;
+    display: none;
+  }
+}
+
+button[fixedVicButton] {
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
 }
-td, th {
-  width: 25%;
+
+.mat-drawer-inner-container {
+  min-width: 300px;
+  padding: 10px;
+}
+
+.mat-drawer-inner-container > ul {
+  list-style-type: none;
+}
+.mat-drawer-inner-container > ul button {
+  width: 100%;
+  text-align: initial;
 }
  
   `;
@@ -1698,9 +1772,6 @@ function geraprincipal_component_css(project, angularPath) {
 
 function geraprincipal_component_html(project, angularPath) {
   let src = `
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-    <h1 class="h2">Sistema ${project.description.title}</h1>
-  </div>
   
     `;
   util.escreveArquivo(`${angularPath}/src/app/vic-components/comum/principal//principal.component.html`, src, `utf8`);
@@ -1774,8 +1845,8 @@ function gerasuper_detalhes_ts(project, angularPath) {
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { SuperService } from './super-service';
-import { BaseEntity } from "./base-entity";
+import { SuperService } from '../comum/super-service';
+import { BaseEntity } from "../comum/base-entity";
 import { VicReturn } from './vic-return';
 import { AlertMessage } from '../alert-message';
 import {switchMap} from "rxjs/operators";
@@ -1886,149 +1957,142 @@ export class SuperDetalhesComponent implements OnInit {
 
 function gerasuper_lista_ts(project, angularPath) {
   let src = `
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { SuperService } from './super-service';
-import { BaseEntity } from "./base-entity";
-import { VicReturn } from './vic-return';
-import { AlertMessage } from '../alert-message';
+import {OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SuperService} from './super-service';
+import {VicReturn} from './vic-return';
+import {AlertMessage} from '../alert-message';
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 
 export class SuperListaComponent implements OnInit {
 
-    pesquisa = "";
-    //erro = undefined;
-    resposta: VicReturn = new VicReturn();
-    colunas = [{ active: true, comparisonOperator: "EQUAL", field: "id", label: "ID", pedacos: ["id"] }];
-    consulta = { hql: "obj.id > '_pesquisa' ", orderBy: "id" };
-    msg: AlertMessage;
+  pesquisa = "";
+  resposta: VicReturn = new VicReturn();
+  observable: Observable<VicReturn>;
+  colunas = [{active: true, comparisonOperator: "EQUAL", field: "id", label: "ID", pedacos: ["id"]}];
+  consulta = {hql: "obj.id > '_pesquisa' ", orderBy: "id"};
+  msg: AlertMessage;
 
-    constructor(protected service: SuperService, protected router: Router, protected route: ActivatedRoute) {
-        this.msg = new AlertMessage();
+  constructor(protected service: SuperService, protected router: Router, protected route: ActivatedRoute) {
+    this.msg = new AlertMessage();
+  }
+
+  ngOnInit() {
+    this.pesquisar();
+  }
+
+  selecionouDescelecionouColuna(coluna) {
+    this.pesquisar();
+  }
+
+  verificaEnter(evento) {
+    if (evento.keyCode === 13) {
+      this.pesquisar();
     }
+  }
 
-    ngOnInit() {
-        this.pesquisar();
-    }
+  goDetalhes(id: string) {
+    this.router.navigate(['detalhes', id], {relativeTo: this.route});
+  }
 
-    selecionouDescelecionouColuna(coluna) {
-        this.pesquisar();
-    }
+  novo() {
+    this.router.navigate(['detalhes', 'new'], {relativeTo: this.route});
+  }
 
-    verificaEnter(evento) {
-        if (evento.keyCode === 13) {
-            this.pesquisar();
+  criaConsulta() {
+    let q = {
+      query: {
+        logicalOperator: "OR",
+        subQuerys: [],
+        joins: [],
+
+      },
+      firstResult: 0,
+      maxResults: 10,
+      orderBy: "id"
+    };
+    q.orderBy = this.colunas[0].field;
+    this.colunas.forEach(coluna => {
+      if (coluna.active) {
+        let f = "";
+        let t = coluna.pedacos.length;
+        if (coluna.pedacos.length === 1) {
+          f = "obj." + coluna.pedacos[0];
+        } else {
+          f = coluna.pedacos[t - 2] + '.' + coluna.pedacos[t - 1];
         }
-    }
-
-    goDetalhes(id: string) {
-        this.router.navigate(['detalhes', id], { relativeTo: this.route });
-    }
-
-    novo() {
-        this.router.navigate(['detalhes', 'new'], { relativeTo: this.route });
-    }
-
-    criaConsulta() {
-        let q = {
-            query: {
-                logicalOperator: "OR",
-                subQuerys: [],
-                joins: [],
-
-            },
-            firstResult: 0,
-            quantity: 20,
-            orderBy: "id"
-        };
-        q.orderBy = this.colunas[0].field;
-        this.colunas.forEach(coluna => {
-            if (coluna.active) {
-                let f = "";
-                let t = coluna.pedacos.length;
-                if (coluna.pedacos.length === 1) {
-                    f = "obj." + coluna.pedacos[0];
-                }
-                else {
-                    f = coluna.pedacos[t - 2] + '.' + coluna.pedacos[t - 1];
-                }
-                q.query.subQuerys.push({ criteria: { comparisonOperator: coluna.comparisonOperator, field: f, value: this.pesquisa } });
-
-                if (t > 1) {
-                    let tt = "obj";
-                    for (let i = 0; i < t - 1; i++) {
-                        tt += "." + coluna.pedacos[i];
-                    }
-                    tt += " " + coluna.pedacos[t - 2];
-                    let o = { type: 'LEFT', table: tt };
-
-                    if (q.query.joins.findIndex(j => j.type === o.type && j.table === o.table) < 0) {
-                        q.query.joins.push(o);
-                    }
-                }
-
-            }
+        q.query.subQuerys.push({
+          criteria: {
+            comparisonOperator: coluna.comparisonOperator,
+            field: f,
+            value: this.pesquisa
+          }
         });
-        return q;
-    }
 
-    pesquisar() {
-        let consulta = this.criaConsulta();
-        this.service.vquery(consulta)
-            .then(r => {
-                this.resposta = r;
-            })
-            .catch(erro => {
-                //this.erro = erro;
-                this.msg.createErrorAlert("", erro);
-            });
-    }
+        if (t > 1) {
+          let tt = "obj";
+          for (let i = 0; i < t - 1; i++) {
+            tt += "." + coluna.pedacos[i];
+          }
+          tt += " " + coluna.pedacos[t - 2];
+          let o = {type: 'LEFT', table: tt};
 
+          if (q.query.joins.findIndex(j => j.type === o.type && j.table === o.table) < 0) {
+            q.query.joins.push(o);
+          }
+        }
 
-    carregarMais() {
-        let consulta = this.criaConsulta();
-        consulta.firstResult = this.resposta.firstResult + this.resposta.quantity;
-        this.service.vquery(consulta)
-            .then(r => {
-                this.resposta.values = this.resposta.values.concat(r.values);
-                this.resposta.firstResult = r.firstResult;
-                this.resposta.quantity = r.quantity;
-                this.resposta.hasMore = r.hasMore;
-            })
-            .catch(erro => {
-                //this.erro = erro;
-                this.msg.createErrorAlert("", erro);
-            });
-    }
+      }
+    });
+    return q;
+  }
 
+  pesquisar() {
+    let consulta = this.criaConsulta();
+    this.observable = this.service.asyncVquery(consulta)
+      .pipe(map((value: VicReturn) => {
+        value.isFilter = true;
+        return value;
+      }));
+  }
 
-
-    public isOwner(obj): boolean {
-        return obj && (obj.r.charAt(0) !== '_');
-    }
-    public commonGroup(obj): boolean {
-        return obj && (obj.r.charAt(1) !== '_');
-    }
-    public canRead(obj): boolean {
-        return obj && (obj.r.charAt(2) !== '_');
-    }
-    public canUpdate(obj): boolean {
-        return obj && (obj.r.charAt(3) !== '_');
-    }
-    public canDelete(obj): boolean {
-        return obj && (obj.r.charAt(4) !== '_');
-    }
-
-    public isNew(obj): boolean {
-        return obj.version === null;
-    }
-
-    public notNew(obj): boolean {
-        return obj.version !== null;
-    }
+  carregarMais() {
+    let consulta = this.criaConsulta();
+    consulta.firstResult = this.resposta.firstResult + this.resposta.quantity;
+    this.observable = this.service.asyncVquery(consulta)
+  }
 
 
-}
+  public isOwner(obj): boolean {
+    return obj && (obj.r.charAt(0) !== '_');
+  }
+
+  public commonGroup(obj): boolean {
+    return obj && (obj.r.charAt(1) !== '_');
+  }
+
+  public canRead(obj): boolean {
+    return obj && (obj.r.charAt(2) !== '_');
+  }
+
+  public canUpdate(obj): boolean {
+    return obj && (obj.r.charAt(3) !== '_');
+  }
+
+  public canDelete(obj): boolean {
+    return obj && (obj.r.charAt(4) !== '_');
+  }
+
+  public isNew(obj): boolean {
+    return obj.version === null;
+  }
+
+  public notNew(obj): boolean {
+    return obj.version !== null;
+  }
+}  
   
     `;
   util.escreveArquivo(`${angularPath}/src/app/vic-components/comum//super-lista.ts`, src, `utf8`);
@@ -2039,9 +2103,11 @@ export class SuperListaComponent implements OnInit {
 
 function gerasuper_service_ts(project, angularPath) {
   let src = `
-import { Http, Headers, Response } from '@angular/http';
-import { LoginService } from '../../login/login.service';
-import { Injector } from '@angular/core';
+import {Headers, Http, Response} from '@angular/http';
+import {LoginService} from '../../login/login.service';
+import {catchError, map, tap} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {VicReturn} from "./vic-return";
 
 export class SuperService {
 
@@ -2070,59 +2136,101 @@ export class SuperService {
   }
 
   add(objeto) {
-    return this.http.post(\`\${this.baseUrl}/\${this.collection}\`, objeto, { headers: this.createAuthorizationHeader() })
+    return this.http.post(\`\${this.baseUrl}/\${this.collection}\`, objeto, {headers: this.createAuthorizationHeader()})
       .toPromise().then(response => response.json())
       .catch(this.errorHandler);
   }
 
+  asyncPost(objeto): Observable<any> {
+    return this.http.post(\`\${this.baseUrl}/\${this.collection}/async\`, objeto, {headers: this.createAuthorizationHeader()})
+      .pipe(catchError(this.errorHandler), map(value => value.json()));
+  }
+
+  asyncVquery(objeto): Observable<VicReturn> {
+    return this.http.post(\`\${this.baseUrl}/\${this.collection}/async/vquery\`, objeto, {headers: this.createAuthorizationHeader()})
+      .pipe(catchError(this.errorHandler), map(value => value.json()));
+  }
+
+  asyncSingleLikeCriteriaQuery(field, pesquisa): Observable<VicReturn> {
+    let consulta = this.criaConsulta([{active: true, comparisonOperator: 'STARTS_WITH', field: field}], pesquisa);
+    consulta.maxResults = 10000;
+    return this.http.post(\`\${this.baseUrl}/\${this.collection}/vquery\`, consulta
+      , {headers: this.createAuthorizationHeader()})
+      .pipe(catchError(this.errorHandler), map(value => value.json()));
+  }
+
+  asyncGetAll(): Observable<VicReturn> {
+    return this.http.get(\`\${this.baseUrl}/\${this.collection}\`, {headers: this.createAuthorizationHeader()})
+      .pipe(catchError(this.errorHandler), map(value => value.json()));
+  }
+
+  asyncLoad(id): Observable<any> {
+    return this.http.get(\`\${this.baseUrl}/\${this.collection}/\${id}\`, {headers: this.createAuthorizationHeader()})
+      .pipe(catchError(this.errorHandler), map(value => value.json()));
+  }
+
+  asyncNewObject(): Observable<any> {
+    return this.http.get(\`\${this.baseUrl}/\${this.collection}/new\`, {headers: this.createAuthorizationHeader()})
+      .pipe(catchError(this.errorHandler), map(value => value.json()));
+  }
+
+  asyncDelete(id): Observable<any> {
+    return this.http.delete(\`\${this.baseUrl}/\${this.collection}/\${id}\`, {headers: this.createAuthorizationHeader()})
+      .pipe(catchError(this.errorHandler), map(value => value.json()));
+  }
+
+  asyncPut(objeto): Observable<any> {
+    return this.http.put(\`\${this.baseUrl}/\${this.collection}/\${objeto.id}\`, objeto, {headers: this.createAuthorizationHeader()})
+      .pipe(catchError(this.errorHandler), map(value => value.json()));
+  }
+
   vquery(objeto) {
-    return this.http.post(\`\${this.baseUrl}/\${this.collection}/vquery\`, objeto, { headers: this.createAuthorizationHeader() })
+    return this.http.post(\`\${this.baseUrl}/\${this.collection}/vquery\`, objeto, {headers: this.createAuthorizationHeader()})
       .toPromise().then(response => response.json())
       .catch(this.errorHandler);
   }
 
   singleLikeCriteriaQuery(field, pesquisa) {
-    let consulta = this.criaConsulta([{ active: true, comparisonOperator: 'STARTS_WITH', field: field }], pesquisa);
+    let consulta = this.criaConsulta([{active: true, comparisonOperator: 'STARTS_WITH', field: field}], pesquisa);
     consulta.maxResults = 10000;
     return this.http.post(\`\${this.baseUrl}/\${this.collection}/vquery\`, consulta
-      , { headers: this.createAuthorizationHeader() })
+      , {headers: this.createAuthorizationHeader()})
       .toPromise().then(response => response.json())
       .catch(this.errorHandler);
   }
 
-
   getAll(): Promise<any> {
-    return this.http.get(\`\${this.baseUrl}/\${this.collection}\`, { headers: this.createAuthorizationHeader() })
+    return this.http.get(\`\${this.baseUrl}/\${this.collection}\`, {headers: this.createAuthorizationHeader()})
       .toPromise().then(response => response.json())
       .catch(this.errorHandler);
   }
 
   getOne(id): Promise<any> {
-    return this.http.get(\`\${this.baseUrl}/\${this.collection}/\${id}\`, { headers: this.createAuthorizationHeader() })
+    return this.http.get(\`\${this.baseUrl}/\${this.collection}/\${id}\`, {headers: this.createAuthorizationHeader()})
       .toPromise().then(response => response.json())
       .catch(this.errorHandler);
   }
 
   newObject(): Promise<any> {
-    return this.http.get(\`\${this.baseUrl}/\${this.collection}/new\`, { headers: this.createAuthorizationHeader() })
+    return this.http.get(\`\${this.baseUrl}/\${this.collection}/new\`, {headers: this.createAuthorizationHeader()})
       .toPromise().then(response => response.json())
       .catch(this.errorHandler);
   }
 
   remove(id) {
-    return this.http.delete(\`\${this.baseUrl}/\${this.collection}/\${id}\`, { headers: this.createAuthorizationHeader() })
+    return this.http.delete(\`\${this.baseUrl}/\${this.collection}/\${id}\`, {headers: this.createAuthorizationHeader()})
       .toPromise().then(response => response.json())
       .catch(this.errorHandler);
   }
 
   update(objeto) {
-    return this.http.put(\`\${this.baseUrl}/\${this.collection}/\${objeto.id}\`, objeto, { headers: this.createAuthorizationHeader() })
+    return this.http.put(\`\${this.baseUrl}/\${this.collection}/\${objeto.id}\`, objeto, {headers: this.createAuthorizationHeader()})
       .toPromise().then(response => response.json())
       .catch(this.errorHandler);
   }
 
   save(objeto) {
-    return this.http.post(\`\${this.baseUrl}/\${this.collection}\`, objeto, { headers: this.createAuthorizationHeader() })
+    return this.http.post(\`\${this.baseUrl}/\${this.collection}\`, objeto, {headers: this.createAuthorizationHeader()})
       .toPromise().then(response => response.json())
       .catch(this.errorHandler);
   }
@@ -2135,12 +2243,18 @@ export class SuperService {
         joins: [],
       },
       orderBy: "id",
-      maxResults: 20
+      maxResults: 10
     };
     q.orderBy = colunas[0].field;
     colunas.forEach(coluna => {
       if (coluna.active) {
-        q.query.subQuerys.push({ criteria: { comparisonOperator: coluna.comparisonOperator, field: coluna.field, value: pesquisa } });
+        q.query.subQuerys.push({
+          criteria: {
+            comparisonOperator: coluna.comparisonOperator,
+            field: coluna.field,
+            value: pesquisa
+          }
+        });
       }
     });
     return q;
@@ -2149,8 +2263,7 @@ export class SuperService {
   drawsvglink(objeto) {
     return \`\${this.baseUrl}/\${this.collection}/draw/\${objeto.id}\`;
   }
-}
-  
+}  
     `;
   util.escreveArquivo(`${angularPath}/src/app/vic-components/comum//super-service.ts`, src, `utf8`);
 }
@@ -2160,22 +2273,41 @@ export class SuperService {
 
 function geravic_return_ts(project, angularPath) {
   let src = `
-import { BaseEntity } from "./base-entity";
-
+import {BaseEntity} from "./base-entity";
 
 export class VicReturn {
 
-    values: BaseEntity[];
-    quantity: number;
-    firstResult: number;
-    hasMore: boolean;
+  values: BaseEntity[];
+  quantity: number;
+  firstResult: number;
+  hasMore: boolean;
+  isFilter:boolean;
 
-    constructor(b: BaseEntity[] = []) {
-        this.values = b;
-        this.quantity = b.length;
-        this.firstResult = 0;
-        this.hasMore = false;
+  constructor(b: BaseEntity[] = []) {
+    this.values = b;
+    this.quantity = b.length;
+    this.firstResult = 0;
+    this.hasMore = false;
+    this.isFilter = false;
+  }
+
+  concat(another: VicReturn) {
+    if (another && another.hasMore) {
+      this.values = this.values.concat(another.values);
+      this.quantity = this.quantity + another.quantity;
+      this.hasMore = another.hasMore;
+      this.isFilter = false;
     }
+    return this;
+  }
+  update(another: VicReturn) {
+    this.quantity = another.quantity;
+    this.values = another.values;
+    this.hasMore = another.hasMore;
+    this.isFilter = true;
+    this.firstResult = another.firstResult;
+    return this;
+  }
 }
     `;
   util.escreveArquivo(`${angularPath}/src/app/vic-components/comum//vic-return.ts`, src, `utf8`);
@@ -2307,30 +2439,37 @@ export class ExcluirAtributosSistemaPipe implements PipeTransform {
 
 function geravic_components_module_ts(project, angularPath) {
   let src = `
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
-import { VicTabelaComponent } from './vic-tabela/vic-tabela.component';
-import { VicSystemFieldsComponent } from './vic-system-fields/vic-system-fields.component';
-import { VicManyToOneComponent } from './vic-many-to-one/vic-many-to-one.component';
-import { VicManyToManyComponent } from './vic-many-to-many/vic-many-to-many.component';
-import { ExcluirAtributosSistemaPipe } from './excluir-atributos-sistema.pipe';
-import { VicOneToManyComponent } from './vic-one-to-many/vic-one-to-many.component';
-import { BrowserModule } from '@angular/platform-browser';
-
-
-@NgModule({
-  imports: [
-    CommonModule,FormsModule,
-    BrowserModule,    
-    ReactiveFormsModule 
-
-  ],
-  declarations: [VicTabelaComponent, VicSystemFieldsComponent, VicManyToOneComponent, VicManyToManyComponent, ExcluirAtributosSistemaPipe, VicOneToManyComponent],
-  exports:[VicTabelaComponent,VicSystemFieldsComponent,VicManyToOneComponent, VicManyToManyComponent, ExcluirAtributosSistemaPipe, VicOneToManyComponent]
-
-})
-export class VicComponentsModule { }
+  import { NgModule } from '@angular/core';
+  import { CommonModule } from '@angular/common';
+  import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+  import { VicTabelaComponent } from './vic-tabela/vic-tabela.component';
+  import { VicSystemFieldsComponent } from './vic-system-fields/vic-system-fields.component';
+  import { VicManyToOneComponent } from './vic-many-to-one/vic-many-to-one.component';
+  import { VicManyToManyComponent } from './vic-many-to-many/vic-many-to-many.component';
+  import { ExcluirAtributosSistemaPipe } from './excluir-atributos-sistema.pipe';
+  import { VicOneToManyComponent } from './vic-one-to-many/vic-one-to-many.component';
+  import { BrowserModule } from '@angular/platform-browser';
+  import {
+    MatButtonModule,
+    MatFormFieldModule, MatGridListModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatTableModule, MatTooltipModule
+  } from "@angular/material";
+  
+  
+  @NgModule({
+    imports: [
+      CommonModule, FormsModule,
+      BrowserModule,
+      ReactiveFormsModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatGridListModule, MatTooltipModule
+  
+    ],
+    declarations: [VicTabelaComponent, VicSystemFieldsComponent, VicManyToOneComponent, VicManyToManyComponent, ExcluirAtributosSistemaPipe, VicOneToManyComponent],
+    exports:[VicTabelaComponent,VicSystemFieldsComponent,VicManyToOneComponent, VicManyToManyComponent, ExcluirAtributosSistemaPipe, VicOneToManyComponent]
+  
+  })
+  export class VicComponentsModule { }  
   
     `;
   util.escreveArquivo(`${angularPath}/src/app/vic-components//vic-components.module.ts`, src, `utf8`);
@@ -2638,63 +2777,114 @@ export class VicManyToOneComponent implements OnInit {
 
 function gerasuper_detalhe_om_component_ts(project, angularPath) {
   let src = `
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SuperService } from '../../vic-components/comum/super-service';
-import { BaseEntity } from '../../vic-components/comum/base-entity';
-import { VicReturn } from '../../vic-components/comum/vic-return';
+import {OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {SuperService} from '../comum/super-service';
+import {BaseEntity} from "../comum/base-entity";
+import {AlertMessage} from '../alert-message';
+import {switchMap} from "rxjs/operators";
 
 
-export class SuperDetalhesOmComponent implements OnInit {
+export class SuperDetalhesComponent implements OnInit {
 
-    protected service: SuperService;
+  selecionado: BaseEntity;
+  erro = undefined;
+  msg: AlertMessage;
+  drawsvg: string;
 
-    public selecionado: BaseEntity;
-
-    public setEditando = function (b: boolean) {
-        console.log("original" + b);
-    }
-
-    erro = undefined;
-
-    constructor(service: SuperService) {
-        this.service = service;
-    }
-
-    ngOnInit(): void {
-    }
+  constructor(protected service: SuperService, protected router: Router, protected route: ActivatedRoute) {
+    this.msg = new AlertMessage();
+  }
 
 
-    salvar() {
-        this.service.update(this.selecionado)
-            .then(salvo => {
-                this.selecionado = salvo;
-                this.setEditando(false);
-            })
-            .catch(erro => {
-                this.erro = erro;
-            });
-    }
+  ngOnInit() {
 
-    cancelar() {
-        this.setEditando(false);
+    this.route.params
+      .pipe(switchMap((params: Params) => this.service.getOne(params['id'])))
+      .subscribe((objeto) => {
+        this.beforeSelect(objeto);
+        this.selecionado = objeto;
+        this.initForm();
+        this.drawsvg = this.service.drawsvglink(objeto);
+      });
+  }
 
-    }
+  initForm() {
+  }
 
-    excluir() {
-        this.service.remove(this.selecionado.id)
-            .then(obj => {
-                this.selecionado = obj;
-                this.setEditando(false);
-            })
-            .catch(erro => {
-                erro = { message: "Impossível Excluir", description: "Este registro está sendo usado" }
-                console.log(erro);
-                this.erro = erro;
-            });
-    }
-}
-  
-  
+  beforeSelect(obj: BaseEntity) {
+
+  }
+
+
+  salvar() {
+    this.service.update(this.selecionado)
+      .then(salvo => {
+        this.selecionado = salvo;
+        this.router.navigate(['../..'], {relativeTo: this.route});
+      })
+      .catch(erro => {
+        this.erro = erro;
+      });
+  }
+
+  salvarImediatamente() {
+    this.service.update(this.selecionado)
+      .then(salvo => {
+        this.selecionado = salvo;
+      })
+      .catch(erro => {
+        this.erro = erro;
+      });
+  }
+
+
+  cancelar() {
+    this.router.navigate(['../..'], {relativeTo: this.route});
+  }
+
+  excluir() {
+    this.service.remove(this.selecionado.id)
+      .then(obj => {
+        this.selecionado = obj;
+        this.router.navigate(['../..'], {relativeTo: this.route});
+      })
+      .catch(erro => {
+        //erro = { message: "Impossível Excluir", description: "Este registro está sendo usado" }
+        //console.log(erro);
+        //this.erro = erro;
+        this.msg.createErrorAlert("Impossível Excluir", "Este registro está sendo usado");
+      });
+  }
+
+  public isOwner(obj): boolean {
+    return obj && (obj.r.charAt(0) !== '_');
+  }
+
+  public commonGroup(obj): boolean {
+    return obj && (obj.r.charAt(1) !== '_');
+  }
+
+  public canRead(obj): boolean {
+    return obj && (obj.r.charAt(2) !== '_');
+  }
+
+  public canUpdate(obj): boolean {
+    return obj && (obj.r.charAt(3) !== '_');
+  }
+
+  public canDelete(obj): boolean {
+    return obj && (obj.r.charAt(4) !== '_');
+  }
+
+  public isNew(obj): boolean {
+    return obj && obj.version === null;
+  }
+
+  public notNew(obj): boolean {
+    return obj && obj.version !== null;
+  }
+}  
     `;
   util.escreveArquivo(`${angularPath}/src/app/vic-components/vic-one-to-many//super-detalhe-om.component.ts`, src, `utf8`);
 }
@@ -2951,32 +3141,26 @@ function geravic_tabela_component_css(project, angularPath) {
 
 function geravic_tabela_component_html(project, angularPath) {
   let src = `
-  <div class="table-responsive">
-    <span *ngIf="selecionaColunas">
-      <span *ngFor="let coluna of colunas"  style="padding-right: 10px;">
-        <input type="checkbox" name="tt" [(ngModel)]="coluna.active" (change)="mudouColuna(coluna)" style="margin-right: 5px">{{coluna.label}}
-      </span>
-    </span>
-    <table class="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th *ngIf="todasApagadas()">
-            Selecione uma coluna.
-          </th>
-          <th *ngFor="let coluna of colunasAtivas()">{{coluna.label}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let dado of dados.values">
-          <td (click)="onClick(dado.id)" *ngFor="let coluna of colunasAtivas()">{{resolve(dado,coluna.field)}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <span class="navbar-brand">
-      <span class="form-control" *ngIf="dados.hasMore" (click)="carregaMais()"> Carregar mais registros</span>
-    </span>
-  
-  </div>
+  <div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- Name Column -->
+    <ng-container *ngFor="let coluna of colunas" [matColumnDef]="coluna.field">
+      <th mat-header-cell *matHeaderCellDef> {{coluna.field}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[coluna.field]}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onClick(row.id)"></tr>
+  </table>
+<!--  <mat-paginator [pageSizeOptions]="[10]" [length]="dados.hasMore ? (dados.quantity + 1) : dados.quantity" (page)="carregaMais()"></mat-paginator>-->
+</div>
+<mat-grid-list cols="1" rowHeight="100px">
+  <mat-grid-tile>
+    <button *ngIf="dados.hasMore" (click)="carregaMais()" matTooltip="Show more data" color="primary" mat-fab aria-label="Show more data">
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+  </mat-grid-tile>
+</mat-grid-list>
     `;
   util.escreveArquivo(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.html`, src, `utf8`);
 }
@@ -3021,90 +3205,119 @@ describe('VicTabelaComponent', () => {
 
 function geravic_tabela_component_ts(project, angularPath) {
   let src = `
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { VicReturn } from '../../vic-components/comum/vic-return';
-import { BaseEntity } from '../../vic-components/comum/base-entity';
-
-@Component({
-  selector: 'vic-tabela',
-  templateUrl: './vic-tabela.component.html',
-  styleUrls: ['./vic-tabela.component.css']
-})
-export class VicTabelaComponent implements OnInit {
-
-  @Input() dados: VicReturn = new VicReturn();
-  @Input() colunas: any[];
-  @Input() selecionaColunas: boolean = true;
-  @Output() acao: EventEmitter<any> = new EventEmitter();
-  @Output() colunaMudou: EventEmitter<any> = new EventEmitter();
-  @Output() carregarMais: EventEmitter<any> = new EventEmitter();
-
-  constructor() { }
-
-
-  ngOnInit(): void {
-
-  }
-
-  colunasAtivas() {
-    return this.colunas.filter(c => c.active);
-  }
-
-  onClick(id: string) {
-    this.acao.emit(id);
-  }
-
-  resolve(obj, coluna: string) {
-
-    let partes = coluna.split(".");
-    let o = obj[partes[0]];
-    for (let i = 1; i < partes.length; i++) {
-      if (o === null) {
-        return null;
-      }
-      if (o === undefined) {
-        return undefined;
-      }
-      o = o[partes[i]];
+  import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+  import {VicReturn} from '../../vic-components/comum/vic-return';
+  import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
+  import {Observable} from "rxjs";
+  
+  @Component({
+    selector: 'vic-tabela',
+    templateUrl: './vic-tabela.component.html',
+    styleUrls: ['./vic-tabela.component.css']
+  })
+  export class VicTabelaComponent implements OnInit, OnChanges {
+  
+    @Input() observable: Observable<VicReturn>;
+    @Input() dados: VicReturn = new VicReturn();
+    @Input() colunas: any[];
+    @Input() selecionaColunas: boolean = true;
+    @Output() acao: EventEmitter<any> = new EventEmitter();
+    @Output() colunaMudou: EventEmitter<any> = new EventEmitter();
+    @Output() carregarMais: EventEmitter<any> = new EventEmitter();
+    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
+  
+    displayedColumns: string[] = [];
+    dataSource = new MatTableDataSource(this.dados.values);
+  
+    applyFilter(filterValue: string) {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
     }
-    return o;
-  }
-
-  todasApagadas() {
-    return !this.colunas.some(r => r.active);
-  }
-
-  carregaMais() {
-    this.carregarMais.emit();
-  }
-
-  mudouColuna(coluna) {
-    this.colunaMudou.emit(coluna);
-  }
-  public isOwner(obj): boolean {
-    return obj && (obj.r.charAt(0) !== '_');
-  }
-  public commonGroup(obj): boolean {
-    return obj && (obj.r.charAt(1) !== '_');
-  }
-  public canRead(obj): boolean {
-    return obj && (obj.r.charAt(2) !== '_');
-  }
-  public canUpdate(obj): boolean {
-    return obj && (obj.r.charAt(3) !== '_');
-  }
-  public canDelete(obj): boolean {
-    return obj && (obj.r.charAt(4) !== '_');
-  }
-
-  public isNew(obj): boolean {
-    return obj.version === null;
-  }
-
-  public notNew(obj): boolean {
-    return obj.version !== null;
-  }
-}
+  
+    constructor() {
+    }
+  
+    ngOnChanges(changes: SimpleChanges) {
+      this.observable.subscribe((data: VicReturn) => {
+        console.log(this.dados, data)
+        if (data.isFilter)
+          this.dados.update(data);
+        else
+          this.dados.concat(data);
+        this.displayedColumns = this.colunas.map(c => c.field);
+        this.dataSource = new MatTableDataSource(this.dados.values);
+      });
+    }
+  
+    ngOnInit(): void {
+  
+    }
+  
+    colunasAtivas() {
+      return this.colunas.filter(c => c.active);
+    }
+  
+    onClick(id: string) {
+      this.acao.emit(id);
+    }
+  
+    resolve(obj, coluna: string) {
+  
+      let partes = coluna.split(".");
+      let o = obj[partes[0]];
+      for (let i = 1; i < partes.length; i++) {
+        if (o === null) {
+          return null;
+        }
+        if (o === undefined) {
+          return undefined;
+        }
+        o = o[partes[i]];
+      }
+      return o;
+    }
+  
+    todasApagadas() {
+      return !this.colunas.some(r => r.active);
+    }
+  
+    carregaMais() {
+      this.carregarMais.emit();
+      this.dataSource.data = this.dados.values;
+    }
+  
+    mudouColuna(coluna) {
+      this.colunaMudou.emit(coluna);
+    }
+  
+    public isOwner(obj): boolean {
+      return obj && (obj.r.charAt(0) !== '_');
+    }
+  
+    public commonGroup(obj): boolean {
+      return obj && (obj.r.charAt(1) !== '_');
+    }
+  
+    public canRead(obj): boolean {
+      return obj && (obj.r.charAt(2) !== '_');
+    }
+  
+    public canUpdate(obj): boolean {
+      return obj && (obj.r.charAt(3) !== '_');
+    }
+  
+    public canDelete(obj): boolean {
+      return obj && (obj.r.charAt(4) !== '_');
+    }
+  
+    public isNew(obj): boolean {
+      return obj.version === null;
+    }
+  
+    public notNew(obj): boolean {
+      return obj.version !== null;
+    }
+  }  
   
     `;
   util.escreveArquivo(`${angularPath}/src/app/vic-components/vic-tabela//vic-tabela.component.ts`, src, `utf8`);
@@ -3381,9 +3594,6 @@ function gera_user_crud_crud_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-    <h1 class="h2">Usuario</h1>
-  </div>
   <router-outlet></router-outlet>
     `;
   util.escreveArquivo(`${angularPath}/src/app/user/crud//crud.component.html`, src, `utf8`);
@@ -3613,21 +3823,18 @@ function gera_user_lista_lista_component_html(project, angularPath) {
 <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
 <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
 <h2>Lista {{resposta.quantity}} </h2>
-<div class="row padding-bottom-20">
-    <div class="col-sm-6">
-        <input type="text" id="inPesquisa" name="pesquisa" placeholder="Pesquisa" class="form-control" [(ngModel)]="pesquisa" (keypress)="verificaEnter(\$event)"/>
-    </div>
-    <div class="col-sm-3" >
-        <button type="button" class="btn btn-info" (click)="pesquisar()">
-            <i class="fas fa-search"></i> Pesquisar </button>
-    </div>
-
-    <div class="col-sm-3 text-right">
-        <button type="button" class="btn btn-success" (click)="novo()">
-            <i class="far fa-file"></i> Novo</button>
-    </div>
-</div>
-<vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)"></vic-tabela>
+<mat-grid-list cols="1" rowHeight="100px">
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput [(ngModel)]="pesquisa" (keypress)="verificaEnter($event)" placeholder="Search">
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+<vic-tabela [(dados)]="resposta" [(observable)]="observable" (carregarMais)="carregarMais()" [colunas]="colunas"
+            (acao)="goDetalhes(\$event)"></vic-tabela>
+<button fixedVicButton matTooltip="New" color="primary" mat-fab aria-label="New" (click)="novo()">
+  <mat-icon>add</mat-icon>
+</button>
     `;
   util.escreveArquivo(`${angularPath}/src/app/user/lista//lista.component.html`, src, `utf8`);
 }
@@ -3721,6 +3928,7 @@ import { CrudComponent } from './crud/crud.component';
 import { ListaComponent } from './lista/lista.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { BrowserModule } from '@angular/platform-browser';
+import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTooltipModule} from "@angular/material";
 
 /*IMPORTS*/
 
@@ -3731,7 +3939,8 @@ import { BrowserModule } from '@angular/platform-browser';
     UsuarioRoutingModule,
     VicComponentsModule,
     BrowserModule,    
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule
   ],
   declarations: [
 /*DECLARATIONS*/
@@ -3788,9 +3997,6 @@ function gera_group_crud_crud_component_html(project, angularPath) {
   let src = `
 <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
 <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-  <h1 class="h2">Grupo</h1>
-</div>
 <router-outlet></router-outlet>
     `;
   util.escreveArquivo(`${angularPath}/src/app/group/crud//crud.component.html`, src, `utf8`);
@@ -3971,6 +4177,8 @@ import { GrupoRoutingModule } from './group-routing.module';
 import { CrudComponent } from './crud/crud.component';
 import { ListaComponent } from './lista/lista.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
+import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTooltipModule} from "@angular/material";
+
 
 /*IMPORTS*/
 
@@ -3979,7 +4187,8 @@ import { DetalhesComponent } from './detalhes/detalhes.component';
     CommonModule,
     FormsModule, OwlDateTimeModule, OwlNativeDateTimeModule,
     GrupoRoutingModule,
-    VicComponentsModule
+    VicComponentsModule,
+    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule
   ],
   declarations: [
 /*DECLARATIONS*/
@@ -4041,21 +4250,18 @@ function gera_group_lista_lista_component_html(project, angularPath) {
 <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
 <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
 <h2>Lista {{resposta.quantity}} </h2>
-<div class="row padding-bottom-20">
-    <div class="col-sm-6">
-        <input type="text" id="inPesquisa" name="pesquisa" placeholder="Pesquisa" class="form-control" [(ngModel)]="pesquisa" (keypress)="verificaEnter(\$event)"/>
-    </div>
-    <div class="col-sm-3" >
-        <button type="button" class="btn btn-info" (click)="pesquisar()">
-            <i class="fas fa-search"></i> Pesquisar </button>
-    </div>
-
-    <div class="col-sm-3 text-right">
-        <button type="button" class="btn btn-success" (click)="novo()">
-            <i class="far fa-file"></i> Novo</button>
-    </div>
-</div>
-<vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)"></vic-tabela>
+<mat-grid-list cols="1" rowHeight="100px">
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput [(ngModel)]="pesquisa" (keypress)="verificaEnter($event)" placeholder="Search">
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+<vic-tabela [(dados)]="resposta" [(observable)]="observable" (carregarMais)="carregarMais()" [colunas]="colunas"
+            (acao)="goDetalhes(\$event)"></vic-tabela>
+<button fixedVicButton matTooltip="New" color="primary" mat-fab aria-label="New" (click)="novo()">
+  <mat-icon>add</mat-icon>
+</button>
     `;
   util.escreveArquivo(`${angularPath}/src/app/group/lista//lista.component.html`, src, `utf8`);
 }
@@ -4115,9 +4321,6 @@ function gera_organization_crud_crud_component_html(project, angularPath) {
   let src = `
 <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
 <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-  <h1 class="h2">Organizacao</h1>
-</div>
 <router-outlet></router-outlet>
     `;
   util.escreveArquivo(`${angularPath}/src/app/organization/crud//crud.component.html`, src, `utf8`);
@@ -4333,21 +4536,18 @@ function gera_organization_lista_lista_component_html(project, angularPath) {
 <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
 <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
 <h2>Lista {{resposta.quantity}} </h2>
-<div class="row padding-bottom-20">
-    <div class="col-sm-6">
-        <input type="text" id="inPesquisa" name="pesquisa" placeholder="Pesquisa" class="form-control" [(ngModel)]="pesquisa" (keypress)="verificaEnter(\$event)"/>
-    </div>
-    <div class="col-sm-3" >
-        <button type="button" class="btn btn-info" (click)="pesquisar()">
-            <i class="fas fa-search"></i> Pesquisar </button>
-    </div>
-
-    <div class="col-sm-3 text-right">
-        <button type="button" class="btn btn-success" (click)="novo()">
-            <i class="far fa-file"></i> Novo</button>
-    </div>
-</div>
-<vic-tabela [(dados)]="resposta" [colunas]="colunas" (acao)="goDetalhes(\$event)"></vic-tabela>
+<mat-grid-list cols="1" rowHeight="100px">
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput [(ngModel)]="pesquisa" (keypress)="verificaEnter($event)" placeholder="Search">
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+<vic-tabela [(dados)]="resposta" [(observable)]="observable" (carregarMais)="carregarMais()" [colunas]="colunas"
+            (acao)="goDetalhes(\$event)"></vic-tabela>
+<button fixedVicButton matTooltip="New" color="primary" mat-fab aria-label="New" (click)="novo()">
+  <mat-icon>add</mat-icon>
+</button>
     `;
   util.escreveArquivo(`${angularPath}/src/app/organization/lista//lista.component.html`, src, `utf8`);
 }
@@ -4440,6 +4640,7 @@ import { CrudComponent } from './crud/crud.component';
 import { ListaComponent } from './lista/lista.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { BrowserModule } from '@angular/platform-browser';
+import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTooltipModule} from "@angular/material";
 
 /*IMPORTS*/
 
@@ -4450,7 +4651,8 @@ import { BrowserModule } from '@angular/platform-browser';
     OrganizacaoRoutingModule,
     VicComponentsModule,
     BrowserModule,    
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule
   ],
   declarations: [
 /*DECLARATIONS*/
@@ -4541,9 +4743,6 @@ function gera_entidade_crud_crud_component_html(project, entityName, entityData,
   let src = `
 <!-- Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 -->
 <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-  <h1 class="h2">${entityName}</h1>
-</div>
 <router-outlet></router-outlet>
     `;
   util.escreveArquivo(`${angularPath}/src/app//${entityName}/crud//crud.component.html`, src, `utf8`);
@@ -4743,24 +4942,21 @@ function gera_entidade_lista_lista_component_css(project, entityName, entityData
 
 function gera_entidade_lista_lista_component_html(project, entityName, entityData, angularPath) {
   let src = `
-  <!--Arquivo gerado utilizando VICGERADOR por anderson as 21 / 03 / 2018 10: 45: 24 -->
-  <!--Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE, pode ser essa mesmo-->
-  <h2>Lista {{ resposta.quantity }} </h2>
-  <div class="row padding-bottom-20">
-    <div class="col-sm-6">
-      <input type="text" id="inPesquisa" name="pesquisa" placeholder="Pesquisa" class="form-control" [(ngModel)]="pesquisa" (keypress)="verificaEnter(\$event)"/>
-      </div>
-    <div class="col-sm-3" >
-      <button type="button" class="btn btn-info" (click)="pesquisar()">
-              <i class="fas fa-search"></i> Pesquisar </button>
-  </div>
-
-  <div class="col-sm-3 text-right">
-    <button type="button" class="btn btn-success" (click)="novo()">
-              <i class="far fa-file"></i> Novo</button>
-      </div >
-  </div >
-  <vic-tabela [(dados)] = "resposta"[colunas] = "colunas"(acao) = "goDetalhes(\$event)"(carregarMais) = "carregarMais()" ></vic-tabela>
+<!--Arquivo gerado utilizando VICGERADOR por anderson as 21 / 03 / 2018 10: 45: 24 -->
+<!--Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE, pode ser essa mesmo-->
+<h2>Lista {{resposta.quantity}} </h2>
+<mat-grid-list cols="1" rowHeight="100px">
+  <mat-grid-tile>
+    <mat-form-field>
+      <input matInput [(ngModel)]="pesquisa" (keypress)="verificaEnter($event)" placeholder="Search">
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+<vic-tabela [(dados)]="resposta" [(observable)]="observable" (carregarMais)="carregarMais()" [colunas]="colunas"
+            (acao)="goDetalhes(\$event)"></vic-tabela>
+<button fixedVicButton matTooltip="New" color="primary" mat-fab aria-label="New" (click)="novo()">
+  <mat-icon>add</mat-icon>
+</button>
     `;
   util.escreveArquivo(`${angularPath}/src/app/${entityName}/lista/lista.component.html`, src, `utf8`);
 }
@@ -4849,8 +5045,9 @@ import { ${util.primeiraMaiuscula(entityName)}RoutingModule } from './${entityNa
 import { CrudComponent } from './crud/crud.component';
 import { ListaComponent } from './lista/lista.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
-import { BrowserModule } from '@angular/platform-browser'
-;
+import { BrowserModule } from '@angular/platform-browser';
+import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTooltipModule} from "@angular/material";
+
 /*IMPORTS*/
 
 @NgModule({
@@ -4860,7 +5057,8 @@ import { BrowserModule } from '@angular/platform-browser'
     ${util.primeiraMaiuscula(entityName)}RoutingModule,
     VicComponentsModule,
     BrowserModule,    
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule
   ],
   declarations: [
 /*DECLARATIONS*/
