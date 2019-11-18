@@ -195,23 +195,23 @@ function geraServices(project, path) {
 
 function geraService(project, p, e, data, path) {
     let src = `package ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.service;
-    /* Arquivo gerado utilizando VICGERADOR por munif */
-    /* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
+/* Arquivo gerado utilizando VICGERADOR por munif */
+/* Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo */
+
+import br.com.munif.framework.vicente.application.BaseService;
+import br.com.munif.framework.vicente.application.VicRepository;
+import ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${util.primeiraMaiuscula (e)}` : `${p}.${util.primeiraMaiuscula (e)}`};
+import org.springframework.stereotype.Service;
+
+
+@Service
+public class ${util.primeiraMaiuscula (e)}Service extends BaseService<${util.primeiraMaiuscula (e)}>{
     
-    import br.com.munif.framework.vicente.application.BaseService;
-    import br.com.munif.framework.vicente.application.VicRepository;
-    import ${util.pacotePrincipal(project)}.projects.${project.description.title.toLowerCase()}backend.domain.${p === 'mainPackage' ? `${util.primeiraMaiuscula (e)}` : `${p}.${util.primeiraMaiuscula (e)}`};
-    import org.springframework.stereotype.Service;
-    
-    
-    @Service
-    public class ${util.primeiraMaiuscula (e)}Service extends BaseService<${util.primeiraMaiuscula (e)}>{
-        
-        public ${util.primeiraMaiuscula (e)}Service(VicRepository<${util.primeiraMaiuscula (e)}> repository) {
-            super(repository);
-        }
-        
+    public ${util.primeiraMaiuscula (e)}Service(VicRepository<${util.primeiraMaiuscula (e)}> repository) {
+        super(repository);
     }
+    
+}
     `
 
     util.escreveArquivo(`${path}/service/${util.primeiraMaiuscula (e)}Service.java`, src, `utf8`);
