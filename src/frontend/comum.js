@@ -303,7 +303,6 @@ function geraproject_angular_json(project, angularPath) {
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -608,7 +607,7 @@ import { BaseEntity } from './vic-components/comum/base-entity';
                           <mat-icon>vpn_key</mat-icon>
                           <span>Change password</span>
                       </button>
-                      <button mat-menu-item>
+                      <button mat-menu-item (click)="sair()">
                           <mat-icon>close</mat-icon>
                           <span>Exit</span>
                       </button>
@@ -633,7 +632,7 @@ import { BaseEntity } from './vic-components/comum/base-entity';
                           </button>
                           <ul class="nav flex-column" *ngIf="item.active">
                               <li class="nav-item" *ngFor="let subItem of item.subItens">
-                                  <button mat-button style="padding-left: 30px;"
+                                  <button mat-button
                                      (click)="onSubMenuClick(item,subItem)" [routerLink]="[subItem.link]">
                                       <i class="{{subItem.iconeTipo}} {{subItem.icone}}"></i> {{ subItem.label }}
                                   </button>
@@ -668,7 +667,7 @@ export class AppComponent implements OnInit {
 
   sair() {
     this.loginService.logout().then(r => {
-      this.router.navigate(['/principal']);
+      this.router.navigate(['/login']);
     });
   }
 
@@ -1212,6 +1211,27 @@ button[fixedVicButton] {
   right: 20px;
 }
 
+button[fixedVicButton2] > .mat-button-wrapper{
+  padding: 0;
+}
+button[fixedVicButton2] {
+  position: fixed;
+  bottom: 22px;
+  right: 80px;
+  width: 35px;
+  height: 35px;
+}
+button[fixedVicButton3] > .mat-button-wrapper{
+  padding: 0;
+}
+button[fixedVicButton3] {
+  position: fixed;
+  bottom: 24px;
+  right: 120px;
+  width: 35px;
+  height: 35px;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
@@ -1219,17 +1239,24 @@ button[fixedVicButton] {
 
 .mat-drawer-inner-container {
   min-width: 300px;
-  padding: 10px;
 }
 
-.mat-drawer-inner-container > ul {
+.mat-drawer-inner-container ul {
   list-style-type: none;
 }
+
 .mat-drawer-inner-container > ul button {
   width: 100%;
   text-align: initial;
 }
- 
+
+.main-mat-toolbar-menu-name {
+  display: flex;
+  align-items: center;
+}
+textarea:focus, input:focus{
+  outline: none;
+}
   `;
   util.escreveArquivo(`${angularPath}/src/styles.css`, src, `utf8`);
 }
@@ -3483,12 +3510,6 @@ export class LoginComponent implements OnInit {
         });
       });
   }
-
-
-  logout() {
-    this.loginService.logout().then(r => r);
-    this.router.navigate(['/']);
-  }
 }
   
     `;
@@ -3511,65 +3532,69 @@ import { Token } from '../vic-components/domain/token';
 })
 export class LoginService {
 
-    public static ins: LoginService;;
+  public static ins: LoginService;
 
-    public groupAtual: any;
+  public groupAtual: any;
 
-    public proximaUrl: string;
+  public proximaUrl: string;
 
-    public logado = false;
+  public logado = false;
 
-    public token: Token;
+  public token: Token;
 
-    public caminho = 'token';
+  public caminho = 'token';
 
-    public static BASE_URL = 'http://127.0.0.1:8080/api';
-    //public static BASE_URL = (location.origin + '/api').replace("4200", "8080");
+  public static BASE_URL = 'http://127.0.0.1:8080/api';
+  //public static BASE_URL = (location.origin + '/api').replace("4200", "8080");
 
 
-    protected baseUrl = 'http://127.0.0.1:8080/api';
+  protected baseUrl = 'http://127.0.0.1:8080/api';
 
-    constructor(protected http: Http) {
-        this.baseUrl = LoginService.BASE_URL;
-        console.log(this.baseUrl);
-        LoginService.ins = this;
+  constructor(protected http: Http) {
+    this.baseUrl = LoginService.BASE_URL;
+    console.log(this.baseUrl);
+    LoginService.ins = this;
+
+    let r = window.localStorage.getItem("vic_token");
+    let token = r ? JSON.parse(r) : null;
+    if (token) {
+      this.logado = true;
+      this.token = token;
+      this.groupAtual = this.token.user.groups[0];
     }
+  }
 
-    errorHandler = error => {
-        return Promise.reject(error.json());
-    }
+  errorHandler = error => {
+    return Promise.reject(error.json());
+  };
 
-    createAuthorizationHeader(): Headers {
-        let headers = new Headers();
-        headers.append('authorization', this.token.value);
-        return headers;
-    }
+  loga(login: string, password: string) {
+    return this.http.post(\`\${this.baseUrl}/\${this.caminho}/login/bypassword\`, {login, password})
+      .toPromise().then(response => {
+        let r = response.json();
+        if (r.ok) {
+          this.logado = true;
+          this.token = r.token;
+          this.groupAtual = this.token.user.groups[0];
+          window.localStorage.setItem("vic_token", JSON.stringify(this.token));
+        }
+        return r;
+      })
+      .catch(this.errorHandler);
+  }
 
-    loga(login: string, password: string) {
-        return this.http.post(\`\${this.baseUrl}/\${this.caminho}/login/bypassword\`, { login, password })
-            .toPromise().then(response => {
-                let r = response.json();
-
-                if (r.ok) {
-                    this.logado = true;
-                    this.token = r.token;
-                    this.groupAtual = this.token.user.groups[0];
-                }
-                return r;
-            })
-            .catch(this.errorHandler);
-    }
-    logout() {
+  logout() {
+    this.logado = false;
+    this.token = null;
+    window.localStorage.clear();
+    return this.http.post(\`\${this.baseUrl}/\${this.caminho}/logout\`, {login: null, password: null})
+      .toPromise().then(response => {
         this.logado = false;
         this.token = null;
-        return this.http.post(\`\${this.baseUrl}/\${this.caminho}/logout\`, { login: null, password: null })
-            .toPromise().then(response => {
-                this.logado = false;
-                this.token = null;
-                return response;
-            })
-            .catch(this.errorHandler);
-    }
+        return response;
+      })
+      .catch(this.errorHandler);
+  }
 }
   
     `;
@@ -3647,80 +3672,52 @@ function gera_user_detalhes_detalhes_component_html(project, angularPath) {
   let src = `
   <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
   <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
-  <div class="container">
-  
-    <div *ngIf="!selecionado">
-      Carregando....
-    </div>
-    <div *ngIf="selecionado">
-  
-      <div class="alert {{msg.cssClass}}" role="alert" *ngIf="msg.show">
-        <strong>{{msg.message}}</strong> {{msg.description}}
-        <a (click)="msg.show = false" style="float: right; margin-right: -10px; margin-top: -10px;cursor: pointer;">x</a>
-      </div>
-      <h2>{{ selecionado.name| uppercase }}</h2>
-      <form [formGroup]="detalhesForm">
-  
-        <div class="row">
-  
-          <div class="col-sm-12 margin-bottom">
-            <label>LOGIN:</label>
-            <input type="text" id="idlogin" name="login" placeholder="LOGIN" [(ngModel)]="selecionado.login" formControlName="login"
-              class="form-control"  />
-            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['login'].valid && detalhesForm.controls['login'].touched" style="margin-top:10px">
-              O campo LOGIN é obrigatório.
-            </div>
-          </div>
-  
-          <div class="col-sm-12 margin-bottom">
-            <label>SENHA:</label>
-            <input type="text" id="idpassword" name="password" placeholder="SENHA" [(ngModel)]="selecionado.password" formControlName="password"
-              class="form-control"  />
-            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['password'].valid && detalhesForm.controls['password'].touched" style="margin-top:10px">
-              O campo SENHA é obrigatório.
-            </div>
-          </div>
-  
-          <div class="col-sm-12 margin-bottom" *ngIf="(isNew(selecionado)||canUpdate(selecionado)  && mostrar )">
-            <label>GRUPOS:</label>
-            <vic-many-to-many [(valor)]="selecionado.groups" [service]="groupService" atributoLabel="name" [group]="detalhesForm"></vic-many-to-many>
-          </div>
-  
-          <div class="col-sm-12 margin-bottom">
-            <label>ORGANIZACAO:</label>
-            <vic-many-to-one [(valor)]="selecionado.organization" [service]="organizationService" atributoLabel="name" [group]="detalhesForm"
-              nameNoForm="organization"></vic-many-to-one>
-            <div class="alert alert-danger" *ngIf="!detalhesForm.controls['organization'].valid && detalhesForm.controls['organization'].touched"
-              style="margin-top:10px">
-              O campo ORGANIZACAO é obrigatório.
-            </div>
-          </div>
-          
-        </div>
-  
-        <div class="row">
-          <div class="col-sm-6 text-left">
-            <button type="button" class="btn btn-danger" (click)="excluir()" [disabled]="isNew(selecionado)||!canDelete(selecionado)">
-              <i class="far fa-trash-alt"></i> Excluir
-            </button>
-          </div>
-          <div class="col-sm-6 text-right">
-            <button type="button" class="btn btn-info" (click)="voltar()" [disabled]="!detalhesForm.pristine">
-              <i class="fas fa-chevron-circle-left"></i> Voltar
-            </button>
-            <button type="button" class="btn btn-warning" (click)="cancelar()" [disabled]="detalhesForm.pristine">
-              <i class="far fa-times-circle"></i> Cancelar
-            </button>
-  
-            <button type="button" class="btn btn-success" (click)="salvar()" [disabled]="(notNew(selecionado)&&!canUpdate(selecionado)) || !detalhesForm.valid || detalhesForm.pristine">
-              <i class="far fa-save"></i> Salvar
-            </button>
-          </div>
-        </div>
-  
-      </form>
+  <mat-card>
+  <div>
+    <button mat-button (click)="cancelar()">
+      <mat-icon>keyboard_return</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="!selecionado">
+    Carregando....
+  </div>
+  <div *ngIf="selecionado">
+    <mat-grid-list cols="2" rowHeight="60px">
+      <mat-grid-tile>
+        <mat-form-field class="nome-form-field">
+          <input matInput type="text" id="idlogin" name="login" placeholder="LOGIN" [(ngModel)]="selecionado.login"
+                 class="form-control"/>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="nome-form-field">
+          <input matInput type="text" id="idcpassword" name="password" placeholder="PASSWORD" [(ngModel)]="selecionado.password"
+                 class="form-control"/>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="60px">
+      <mat-grid-tile>
+        <vic-many-to-many [(valor)]="selecionado.groups" [service]="groupService" atributoLabel="name"
+                          [group]="detalhesForm"></vic-many-to-many>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <vic-many-to-one [(valor)]="selecionado.organization" [service]="organizationService" atributoLabel="name"
+                         [group]="detalhesForm"
+                         nameNoForm="organization"></vic-many-to-one>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div *ngIf="erro">
+      {{erro|json}}
     </div>
   </div>
+</mat-card>
+<button fixedVicButton matTooltip="New" color="primary" mat-fab aria-label="Save" (click)="salvar()" [disabled]="(notNew(selecionado)&&!canUpdate(selecionado))">
+  <mat-icon>save</mat-icon>
+</button>
+<button fixedVicButton2 matTooltip="Delete" color="warn" mat-fab aria-label="Delete" (click)="excluir()">
+  <mat-icon>delete</mat-icon>
+</button>
     `;
   util.escreveArquivo(`${angularPath}/src/app/user/detalhes//detalhes.component.html`, src, `utf8`);
 }
@@ -3928,7 +3925,7 @@ import { CrudComponent } from './crud/crud.component';
 import { ListaComponent } from './lista/lista.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTooltipModule} from "@angular/material";
+import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatCardModule, MatTooltipModule} from "@angular/material";
 
 /*IMPORTS*/
 
@@ -3940,7 +3937,7 @@ import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTo
     VicComponentsModule,
     BrowserModule,    
     ReactiveFormsModule,
-    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule
+    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule, MatCardModule
   ],
   declarations: [
 /*DECLARATIONS*/
@@ -4050,48 +4047,41 @@ function gera_group_detalhes_detalhes_component_html(project, angularPath) {
   let src = `
 <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
 <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
-<div class="container">
-
+<mat-card>
+  <div>
+    <button mat-button (click)="cancelar()">
+      <mat-icon>keyboard_return</mat-icon>
+    </button>
+  </div>
   <div *ngIf="!selecionado">
     Carregando....
   </div>
   <div *ngIf="selecionado">
-
-    <h2>{{ selecionado.name| uppercase }}</h2>
-
-    <div class="row">
-
-  <div class="col-sm-12 margin-bottom">
-    <label>NOME:</label>
-      <input type="text" id="idname" name="name" placeholder="NOME" [(ngModel)]="selecionado.name" class="form-control" />
-  </div>
-
-  <div class="col-sm-12 margin-bottom">
-    <label>CODIGO:</label>
-      <input type="text" id="idcode" name="code" placeholder="CODIGO" [(ngModel)]="selecionado.code" class="form-control" />
-  </div>
-
-    </div>
-    <div class="row">
-      <div class="col-sm-6 text-left">
-        <button type="button" class="btn btn-danger" (click)="excluir()" *ngIf="selecionado.version !== null">
-          <i class="far fa-trash-alt"></i> Excluir
-        </button>
-      </div>
-      <div class="col-sm-6 text-right">
-        <button type="button" class="btn btn-warning" (click)="cancelar()">
-          <i class="far fa-times-circle"></i> Cancelar
-        </button>
-        <button type="button" class="btn btn-success" (click)="salvar()">
-          <i class="far fa-save"></i> Salvar
-        </button>
-      </div>
-    </div>
-    <div class="alert alert-danger" role="alert" *ngIf="erro">
+    <mat-grid-list cols="2" rowHeight="100px">
+      <mat-grid-tile>
+        <mat-form-field class="nome-form-field">
+          <input matInput type="text" id="idname" name="name" placeholder="NOME" [(ngModel)]="selecionado.name"
+                 class="form-control"/>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="nome-form-field">
+          <input matInput type="text" id="idcode" name="code" placeholder="CODIGO" [(ngModel)]="selecionado.code"
+                 class="form-control"/>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div *ngIf="erro">
       {{erro|json}}
     </div>
   </div>
-  
+</mat-card>
+<button fixedVicButton matTooltip="New" color="primary" mat-fab aria-label="Save" (click)="salvar()">
+  <mat-icon>save</mat-icon>
+</button>
+<button fixedVicButton2 matTooltip="Delete" color="warn" mat-fab aria-label="Delete" (click)="excluir()">
+  <mat-icon>delete</mat-icon>
+</button>
     `;
   util.escreveArquivo(`${angularPath}/src/app/group/detalhes//detalhes.component.html`, src, `utf8`);
 }
@@ -4177,7 +4167,7 @@ import { GrupoRoutingModule } from './group-routing.module';
 import { CrudComponent } from './crud/crud.component';
 import { ListaComponent } from './lista/lista.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
-import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTooltipModule} from "@angular/material";
+import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatCardModule, MatTooltipModule} from "@angular/material";
 
 
 /*IMPORTS*/
@@ -4188,7 +4178,7 @@ import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTo
     FormsModule, OwlDateTimeModule, OwlNativeDateTimeModule,
     GrupoRoutingModule,
     VicComponentsModule,
-    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule
+    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule, MatCardModule
   ],
   declarations: [
 /*DECLARATIONS*/
@@ -4374,70 +4364,48 @@ function gera_organization_detalhes_detalhes_component_html(project, angularPath
   let src = `
 <!-- Arquivo gerado utilizando VICGERADOR por munif as 28/02/2018 01:55:26 -->
 <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
-<div class="container">
-
+<mat-card>
+  <div>
+    <button mat-button (click)="cancelar()">
+      <mat-icon>keyboard_return</mat-icon>
+    </button>
+  </div>
   <div *ngIf="!selecionado">
     Carregando....
   </div>
   <div *ngIf="selecionado">
-    <div class="alert {{msg.cssClass}}" role="alert" *ngIf="msg.show">
-      <strong>{{msg.message}}</strong> {{msg.description}}
-      <a (click)="msg.show = false" style="float: right; margin-right: -10px; margin-top: -10px;cursor: pointer;">x</a>
+    <mat-grid-list cols="2" rowHeight="60px">
+      <mat-grid-tile>
+        <mat-form-field class="nome-form-field">
+          <input matInput type="text" id="idname" name="name" placeholder="NOME" [(ngModel)]="selecionado.name"
+                 class="form-control"/>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="nome-form-field">
+          <input matInput type="text" id="idcode" name="code" placeholder="CODIGO" [(ngModel)]="selecionado.code"
+                 class="form-control"/>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="60px">
+      <mat-grid-tile>
+        <vic-many-to-one [(valor)]="selecionado.upper" [service]="organizationService" atributoLabel="name" [group]="detalhesForm"
+                         nameNoForm="upper">
+        </vic-many-to-one>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div *ngIf="erro">
+      {{erro|json}}
     </div>
-    <h2>{{ selecionado.name| uppercase }}</h2>
-    <form [formGroup]="detalhesForm">
-      <div class="row">
-
-        <div class="col-sm-12 margin-bottom">
-          <label>NOME:</label>
-          <input type="text" id="idname" name="name" placeholder="NOME" formControlName="name" [(ngModel)]="selecionado.name" class="form-control"/>
-          <div class="alert alert-danger" *ngIf="!detalhesForm.controls['name'].valid && detalhesForm.controls['name'].touched" style="margin-top:10px">
-            O campo NOME é obrigatório.
-          </div>
-        </div>
-
-        <div class="col-sm-12 margin-bottom">
-          <label>CODIGO:</label>
-          <input type="text" id="idcode" name="code" placeholder="CODIGO" formControlName="code" [(ngModel)]="selecionado.code"
-            class="form-control"  />
-          <div class="alert alert-danger" *ngIf="!detalhesForm.controls['code'].valid && detalhesForm.controls['code'].touched"
-            style="margin-top:10px">
-            O campo CODIGO é obrigatório.
-          </div>
-        </div>
-
-        <div class="col-sm-12 margin-bottom">
-          <label>SUPERIOR:</label>
-          <vic-many-to-one [(valor)]="selecionado.upper" [service]="organizationService" atributoLabel="name" [group]="detalhesForm"
-            nameNoForm="upper">
-          </vic-many-to-one>
-          <div class="alert alert-danger" *ngIf="!detalhesForm.controls['upper'].valid && detalhesForm.controls['upper'].touched"
-            style="margin-top:10px">
-            O campo SUPERIOR é obrigatório.
-          </div>
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="col-sm-6 text-left">
-          <button type="button" class="btn btn-danger" (click)="excluir()" >
-            <i class="far fa-trash-alt"></i> Excluir
-          </button>
-        </div>
-        <div class="col-sm-6 text-right">
-          <button type="button" class="btn btn-info" (click)="voltar()" [disabled]="!detalhesForm.pristine">
-            <i class="fas fa-chevron-circle-left"></i> Voltar
-          </button>
-          <button type="button" class="btn btn-warning" (click)="cancelar()" [disabled]="detalhesForm.pristine">
-            <i class="far fa-times-circle"></i> Cancelar
-          </button>
-          <button type="button" class="btn btn-success" (click)="salvar()" [disabled]="(notNew(selecionado)&&!canUpdate(selecionado)) || !detalhesForm.valid || detalhesForm.pristine">
-            <i class="far fa-save"></i> Salvar
-          </button>
-        </div>
-      </div>
-    </form>
   </div>
+</mat-card>
+<button fixedVicButton matTooltip="New" color="primary" mat-fab aria-label="Save" (click)="salvar()" [disabled]="(notNew(selecionado)&&!canUpdate(selecionado))">
+  <mat-icon>save</mat-icon>
+</button>
+<button fixedVicButton2 matTooltip="Delete" color="warn" mat-fab aria-label="Delete" (click)="excluir()">
+  <mat-icon>delete</mat-icon>
+</button>
     `;
   util.escreveArquivo(`${angularPath}/src/app/organization/detalhes//detalhes.component.html`, src, `utf8`);
 }
@@ -4640,7 +4608,7 @@ import { CrudComponent } from './crud/crud.component';
 import { ListaComponent } from './lista/lista.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTooltipModule} from "@angular/material";
+import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatCardModule, MatTooltipModule} from "@angular/material";
 
 /*IMPORTS*/
 
@@ -4652,7 +4620,7 @@ import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTo
     VicComponentsModule,
     BrowserModule,    
     ReactiveFormsModule,
-    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule
+    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule, MatCardModule
   ],
   declarations: [
 /*DECLARATIONS*/
@@ -4710,7 +4678,7 @@ export class PietraGuardGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    this.loginService.proximaUrl = state.url;
+    this.loginService.proximaUrl = state.url || "/principal";
     if (!this.loginService.logado) {
       this.router.navigate(['/login']);
     }
@@ -4797,53 +4765,40 @@ function gera_entidade_detalhes_detalhes_component_html(project, entityName, ent
   let src = `
 <!-- Arquivo gerado utilizando VICGERADOR por anderson as 21/03/2018 10:45:24 -->
 <!-- Para não gerar o arquivo novamente coloque na primeira linha um comentário com  VICIGNORE , pode ser essa mesmo -->
-<div class="container">
-
+<mat-card>
+  <div>
+    <button mat-button (click)="voltar()">
+      <mat-icon>keyboard_return</mat-icon>
+    </button>
+  </div>
   <div *ngIf="!selecionado">
     Carregando....
   </div>
   <div *ngIf="selecionado">
-      <div class="alert {{msg.cssClass}}" role="alert" *ngIf="msg.show">
-        <strong>{{msg.message}}</strong> {{msg.description}}
-        <a (click)="msg.show = false" style="float: right; margin-right: -10px; margin-top: -10px;cursor: pointer;">x</a>
+    <form [formGroup]="detalhesForm">
+      <mat-grid-list cols="1" rowHeight="60px">
+        <mat-grid-tile>
+          <mat-form-field class="nome-form-field">
+            <input matInput type="text" id="id${Object.keys(entityData.fields)[0]}" name="${Object.keys(entityData.fields)[0]}" formControlName="${Object.keys(entityData.fields)[0]}" [disabled]="notNew(selecionado)&&!canUpdate(selecionado)" placeholder="${Object.keys(entityData.fields)[0].toUpperCase()}" [(ngModel)]="selecionado.${Object.keys(entityData.fields)[0]}"
+                   class="form-control"/>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <div class="row" *ngIf="notNew(selecionado)">
+        <img [src]="drawsvg">
       </div>
-    <h2>{{ selecionado.name| uppercase }}</h2>
-
-<form [formGroup]="detalhesForm">
-    <div class="row">
-
-  <div class="col-sm-12 margin-bottom">
-    <label>NOME:</label>
-      <input type="text" id="idname" name="name" formControlName="name" placeholder="NOME" [(ngModel)]="selecionado.name" class="form-control" [disabled]="notNew(selecionado)&&!canUpdate(selecionado)" />
-          <div class="alert alert-danger" *ngIf="!detalhesForm.controls['name'].valid && detalhesForm.controls['name'].touched" style="margin-top:10px">
-            O campo NOME é obrigatório.
-          </div>
-  </div>
-
-    </div>
-    <div class="row">
-      <div class="col-sm-6 text-left">
-        <button type="button" class="btn btn-danger" (click)="excluir()" [disabled]="isNew(selecionado)||!canDelete(selecionado)">
-          <i class="far fa-trash-alt"></i> Excluir
-        </button>
+      <div *ngIf="erro">
+        {{erro|json}}
       </div>
-      <div class="col-sm-6 text-right">
-          <button type="button" class="btn btn-info" (click)="voltar()" [disabled]="!detalhesForm.pristine">
-            <i class="fas fa-chevron-circle-left"></i> Voltar
-          </button>        <button type="button" class="btn btn-warning" (click)="cancelar()" [disabled]="detalhesForm.pristine">
-          <i class="far fa-times-circle"></i> Cancelar
-        </button>
-        <button type="button" class="btn btn-success" (click)="salvar()"  [disabled]="(notNew(selecionado)&&!canUpdate(selecionado)) || !detalhesForm.valid || detalhesForm.pristine" >
-          <i class="far fa-save"></i> Salvar
-        </button>
-      </div>
-    </div>
     </form>
-    </div>
-    <div class="row" *ngIf="notNew(selecionado)">
-      <img [src]="drawsvg">
-    </div> </div>
-
+  </div>
+</mat-card>
+<button fixedVicButton matTooltip="New" [disabled]="(notNew(selecionado)&&!canUpdate(selecionado)) || !detalhesForm.valid || detalhesForm.pristine" color="primary" mat-fab aria-label="Save" (click)="salvar()">
+  <mat-icon>save</mat-icon>
+</button>
+<button fixedVicButton2 matTooltip="Delete" [disabled]="isNew(selecionado)||!canDelete(selecionado)" color="warn" mat-fab aria-label="Delete" (click)="excluir()">
+  <mat-icon>delete</mat-icon>
+</button>
     `;
   util.escreveArquivo(`${angularPath}/src/app/${entityName}/detalhes//detalhes.component.html`, src, `utf8`);
 }
@@ -4984,7 +4939,7 @@ import { SuperListaComponent } from '../../vic-components/comum/super-lista';
 export class ListaComponent extends SuperListaComponent {
 
   colunas = [
-    { active: true, comparisonOperator: "STARTS_WITH", field: "name", label: "Nome", pedacos: ["name"] },
+    { active: true, comparisonOperator: "STARTS_WITH", field: "${Object.keys(entityData.fields)[0]}", label: "${Object.keys(entityData.fields)[0]}", pedacos: ["${Object.keys(entityData.fields)[0]}"] },
   ];
 
   constructor(protected service: ${util.primeiraMaiuscula(entityName)}Service, protected router: Router, protected route: ActivatedRoute) {
@@ -5046,7 +5001,7 @@ import { CrudComponent } from './crud/crud.component';
 import { ListaComponent } from './lista/lista.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTooltipModule} from "@angular/material";
+import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatCardModule, MatTooltipModule} from "@angular/material";
 
 /*IMPORTS*/
 
@@ -5058,7 +5013,7 @@ import {MatButtonModule, MatGridListModule, MatIconModule, MatInputModule, MatTo
     VicComponentsModule,
     BrowserModule,    
     ReactiveFormsModule,
-    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule
+    MatTooltipModule, MatGridListModule, MatIconModule, MatButtonModule, MatInputModule, MatCardModule
   ],
   declarations: [
 /*DECLARATIONS*/
