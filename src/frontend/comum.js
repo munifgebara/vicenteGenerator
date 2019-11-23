@@ -666,7 +666,7 @@ export class AppComponent implements OnInit {
   }
 
   sair() {
-    this.loginService.logout().then(r => {
+    this.loginService.logout().finally(() => {
       this.router.navigate(['/login']);
     });
   }
