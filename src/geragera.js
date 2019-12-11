@@ -38,7 +38,7 @@ ${s}
     }
   });
 }
-copia('/home/munif/tcc/', 'mvnabc/');
+copia(require('os').homedir() + '/tcc/', 'mvnabc/');
 
 
 c.forEach(cc => console.log(cc));
