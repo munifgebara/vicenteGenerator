@@ -3684,13 +3684,13 @@ function gera_user_detalhes_detalhes_component_html(project, angularPath) {
   <div *ngIf="selecionado">
     <mat-grid-list cols="2" rowHeight="60px">
       <mat-grid-tile>
-        <mat-form-field class="nome-form-field">
+        <mat-form-field class="login-form-field">
           <input matInput type="text" id="idlogin" name="login" placeholder="LOGIN" [(ngModel)]="selecionado.login"
                  class="form-control"/>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile>
-        <mat-form-field class="nome-form-field">
+        <mat-form-field class="password-form-field">
           <input matInput type="text" id="idcpassword" name="password" placeholder="PASSWORD" [(ngModel)]="selecionado.password"
                  class="form-control"/>
         </mat-form-field>
@@ -4059,13 +4059,13 @@ function gera_group_detalhes_detalhes_component_html(project, angularPath) {
   <div *ngIf="selecionado">
     <mat-grid-list cols="2" rowHeight="100px">
       <mat-grid-tile>
-        <mat-form-field class="nome-form-field">
+        <mat-form-field class="name-form-field">
           <input matInput type="text" id="idname" name="name" placeholder="NOME" [(ngModel)]="selecionado.name"
                  class="form-control"/>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile>
-        <mat-form-field class="nome-form-field">
+        <mat-form-field class="code-form-field">
           <input matInput type="text" id="idcode" name="code" placeholder="CODIGO" [(ngModel)]="selecionado.code"
                  class="form-control"/>
         </mat-form-field>
@@ -4382,7 +4382,7 @@ function gera_organization_detalhes_detalhes_component_html(project, angularPath
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile>
-        <mat-form-field class="nome-form-field">
+        <mat-form-field class="codigo-form-field">
           <input matInput type="text" id="idcode" name="code" placeholder="CODIGO" [(ngModel)]="selecionado.code"
                  class="form-control"/>
         </mat-form-field>
@@ -4838,7 +4838,7 @@ export class DetalhesComponent extends SuperDetalhesComponent {
   initForm() {
 
     this.detalhesForm = this.fb.group({
-      'name': ['', Validators.compose([Validators.required])],
+      '${Object.keys(entityData.fields)[0]}': ['', Validators.compose([Validators.required])],
     });
   }
 
@@ -4853,7 +4853,7 @@ export class DetalhesComponent extends SuperDetalhesComponent {
     this.service.getOne(id).then(obj => {
       this.selecionado = obj;
       this.detalhesForm = this.fb.group({
-        'name': [this.selecionado['name'], Validators.compose([Validators.required])],
+        '${Object.keys(entityData.fields)[0]}': [this.selecionado['${Object.keys(entityData.fields)[0]}'], Validators.compose([Validators.required])],
       })
     })
   }
