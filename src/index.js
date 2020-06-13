@@ -4,7 +4,7 @@ const bc = require("./backend/comum");
 const fc = require("./frontend/comum");
 
 
-let jsonData = fs.readFileSync(require('os').homedir() + `/projetos/${process.argv[2] || 'estoque'}.json`, "utf8");
+let jsonData = fs.readFileSync(require('os').homedir() + `/projetos/${process.argv[2] || 'empleados.project'}.json`, "utf8");
 let json = JSON.parse(jsonData);
 generateProject(json);
 
