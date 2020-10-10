@@ -89,11 +89,7 @@ function geraHelloController(project, path) {
     import br.com.munif.framework.vicente.core.VicThreadScope;
     import br.com.munif.framework.vicente.domain.entities.EntitiesToSVG;
     import java.lang.reflect.Method;
-    import java.util.ArrayList;
-    import java.util.Arrays;
-    import java.util.HashMap;
-    import java.util.List;
-    import java.util.Map;
+    import java.util.*;
     import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.ResponseBody;
@@ -114,7 +110,7 @@ function geraHelloController(project, path) {
         }
         @RequestMapping("/enum/{enumName}")
         public VicReturn<Map<String, String>> enumValues(@PathVariable String enumName) {
-            List<Map<String, String>> toReturn = new ArrayList<>();
+            Set<Map<String, String>> toReturn = new HashSet<>();
             if (!enumName.contains(".")) {
                 enumName = this.getClass().getCanonicalName().replace("controllers.HelloController", "domain." + Utils.firstCapital(enumName));
             }
