@@ -584,7 +584,7 @@ import { BaseEntity } from './vic-components/comum/base-entity';
                   <span>{{title}}</span>
               </div>
               <div class="toolbar-info" *ngIf="loginService.token && loginService.token.user">
-                  <span class="hide-on-tablet">Organization: {{ loginService.token.user.organization.name }}</span>
+                  <span class="hide-on-tablet">Organization: {{ loginService.token.user.organizations[0].name }}</span>
                   <span>
                     <mat-form-field class="toolbar-group-select">
                       <mat-select [compareWith]="byId" [ngModel]="loginService.groupAtual"
@@ -2406,7 +2406,7 @@ export interface Usuario {
     login: string;
     password: string;
     groups: Grupo[];
-    organization: Organizacao;
+    organizations: Organizacao[];
 }
     `;
   util.escreveArquivo(`${angularPath}/src/app/vic-components/domain//user.ts`, src, `utf8`);
