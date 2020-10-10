@@ -476,8 +476,6 @@ function geraproject_package_json(project, angularPath) {
     "rxjs-compat": "^6.5.3",
     "ng-pick-datetime": "^7.0.0",
     "ng2-currency-mask": "^5.3.1",
-    "ng2-tooltip-directive": "^2.8.17",
-    "ngx-bootstrap": "^5.2.0",
     "@angular/service-worker": "^8.2.13",
     "hammerjs": "^2.0.8",
     "bootstrap": "^4.3.1"
@@ -760,12 +758,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { VicComponentsModule } from './vic-components/vic-components.module';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
-import { AlertModule, AccordionModule } from 'ngx-bootstrap';
 import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { AppComponent } from './app.component';
 import { PrincipalComponent } from './vic-components/comum/principal/principal.component';
 import { NaoexisteComponent } from './vic-components/comum/naoexiste/naoexiste.component';
-import { TooltipModule } from 'ng2-tooltip-directive';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { LoginComponent } from './login/login.component';
 
@@ -853,9 +849,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    AlertModule.forRoot(),
-    AccordionModule.forRoot(),
-    TooltipModule,
     CurrencyMaskModule,
     VicComponentsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
@@ -2169,12 +2162,12 @@ export class SuperService {
   }
 
   asyncPost(objeto): Observable<any> {
-    return this.http.post(\`\${this.baseUrl}/\${this.collection}/async\`, objeto, {headers: this.createAuthorizationHeader()})
+    return this.http.post(\`\${this.baseUrl}/\${this.collection}\`, objeto, {headers: this.createAuthorizationHeader()})
       .pipe(catchError(this.errorHandler), map(value => value.json()));
   }
 
   asyncVquery(objeto): Observable<VicReturn> {
-    return this.http.post(\`\${this.baseUrl}/\${this.collection}/async/vquery\`, objeto, {headers: this.createAuthorizationHeader()})
+    return this.http.post(\`\${this.baseUrl}/\${this.collection}/vquery\`, objeto, {headers: this.createAuthorizationHeader()})
       .pipe(catchError(this.errorHandler), map(value => value.json()));
   }
 
@@ -3470,7 +3463,7 @@ export class LoginComponent implements OnInit {
   constructor(public loginService: LoginService, private router: Router, public userService: UsuarioService,
     private fb: FormBuilder) {
     this.loginForm = fb.group({
-      'loginInput': ['admin@munif.com.br', Validators.compose([Validators.required, Validators.email])],
+      'loginInput': ['admin@vicente.com.br', Validators.compose([Validators.required, Validators.email])],
       'passwordInput': ['qwe123', Validators.compose([Validators.required])]
     });
 
